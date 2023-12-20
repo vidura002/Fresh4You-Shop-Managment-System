@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Home() {
   return (
-    <div>Home</div>
+    <h1 className='hidden sm:inline text-slate-700 hover:underline text-xl'>Home</h1>
   )
 }
