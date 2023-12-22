@@ -8,8 +8,8 @@ dotenv.config();
 
 mongoose.connect(process.env.MONGO).then(() => {
     console.log('Connected to MongoBD!');
-    }).catch((rrr) => {
-        console.log(err)
+    }).catch((err) => {
+        console.log(err);
     })
 
 
