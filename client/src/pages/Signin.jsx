@@ -1,13 +1,21 @@
 import { data } from "autoprefixer";
 import React, { useState } from "react";
 import { Link , useNavigate} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import {
+     signInStart , 
+     signInSuccess , 
+     signInFailure 
+    } from "../redux/user/userSlice";  
+
 
 export default function Signin() {
 
     const [formData, setFormData] = useState({});//[state,setState
-    const [error , serError] = useState(null);//[state,setState
-    const [loading , setLoading] = useState(false);//[state,setState
+    const {loading , error} = useSelector((state) => state.user);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleChange = (e) => {
         setFormData({
@@ -20,7 +28,7 @@ export default function Signin() {
         e.preventDefault();
 
         try {
-            setLoading(true);
+            dispatch(signInStart());
         const res = await fetch('/api/auth/signin',
         {
             method: 'POST',
@@ -33,17 +41,14 @@ export default function Signin() {
         const data = await res.json();
         console.log(data);
         if(data.success == false){
-            setLoading(false);
-            serError(data.message);
+            dispatch(signInFailure(data.message));
             return;
         }
-        setLoading(false);
-        serError(null);
+        dispatch(signInSuccess(data));
         navigate('/');
 
         } catch (error) {
-            setLoading(false);
-            serError(error.message);
+            dispatch(signInFailure(error.message));
         }
     };
 
