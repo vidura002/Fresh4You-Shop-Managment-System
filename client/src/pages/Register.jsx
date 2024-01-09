@@ -6,7 +6,7 @@ import OAuth from "../components/OAuth";
 export default function Register() {
 
     const [formData, setFormData] = useState({});//[state,setState
-    const [error , serError] = useState(null);//[state,setState
+    const [error , setError] = useState(null);//[state,setState
     const [loading , setLoading] = useState(false);//[state,setState
     const navigate = useNavigate();
 
@@ -35,16 +35,16 @@ export default function Register() {
         console.log(data);
         if(data.success == false){
             setLoading(false);
-            serError(data.message);
+            setError(data.message);
             return;
         }
         setLoading(false);
-        serError(null);
+        setError(null);
         navigate('/signin');
 
         } catch (error) {
             setLoading(false);
-            serError(error.message);
+            setError(error.message);
         }
     };
 
