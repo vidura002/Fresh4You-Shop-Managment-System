@@ -27,12 +27,11 @@ export const getOrder = async (req, res) => {
 
 //create new order
 export const createOrder = async (req, res) => {
-  const { OrderID, CustomerID, Items, Address, Price } = req.body;
+  const { CustomerID, Items, Address, Price } = req.body;
 
   //add dot to batabase
   try {
     const order = await Orders.create({
-      OrderID,
       CustomerID,
       Items,
       Address,
