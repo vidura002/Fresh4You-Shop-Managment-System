@@ -1,18 +1,21 @@
 import {FaSearch} from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import Logo from '../images/logo.jpg'
 
 export default function Header() {
     const {currentUser} = useSelector(state => state.user);
   return (
-    <header className='bg-slate-200 shadow-md'>
+    <header className='bg-green-400 shadow-md'>
 
         <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
-        <Link to=''>
+        <Link to='/'>
             
-        <h1 className='font-bold text-2xl sm:text-xl flex flex-wrap'>
-            <span className='text-slate-500'>Land</span>
-            <span className='text-slate-700'>Estate</span>
+            
+        <h1 className='font-bold text-7xl sm:text-xl flex flex-wrap mr-20 items-center space-x-1'>
+            <img src={Logo} alt="logo" className='w-14 h-14 rounded-full '/>
+            <span className='text-green-700'>Fresh</span>
+            <span className='text-green-800'>4You</span>
         </h1>
         </Link>
 
