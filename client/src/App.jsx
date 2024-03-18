@@ -7,6 +7,7 @@ import Header from './components/Header'
 import Register from './pages/Register';
 import PrivateRoute from './components/PrivateRoute';
 import CreateListing from './pages/CreateListing';
+import FeedbackForm from './pages/FeedbackForm';
 
 
 
@@ -19,6 +20,7 @@ export default function App() {
         <Route path='/signup'  element= {<Register />}></Route>
         <Route path='/signin'  element= {<Signin />}></Route>
         <Route path='/about'  element= {<About />}></Route>
+        <Route path='/feedbackform'  element= {<FeedbackForm />}></Route>
         <Route element= {<PrivateRoute /> }>
           <Route path='/profile'  element= {<Profile />}></Route>
           <Route path='/create-listing'  element= {<CreateListing />}></Route>
