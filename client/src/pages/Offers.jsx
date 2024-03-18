@@ -1,16 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import offers from "../offerdata";
 
-export default function Home() {
+export default function Offers() {
   return (
     <>
       <h1 className="hidden sm:inline text-red-700 hover:underline text-3xl self-auto">
-        Home
+        Offers
       </h1>
 
-      <Link to="Offers">Offers</Link>
+      <div>
+        <h1>{offers.length}</h1>
+      </div>
 
-      
     </>
   );
 }
