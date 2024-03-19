@@ -8,12 +8,10 @@ import Register from './pages/Register';
 import PrivateRoute from './components/PrivateRoute';
 import CreateListing from './pages/CreateListing';
 
-
-
 export default function App() {
   return (
     <BrowserRouter>
-  <Header />
+    <Header />
     <Routes>
         <Route path='/'  element= {<Home />} ></Route>
         <Route path='/signup'  element= {<Register />}></Route>
@@ -25,6 +23,10 @@ export default function App() {
         </Route>
     </Routes>
     </BrowserRouter>
+
+    
+
+    
   );
 }
 
