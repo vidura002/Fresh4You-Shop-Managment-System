@@ -1,4 +1,4 @@
-const mongoose = required('mongoose');
+import mongoose from 'mongoose';
 const StockSchema = new mongoose.Schema({
     FruitID:{
         type: String,
@@ -9,7 +9,7 @@ const StockSchema = new mongoose.Schema({
         type:String,
         required: true
     },
-    qty:{
+    quantity:{
         type:Number, 
         required: true
     },
@@ -19,8 +19,10 @@ const StockSchema = new mongoose.Schema({
     },
     image:{
         type: String,
-        required: ture
+        required: true
     }
 });
 
-module.exports = mongoose.module( 'stock', StockSchema );
+const Stock = mongoose.model( 'Stock', StockSchema );
+export default Stock;
+

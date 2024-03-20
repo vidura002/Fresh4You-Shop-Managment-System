@@ -5,6 +5,10 @@ import userRouter from './routes/user.router.js'
 import authRouter from './routes/auth.route.js'
 import cookieParser from 'cookie-parser';
 import listingRouter from './routes/listing.route.js';
+import bodyParser from 'body-parser';
+import StockRouter from './routes/StockRoute.js';
+
+
 
 
 dotenv.config();
@@ -25,7 +29,7 @@ app.get('/', (req, res) => {
 app.use(express.json());
 app.use(cookieParser());
 
-
+app.use(bodyParser.json());
 
 app.listen(3000, () => {
     console.log('server is running port 3000');
@@ -35,6 +39,7 @@ app.listen(3000, () => {
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
+app.use("/api/stock", StockRouter);
 
 app.use((err, req, res, next)=>{
     const statusCode = err.statusCode || 500;
