@@ -13,7 +13,9 @@ import StockRouter from './routes/StockRoute.js';
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGO).then(() => {
+const MONGO = 'mongodb+srv://viduransilu2002:12345@mern-state.pd2zav1.mongodb.net/?retryWrites=true&w=majority'
+
+mongoose.connect(MONGO).then(() => {
     console.log('Connected to MongoBD!');
     }).catch((err) => {
         console.log(err);
