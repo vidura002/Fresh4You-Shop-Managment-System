@@ -1,15 +1,11 @@
 import express from 'express';
 const router = express.Router();
-import { create } from '../controllers/StockController.js';
+import { create,getAllStock,getsingleStock } from '../controllers/StockController.js';
 
 
-router.get('/',(req,res)=>{
-    res.json({message:"Welcome to Stock API"});
-})
+router.get('/', getAllStock)
 
-router.get('/:id',(req,res)=> {
-    res.json({massage:"Get a single Stock item"});
-})
+router.get('/:FruitID',getsingleStock)
 
 router.post('/',create);
 
