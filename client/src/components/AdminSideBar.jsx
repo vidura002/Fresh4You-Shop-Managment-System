@@ -13,9 +13,8 @@ import adminPage from "../images/Admin-img.jpeg"
 function AdminSideBar()  {
   return (
     <div className="w-64 bg-Gray-20 fixed h-full m-30">
-      <div className="h-16"> 
-        <img src={adminPage} alt="logo" className='rounded-full w-10 h-10 content-center '/>
-        <h1 className="text-center mt-5">Welcom Admin</h1>
+      <div className="h-50 flex justify-center p-5"> 
+        <img src={adminPage} alt="logo" className='rounded-full w-10 h-10  '/>
       </div>
       <hr/>
         <ul>

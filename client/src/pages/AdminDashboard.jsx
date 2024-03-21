@@ -6,9 +6,15 @@ import AdminNavBar from '../components/AdminNavBar'
 function AdminDashboard() {
   return (
     <div>
-        <AdminNavBar/>
-        <AdminSideBar/>
-        <h1>Admin Dashboard</h1>
+        <div><AdminNavBar/></div>
+        <div className="grid grid gap-4 sm:grid-cols-12">
+          <div className="col-span-2"><AdminSideBar/></div>
+
+          <div className="col-span-10 h-max text-black">
+            <h1>Admin Dashboard</h1>
+          </div>
+          
+        </div>
     </div>
   )
 }
