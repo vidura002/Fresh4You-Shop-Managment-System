@@ -8,6 +8,10 @@ import Register from "./pages/Register";
 import PrivateRoute from "./components/PrivateRoute";
 import CreateListing from "./pages/CreateListing";
 import Order from "./pages/Order";
+import ShoppingCart from "./pages/ShoppingCart";
+import CartProducts from "./components/CartProducts";
+import productSlice from "./redux/productSlice";
+import OrderPayment from "./pages/OrderPayment";
 
 export default function App() {
   return (
@@ -25,6 +29,12 @@ export default function App() {
 
         {/* Orders */}
         <Route path="/orders" element={<Order />}></Route>
+        <Route path="/shoppingcart" element={<ShoppingCart />}></Route>
+        <Route path="/cartproducts" element={<CartProducts />}></Route>
+        <Route path="/productSlice" element={<productSlice />}></Route>
+
+        {/*Order payment  */}
+        <Route path="/orderpayment" element={<OrderPayment />}></Route>
       </Routes>
     </BrowserRouter>
   );

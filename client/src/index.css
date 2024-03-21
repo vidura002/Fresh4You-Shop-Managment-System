@@ -49,3 +49,66 @@ body {
   border-radius: 50%;
   color: #333;
 }
+
+.paymentcontainer {
+  width: 750px;
+  height: 500px;
+  margin: 0 auto;
+  padding: 40px;
+  border: 1px solid #0e0d0d;
+  border-radius: 5px;
+  align-items: center;
+  background-color: #9afaaf;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.paymentcontainer label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.paymentcontainer input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #0e0d0d;
+  border-radius: 5px;
+}
+
+.paymentcontainer button {
+  background-color: #56946b;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.paymentcontainer button:hover {
+  background-color: #026b02;
+}
+
+.paymentcontainer h1 {
+  text-align: center;
+  font-size: 1.5em;
+}
+.row {
+  display: flex;
+}
+.expiryDate {
+  margin-left: 180px;
+}
+.selection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.selection select {
+  padding: 10px 20px;
+}
+
+.input-border {
+  border: 1px solid #0e0d0d;
+  border-radius: 5px;
+}

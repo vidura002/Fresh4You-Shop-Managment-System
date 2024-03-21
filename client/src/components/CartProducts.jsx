@@ -6,9 +6,9 @@ import {
   deleteCartItem,
   increaseQty,
   decreaseQty,
-} from "../redux/productSlide";
+} from "../redux/productSlice";
 
-const CartProduct = ({ id, name, image, category, qty, total, price }) => {
+const CartProducts = ({ FruitID, FruitName, image, qty, price }) => {
   const dispatch = useDispatch();
 
   return (
@@ -19,18 +19,17 @@ const CartProduct = ({ id, name, image, category, qty, total, price }) => {
       <div className="flex flex-col gap-1 w-full">
         <div className="flex justify-between">
           <h3 className="font-semibold text-slate-600  capitalize text-lg md:text-xl">
-            {name}
+            {FruitName}
           </h3>
           <div
             className="cursor-pointer text-slate-700 hover:text-red-500"
-            onClick={() => dispatch(deleteCartItem(id))}
+            onClick={() => dispatch(deleteCartItem(FruitID))}
           >
             <AiFillDelete />
           </div>
         </div>
-        <p className=" text-slate-500  font-medium ">{category}</p>
         <p className=" font-bold text-base">
-          <span className="text-red-500 ">₹</span>
+          <span className="text-red-500 ">Rs.</span>
           <span>{price}</span>
         </p>
         <div className="flex justify-between ">
@@ -52,7 +51,7 @@ const CartProduct = ({ id, name, image, category, qty, total, price }) => {
           <div className="flex items-center gap-2 font-bold text-slate-700">
             <p>Total :</p>
             <p>
-              <span className="text-red-500">₹</span>
+              <span className="text-red-500">Rs.</span>
               {total}
             </p>
           </div>
@@ -62,4 +61,4 @@ const CartProduct = ({ id, name, image, category, qty, total, price }) => {
   );
 };
 
-export default CartProduct;
+export default CartProducts;

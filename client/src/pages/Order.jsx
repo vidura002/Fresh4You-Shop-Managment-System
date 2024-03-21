@@ -18,10 +18,12 @@ const Order = () => {
   }, []);
 
   return (
-    <div className="Order">
-      <h2>ORDERS</h2>
-      {orders &&
-        orders.map((order) => <OrderDetails key={order._id} order={order} />)}
+    <div className="mx-auto max-w-5xl px-4">
+      <div className="Order">
+        <h2>ORDERS</h2>
+        {orders &&
+          orders.map((order) => <OrderDetails key={order._id} order={order} />)}
+      </div>
     </div>
   );
 };
