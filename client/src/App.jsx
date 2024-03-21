@@ -13,6 +13,8 @@ import CartProducts from "./components/CartProducts";
 import productSlice from "./redux/productSlice";
 import OrderPayment from "./pages/OrderPayment";
 import { ShopTest } from "./pages/ShopTest";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AdminDashboard from "./pages/AdminDashboard";
 
 export default function App() {
   return (
@@ -26,6 +28,7 @@ export default function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/create-listing" element={<CreateListing />}></Route>
+          <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
         </Route>
 
         {/* Orders */}
