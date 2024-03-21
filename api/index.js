@@ -6,16 +6,12 @@ import authRouter from './routes/auth.route.js'
 import cookieParser from 'cookie-parser';
 import listingRouter from './routes/listing.route.js';
 import bodyParser from 'body-parser';
-import StockRouter from './routes/StockRoute.js';
-
 
 
 
 dotenv.config();
 
-const MONGO = 'mongodb+srv://viduransilu2002:12345@mern-state.pd2zav1.mongodb.net/?retryWrites=true&w=majority'
-
-mongoose.connect(MONGO).then(() => {
+mongoose.connect(process.env.MONGO).then(() => {
     console.log('Connected to MongoBD!');
     }).catch((err) => {
         console.log(err);
@@ -41,7 +37,6 @@ app.listen(3000, () => {
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
-app.use("/api/stock", StockRouter);
 
 app.use((err, req, res, next)=>{
     const statusCode = err.statusCode || 500;
