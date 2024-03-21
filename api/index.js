@@ -7,6 +7,7 @@ import authRouter from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import listingRouter from "./routes/listing.route.js";
 import orderRoutes from "./routes/Orders.js";
+import StockRouter from "./routes/StockRoute.js";
 
 dotenv.config();
 
@@ -26,6 +27,8 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
+app.use(bodyParser.json());
+
 app.listen(3000, () => {
   console.log("server is running port 3000");
 });
@@ -34,6 +37,7 @@ app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
 app.use("/api/orders", orderRoutes);
+app.use("/api/stock", StockRouter);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
@@ -44,5 +48,3 @@ app.use((err, req, res, next) => {
     message,
   });
 });
-
-
