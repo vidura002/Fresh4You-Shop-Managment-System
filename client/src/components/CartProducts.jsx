@@ -8,7 +8,7 @@ import {
   decreaseQty,
 } from "../redux/productSlice";
 
-const CartProducts = ({ id, FruitID, FruitName, image, qty, price, total }) => {
+const CartProducts = ({ id, FruitName, image, qty, price, total }) => {
   const dispatch = useDispatch();
 
   return (
@@ -23,7 +23,7 @@ const CartProducts = ({ id, FruitID, FruitName, image, qty, price, total }) => {
           </h3>
           <div
             className="cursor-pointer text-slate-700 hover:text-red-500"
-            onClick={() => dispatch(deleteCartItem(FruitID))}
+            onClick={() => dispatch(deleteCartItem(id))}
           >
             <AiFillDelete />
           </div>
