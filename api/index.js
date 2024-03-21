@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import listingRouter from "./routes/listing.route.js";
 import orderRoutes from "./routes/Orders.js";
 import StockRouter from "./routes/StockRoute.js";
+import bodyParser from "body-parser";
 
 dotenv.config();
 

@@ -8,7 +8,7 @@ import {
   decreaseQty,
 } from "../redux/productSlice";
 
-const CartProducts = ({ FruitID, FruitName, image, qty, price }) => {
+const CartProducts = ({ id, FruitID, FruitName, image, qty, price, total }) => {
   const dispatch = useDispatch();
 
   return (

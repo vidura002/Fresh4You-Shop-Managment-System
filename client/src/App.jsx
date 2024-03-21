@@ -12,6 +12,7 @@ import ShoppingCart from "./pages/ShoppingCart";
 import CartProducts from "./components/CartProducts";
 import productSlice from "./redux/productSlice";
 import OrderPayment from "./pages/OrderPayment";
+import { ShopTest } from "./pages/ShopTest";
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
 
         {/*Order payment  */}
         <Route path="/orderpayment" element={<OrderPayment />}></Route>
+        <Route path="/shop" element={<ShopTest />}></Route>
       </Routes>
     </BrowserRouter>
   );

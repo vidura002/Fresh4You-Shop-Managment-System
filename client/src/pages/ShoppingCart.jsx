@@ -36,6 +36,7 @@ const ShoppingCart = () => {
                     image={el.image}
                     qty={el.qty}
                     price={el.price}
+                    total={el.total}
                   />
                 );
               })}
@@ -57,7 +58,7 @@ const ShoppingCart = () => {
               </div>
               <button
                 className="bg-red-500 w-full text-lg font-bold py-2 text-white"
-                onClick={handlePayment}
+                // onClick={handlePayment}
               >
                 Payment
               </button>
