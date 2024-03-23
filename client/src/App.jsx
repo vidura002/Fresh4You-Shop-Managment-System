@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import PrivateRoute from './components/PrivateRoute';
 import CreateListing from './pages/CreateListing';
 import AdminDashboard from './pages/AdminDashboard';
+import DeliveryPlaces from './pages/DeliveryPlaces';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path='/create-listing'  element= {<CreateListing />}></Route>
         </Route>
         <Route path="/AdminDashboard" element={<AdminDashboard/>}></Route>
+        <Route path="/DeliveryPlaces" element={<DeliveryPlaces/>}></Route>
     </Routes>
     
     </BrowserRouter>
