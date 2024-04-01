@@ -11,7 +11,7 @@ const offerSchema = new mongoose.Schema({
     required: true,
   },
   Image: {
-    type: Buffer,
+    type: String,
   },
   Category: {
     type: String,
