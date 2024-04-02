@@ -7,14 +7,12 @@ import Header from './components/Header'
 import Register from './pages/Register';
 import PrivateRoute from './components/PrivateRoute';
 import CreateListing from './pages/CreateListing';
-import FeedbackForm from './pages/FeedbackForm';
 
 
 
 export default function App() {
   return (
     <BrowserRouter>
-  <Header />
     <Routes>
         <Route path='/'  element= {<Home />} ></Route>
         <Route path='/signup'  element= {<Register />}></Route>
@@ -25,8 +23,15 @@ export default function App() {
           <Route path='/profile'  element= {<Profile />}></Route>
           <Route path='/create-listing'  element= {<CreateListing />}></Route>
         </Route>
+        <Route path="/AdminDashboard" element={<AdminDashboard/>}></Route>
+        <Route path="/DeliveryPlaces" element={<DeliveryPlaces/>}></Route>
     </Routes>
+    
     </BrowserRouter>
+
+    
+
+    
   );
 }
 
