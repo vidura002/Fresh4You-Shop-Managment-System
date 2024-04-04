@@ -1,4 +1,5 @@
 import { BrowserRouter , Routes , Route} from 'react-router-dom';
+import React from 'react';
 import Home from './pages/Home';
 import Signin from './pages/Signin';
 import About from './pages/About';
@@ -7,10 +8,9 @@ import Header from './components/Header'
 import Register from './pages/Register';
 import PrivateRoute from './components/PrivateRoute';
 import CreateListing from './pages/CreateListing';
+import AdminDashboard from './pages/AdminDashboard';
+import DeliveryPlaces from './pages/DeliveryPlaces';
 import FeedbackForm from './pages/FeedbackForm';
-
-
-
 
 
 export default function App() {
@@ -21,13 +21,13 @@ export default function App() {
         <Route path='/signup'  element= {<Register />}></Route>
         <Route path='/signin'  element= {<Signin />}></Route>
         <Route path='/about'  element= {<About />}></Route>
-        <Route path='/feedbackform'  element= {<FeedbackForm />}></Route>
         <Route element= {<PrivateRoute /> }>
           <Route path='/profile'  element= {<Profile />}></Route>
           <Route path='/create-listing'  element= {<CreateListing />}></Route>
         </Route>
         <Route path="/AdminDashboard" element={<AdminDashboard/>}></Route>
         <Route path="/DeliveryPlaces" element={<DeliveryPlaces/>}></Route>
+        <Route path="/feedbackform"  element= {<FeedbackForm />}></Route>
     </Routes>
     
     </BrowserRouter>
@@ -36,6 +36,4 @@ export default function App() {
 
     
   );
-}
-
-
+};
