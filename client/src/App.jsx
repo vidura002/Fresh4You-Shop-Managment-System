@@ -10,7 +10,7 @@ import PrivateRoute from './components/PrivateRoute';
 import CreateListing from './pages/CreateListing';
 import AdminDashboard from './pages/AdminDashboard';
 import DeliveryPlaces from './pages/DeliveryPlaces';
-import FeedbackForm from './pages/FeedbackForm';
+import CreateFeedback from './pages/CreateFeedback';
 
 
 export default function App() {
@@ -27,7 +27,7 @@ export default function App() {
         </Route>
         <Route path="/AdminDashboard" element={<AdminDashboard/>}></Route>
         <Route path="/DeliveryPlaces" element={<DeliveryPlaces/>}></Route>
-        <Route path="/feedbackform"  element= {<FeedbackForm />}></Route>
+        <Route path="/CreateFeedback"  element= {<CreateFeedback />}></Route>
     </Routes>
     
     </BrowserRouter>
