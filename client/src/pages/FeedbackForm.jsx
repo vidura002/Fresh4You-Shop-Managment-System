@@ -1,43 +1,176 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+
+// Define star icon components
+const StarIcon = ({ filled, onClick }) => (
+  <span
+    className={`cursor-pointer ${filled ? 'text-yellow-500' : 'text-gray-300'
+      } text-3xl`} // Adjust the font size here, e.g., text-3xl for larger icons
+    onClick={onClick}
+  >
+    ★
+  </span>
+);
 
 export default function FeedbackForm() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [rating, setRating] = useState(3);
-  const [comments, setComments] = useState('');
+  const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [userFeedback, setUserFeedback] = useState([]);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [rating, setRating] = useState(0); // New state for rating
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can handle form submission logic here
-    console.log('Form submitted:', { name, email, rating, comments });
+    try {
+      setLoading(true);
+      setError(false);
+      const res = await fetch('/api/feedback/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          userRef: currentUser._id,
+          rating, // Include rating in the request body
+        }),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        setError(data.message);
+      }
+      alert('Feedback created successfully!');
+      formData.name = '';
+      formData.email = '';
+      formData.message = '';
+
+      navigate('/create-feedback');
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+  // Function to handle rating changes
+  const handleRatingChange = (value) => {
+    setRating(value);
+  };
+
+  const handleShowListings = async () => {
+    try {
+      const res = await fetch(`/api/feedback/getUid/${currentUser._id}`);
+      const data = await res.json();
+      if (data.success === false) {
+        return;
+      }
+      setUserFeedback(data); // Set the fetched data to userFeedback state
+    } catch (error) {
+      console.error('Error fetching feedback:', error);
+      // Handle error, maybe set an error state or display an error message
+    }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-br from-green-400 to-green-600">
-      <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center p-6 bg-white rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Feedback Form</h2>
-        <div className="mb-4">
-          <label htmlFor="name" className="block text-sm font-medium text-gray-800 mb-2">Name</label>
-          <input type="text" id="name" className="p-3 w-72 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" value={name} onChange={(e) => setName(e.target.value)} required />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-800 mb-2">Email</label>
-          <input type="email" id="email" className="p-3 w-72 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="rating" className="block text-sm font-medium text-gray-800 mb-2">Rating</label>
-          <select id="rating" className="p-3 w-72 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" value={rating} onChange={(e) => setRating(parseInt(e.target.value))} required>
+    <div className='max-w-3xl mx-auto mt-10'>
+      <h1 className='text-2xl font-bold text-slate-700'>Create Feedback</h1>
+      <form onSubmit={handleSubmit} className='mt-5'>
+        <div className='flex flex-col space-y-4'>
+          <input
+            type='text'
+            placeholder='Name'
+            className='bg-slate-100 p-3 rounded-lg'
+            value={formData.name}
+            onChange={(e) =>
+              setFormData({ ...formData, name: e.target.value })
+            }
+          />
+          <input
+            type='email'
+            placeholder='Email'
+            className='bg-slate-100 p-3 rounded-lg'
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+          />
+
+          <div className='flex justify-center space-x-2'>
             {[1, 2, 3, 4, 5].map((value) => (
-              <option key={value} value={value}>{value}</option>
+              <StarIcon
+                key={value}
+                filled={value <= rating}
+                onClick={() => handleRatingChange(value)}
+              />
             ))}
-          </select>
+          </div>
+
+          <textarea
+            placeholder='Message'
+            className='bg-slate-100 p-3 rounded-lg'
+            value={formData.message}
+            onChange={(e) =>
+              setFormData({ ...formData, message: e.target.value })
+            }
+          />
+          <button
+            type='submit'
+            className='bg-slate-700 text-white p-3 rounded-lg'
+          >
+            Create Feedback
+          </button>
         </div>
-        <div className="mb-4">
-          <label htmlFor="comments" className="block text-sm font-medium text-gray-800 mb-2">Comments</label>
-          <textarea id="comments" className="p-3 w-72 h-32 border border-gray-300 rounded-md resize-none focus:outline-none focus:border-blue-500" value={comments} onChange={(e) => setComments(e.target.value)} required />
-        </div>
-        <button type="submit" className="px-6 py-3 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600">Submit</button>
       </form>
+      {error && <p className='text-red-500 mt-5'>{error}</p>}
+      <div className='mt-5'>
+        <button
+          onClick={handleShowListings}
+          className='w-full bg-green-700 text-white p-3 rounded-lg my-2 uppercase hover:opacity-45 disabled:opacity-30'
+        >
+          View Feedback
+        </button>
+        {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
+        {userFeedback && userFeedback.length === 0 && !loading && (
+          <p className='text-center my-7 text-2xl'>No feedback found!</p>
+        )}
+        {userFeedback && userFeedback.length > 0 && !loading && (
+          <div>
+            <p className='text-center my-7 text-2xl'>Feedback</p>
+            {userFeedback.map((feedback) => (
+              <Link to={`/Feedback/${feedback._id}`} key={feedback._id}>
+                <div
+                  key={feedback._id}
+                  className='bg-slate-100 p-3 my-3 rounded-lg'
+                >
+                  <p className='text-center'>{feedback.name}</p>
+                  <p className='text-center'>{feedback.email}</p>
+                  <p className='text-center'>{feedback.message}</p>
+                  <p className='text-center'>Rating: {feedback.rating}</p>
+
+                  <div className='flex justify-end gap-9'>
+                    <button
+                      className='w-30 bg-green-700 text-white p-3 rounded-lg my-2 uppercase hover:opacity-45 disabled:opacity-30'
+                    >
+                      edit
+                    </button>
+                    <button
+                      className='w-30 bg-red-700 text-white p-3 rounded-lg my-2 uppercase hover:opacity-45 disabled:opacity-30'
+                    >
+                      delete
+                    </button>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
