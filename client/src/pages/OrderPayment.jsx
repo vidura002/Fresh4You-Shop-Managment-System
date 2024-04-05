@@ -3,13 +3,14 @@ import mastercard from "../assest/mc.png";
 import paypal from "../assest/pp.png";
 import visa from "../assest/vi.png";
 import "../index.css";
+import backgroundPhoto from "../assest/fruit2.png";
 
 const OrderPayment = () => {
   const [formData, setFormData] = useState({
     cardNumber: "",
     expiryDate: "",
     cvv: "",
-    address: "",
+    shoppingAddress: "",
   });
   const [errors, setErrors] = useState({});
 
@@ -42,7 +43,7 @@ const OrderPayment = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ amount, ...formData }),
+        body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
@@ -56,14 +57,18 @@ const OrderPayment = () => {
   };
 
   return (
-    <div className="paymentcontainer">
+    <div
+      className="paymentcontainer"
+      style={{ backgroundImage: `url(${backgroundPhoto})` }}
+    >
       <form onSubmit={handleSubmit}>
-        <h1>Payment Form</h1>{" "}
-        <di className="flex gap-4">
-          <img src={mastercard} height={20} width={60}></img>
-          <img src={paypal} height={20} width={60}></img>
-          <img src={visa} height={20} width={60}></img>
-        </di>
+        <h1>Payment Form</h1>
+        <div className="flex gap-4">
+          {" "}
+          <img src={mastercard} height={20} width={60} alt="Mastercard" />
+          <img src={paypal} height={20} width={60} alt="Paypal" />
+          <img src={visa} height={20} width={60} alt="Visa" />
+        </div>
         <div className="cardNumber">
           <h2>Card Number :</h2>
           <div className="input-field">
@@ -96,8 +101,15 @@ const OrderPayment = () => {
           <div className="expiryDate">
             <h2>Expiry Date :</h2>
             <div className="selection">
-              <div class="date flex gap-1 ">
-                <select name="months" id="months" className="input-border">
+              <div className="date flex gap-1 ">
+                {" "}
+                <select
+                  name="expiryDate"
+                  id="months"
+                  className="input-border"
+                  onChange={handleChange}
+                  required
+                >
                   <option value=""> </option>
                   <option value="jan">Jan</option>
                   <option value="feb">Feb</option>
@@ -112,7 +124,13 @@ const OrderPayment = () => {
                   <option value="nov">Nov</option>
                   <option value="dec">Dec</option>
                 </select>
-                <select name="years" id="years" className="input-border">
+                <select
+                  name="expiryDate"
+                  id="years"
+                  className="input-border"
+                  onChange={handleChange}
+                  required
+                >
                   <option value=""> </option>
                   <option value="2024">2024</option>
                   <option value="2025">2025</option>
@@ -125,10 +143,18 @@ const OrderPayment = () => {
             </div>
           </div>
         </div>
-        <div className="shoppingaAddress">
+        <div className="shoppingAddress">
+          {" "}
           <h2>Shopping Address :</h2>
           <div className="input-field">
-            <input type="text" id="shoppingAddress" name="shoppingAddress" />
+            <input
+              type="text"
+              id="shoppingAddress"
+              name="shoppingAddress"
+              value={formData.shoppingAddress}
+              onChange={handleChange}
+              required
+            />
           </div>
         </div>
         <div className="flex items-center justify-center">

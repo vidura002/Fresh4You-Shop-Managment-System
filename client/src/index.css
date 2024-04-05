@@ -51,14 +51,15 @@ body {
 }
 
 .paymentcontainer {
+  background-image: url("../assest/fruit2.jpg");
   width: 750px;
   height: 500px;
-  margin: 0 auto;
+  margin: 25px auto;
   padding: 40px;
   border: 1px solid #0e0d0d;
   border-radius: 5px;
   align-items: center;
-  background-color: #9afaaf;
+  background-color: #c3faaf;
   justify-content: center;
   flex-direction: column;
 }

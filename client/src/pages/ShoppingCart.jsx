@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import CartProducts from "../components/CartProducts";
+import { Link } from "react-router-dom";
 
 const ShoppingCart = () => {
   const productCartItem = useSelector((state) => state.product.cartItem);
@@ -18,8 +19,8 @@ const ShoppingCart = () => {
   return (
     <>
       <div className="p-2 md:p-4">
-        <h2 className="text-lg md:text-2xl font-bold text-slate-600">
-          Your Cart Items
+        <h2 className="text-lg md:text-2xl font-bold bg-lime-300	">
+          - My Cart -
         </h2>
 
         {productCartItem[0] ? (
@@ -32,7 +33,7 @@ const ShoppingCart = () => {
                   <CartProducts
                     key={el._id}
                     id={el._id}
-                    name={el.name}
+                    FruitName={el.FruitName}
                     image={el.image}
                     qty={el.qty}
                     price={el.price}
@@ -45,23 +46,24 @@ const ShoppingCart = () => {
             {/* total cart item  */}
 
             <div className="w-full max-w-md  ml-auto">
-              <h2 className="bg-blue-500 text-white p-2 text-lg">Summary</h2>
+              <h2 className="bg-lime-200 bg-lime-400 p-2 text-lg font-bold">
+                Summary
+              </h2>
               <div className="flex w-full py-2 text-lg border-b">
                 <p>Total Qty :</p>
                 <p className="ml-auto w-32 font-bold">{totalQty}</p>
               </div>
               <div className="flex w-full py-2 text-lg border-b">
-                <p>Total Price</p>
+                <p>Total Price : </p>
                 <p className="ml-auto w-32 font-bold">
-                  <span className="text-red-500">RS</span> {totalPrice}
+                  <span className="text-red-500">Rs.</span> {totalPrice}
                 </p>
               </div>
-              <button
-                className="bg-red-500 w-full text-lg font-bold py-2 text-white"
-                // onClick={handlePayment}
-              >
-                Payment
-              </button>
+              <Link to="/orderpayment">
+                <button className="bg-red-500 w-full text-lg font-bold py-2 text-white">
+                  Place Order
+                </button>
+              </Link>
             </div>
           </div>
         ) : (
