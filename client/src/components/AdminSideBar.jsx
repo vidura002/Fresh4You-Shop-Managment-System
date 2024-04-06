@@ -18,38 +18,46 @@ function AdminSideBar()  {
       </div>
       <hr/>
         <ul>
+        <a href="/AdminDashboard">  
         <li className="text-4x text-black font-bold p-3 hover:bg-green-30">
           <IoHomeSharp className="inline-block"></IoHomeSharp>{' '}
-            <a>Dashboard</a>
-          </li>
-          <li className="text-4x text-black font-bold p-3 hover:bg-green-30">
+          <span>Dashboard</span>
+        </li></a>
+        <a href="/AdminDashboard"> 
+        <li className="text-4x text-black font-bold p-3 hover:bg-green-30">
             <FaUser className="inline-block"></FaUser>{' '}
-            <a>User Management</a>
-          </li>
+            <span>User Management</span>
+          </li></a>
+          <a href="/AdminDashboard"> 
           <li className="text-4x text-black font-bold p-3 hover:bg-green-30 ease-in-out duration-300">
             <GiFruitBowl className="inline-block"></GiFruitBowl>{' '}
-            <a>Fruit Offer Management</a>
-          </li>
+            <span>Fruit Offer Management</span>
+          </li></a>
+          <a href="/AdminDashboard"> 
           <li className="text-4x text-black font-bold p-3 hover:bg-green-30">
             <GoListOrdered className="inline-block"></GoListOrdered>{' '}
-            <a>Order Management</a>
-          </li>
+            <span>Order Management</span>
+          </li></a>
+          <a href="/AdminStock" className="ease-in duration-700"> 
           <li className="text-4x text-black font-bold p-3 hover:bg-green-30">
             <RiStockLine className="inline-block"></RiStockLine>{' '}
-            <a>Stock Management</a>
-          </li>
+            <span>Stock Management</span>
+          </li></a>
+          <a href="/AdminDashboard"> 
           <li className="text-4x text-black font-bold p-3 hover:bg-green-30">
             <TbTruckDelivery className="inline-block"></TbTruckDelivery>{' '}
-            <a>Delivery Details</a>
-          </li>
+            <span>Delivery Details</span>
+          </li></a>
+          <a href="/AdminDashboard"> 
           <li className="text-4x text-black font-bold p-3 hover:bg-green-30">
             <LiaLuggageCartSolid className="inline-block"></LiaLuggageCartSolid>{' '}
-            <a>Supplier </a>
-          </li>
+            <span>Supplier Management</span>
+          </li></a>
+          <a href="/AdminDashboard"> 
           <li className="text-4x text-black font-bold p-3 hover:bg-green-30">
             <MdFeedback className="inline-block"></MdFeedback>{' '}
-            <a>Feedback & Review</a>
-          </li>
+            <span>Feedback & Review</span>
+          </li></a>
         </ul>
 
        
