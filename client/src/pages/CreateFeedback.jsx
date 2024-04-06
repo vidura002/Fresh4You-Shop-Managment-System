@@ -82,14 +82,14 @@ export default function FeedbackForm() {
 
   return (
     <div className='max-w-lg mx-auto mt-10 bg-green-50 shadow-md p-8 rounded-lg'>
-      <h1 className='text-3xl font-bold text-green-800 mb-6 text-center'>Give Feedback</h1>
+      <h1 className='text-3xl font-bold text-black mb-6 text-center'>Give Feedback</h1>
       <form onSubmit={handleSubmit}>
         <div className='mb-4'>
-          <label className='block text-green-800 text-sm font-bold mb-2'>Name</label>
+          <label className='block text-black text-sm font-bold mb-2'>Name</label>
           <input
             type='text'
             placeholder='Enter your name'
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-green-800 leading-tight focus:outline-none focus:shadow-outline'
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline'
             value={formData.name}
             onChange={(e) =>
               setFormData({ ...formData, name: e.target.value })
@@ -97,11 +97,11 @@ export default function FeedbackForm() {
           />
         </div>
         <div className='mb-4'>
-          <label className='block text-green-800 text-sm font-bold mb-2'>Email</label>
+          <label className='block text-black text-sm font-bold mb-2'>Email</label>
           <input
             type='email'
             placeholder='Enter your email'
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-green-800 leading-tight focus:outline-none focus:shadow-outline'
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline'
             value={formData.email}
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
@@ -109,7 +109,7 @@ export default function FeedbackForm() {
           />
         </div>
         <div className='mb-4'>
-          <label className='block text-green-800 text-sm font-bold mb-2'>Rating</label>
+          <label className='block text-black text-sm font-bold mb-2'>Rating</label>
           <div className='flex items-center'>
             {[1, 2, 3, 4, 5].map((value) => (
               <StarIcon
@@ -121,10 +121,10 @@ export default function FeedbackForm() {
           </div>
         </div>
         <div className='mb-4'>
-          <label className='block text-green-800 text-sm font-bold mb-2'>Message</label>
+          <label className='block text-black text-sm font-bold mb-2'>Message</label>
           <textarea
             placeholder='Enter your message'
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-green-800 leading-tight focus:outline-none focus:shadow-outline'
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline'
             value={formData.message}
             onChange={(e) =>
               setFormData({ ...formData, message: e.target.value })
@@ -160,10 +160,10 @@ export default function FeedbackForm() {
                   key={feedback._id}
                   className='bg-green-100 p-4 my-4 rounded-lg'
                 >
-                  <p className='text-center font-semibold text-green-800'>{feedback.name}</p>
-                  <p className='text-center text-green-800'>{feedback.email}</p>
-                  <p className='text-center mt-2 text-green-800'>{feedback.message}</p>
-                  <p className='text-center mt-2 text-green-800'>Rating: {feedback.rating}</p>
+                  <p className='text-center font-semibold text-black'>{feedback.name}</p>
+                  <p className='text-center text-black'>{feedback.email}</p>
+                  <p className='text-center mt-2 text-black'>{feedback.message}</p>
+                  <p className='text-center mt-2 text-black'>Rating: {feedback.rating}</p>
 
                   <div className='flex justify-end mt-4'>
                     <button className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
