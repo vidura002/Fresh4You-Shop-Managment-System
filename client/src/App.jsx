@@ -11,6 +11,7 @@ import CreateListing from './pages/CreateListing';
 import AdminDashboard from './pages/AdminDashboard';
 import DeliveryPlaces from './pages/DeliveryPlaces';
 import CreateFeedback from './pages/CreateFeedback';
+import Feedback from './pages/Feedback';
 
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/AdminDashboard" element={<AdminDashboard/>}></Route>
         <Route path="/DeliveryPlaces" element={<DeliveryPlaces/>}></Route>
         <Route path="/CreateFeedback"  element= {<CreateFeedback />}></Route>
+        <Route path="/Feedback"  element= {<Feedback />}></Route>
     </Routes>
     
     </BrowserRouter>
