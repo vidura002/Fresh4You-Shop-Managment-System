@@ -10,35 +10,11 @@ route.get("/", (req, res) => {
 route.get("/:id", (req, res) => {
   res.json({ message: "get a single offer item" });
 });
+const create = (req, res) => {
+  res.json({ message: "Create offer" });
+};
 
-// Route for creating a new offer with image upload
-route.post("/", async (req, res) => {
-  const {
-    OfferID,
-    OfferName,
-    Category,
-    Price,
-    Variants,
-    Quantity,
-    description,
-  } = req.body;
-  try {
-    // Check if req.file exists before accessing its properties
-    const newOffer = await Offer.create({
-      OfferID,
-      OfferName,
-      Image: imageData,
-      Category,
-      Price,
-      Variants,
-      Quantity,
-      description,
-    });
-    res.status(201).json(newOffer);
-  } catch (error) {
-    res.status(500).json({ error: "Error creating offer" });
-  }
-});
+route.post("/CreateOffer", create);
 
 route.patch("/:id", (req, res) => {
   res.json({ message: "Update offer" });
@@ -49,3 +25,6 @@ route.delete("/:id", (req, res) => {
 });
 
 export default route;
+
+
+

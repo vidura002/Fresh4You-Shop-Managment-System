@@ -1,15 +1,22 @@
 import Offer from "../models/offers.model.js";
 
 export const create = async (req, res) => {
+  const { id, name, price, variant, quantity, category, description,image } =
+    req.body;
   try {
-    const offersData = new Offer(req.body);
-    if(!offersData) {
-      return res.status(404).json({ message: "Offer data not found" });
-    }
-    const savedData = await offersData.save();
-    res.status(201).json(savedData);
-
+    // Check if req.file exists before accessing its properties
+    const newOffer = await Offer.create({
+      id,
+      name,
+      price,
+      variant,
+      quantity,
+      category,
+      description,
+    });
+    res.status(201).json(newOffer);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: "Error creating offer" });
   }
-}
+};
+

@@ -1,31 +1,28 @@
 import mongoose from "mongoose";
 
 const offerSchema = new mongoose.Schema({
-  OfferID: {
+  id: {
     type: Number,
     required: true,
     unique: true,
   },
-  OfferName: {
+  name: {
     type: String,
     required: true,
   },
-  Image: {
-    type: String,
-  },
-  Category: {
+  category: {
     type: String,
     required: true,
   },
-  Price: {
+  price: {
     type: Number,
     required: true,
   },
-  Variants: {
+  variant: {
     type: String,
     required: true,
   },
-  Quantity: {
+  quantity: {
     type: Number,
     required: true,
   },
@@ -34,4 +31,5 @@ const offerSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("Offer", offerSchema);
+const OfferModel = mongoose.model("Offer", offerSchema);
+module.exports = OfferModel;
