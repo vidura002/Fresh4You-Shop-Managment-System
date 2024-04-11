@@ -35,14 +35,15 @@ export const updateFeedback = async (req, res, next) => {
     if (!feedback) {
         return next(errorhandler(404, 'Feedback not found!'));
     }
-    if (req.user.userId !== feedback.userRef && req.user.userId !== "66078dbc951f7e108cd5ec2b") {
+    if (req.user.userId !== feedback.userRef ) {
         return next(errorhandler(401, "You are not authorized to delete this feedback"));
     }
+    
 
     try {
         const updatedFeedback = await Feedback.findByIdAndUpdate(
             req.params.id,
-            { ...req.body, status: 'Approved' }, // Update status to 'Approved'
+            { ...req.body }, 
             { new: true }
         );
         res.status(200).json(updatedFeedback);
@@ -50,6 +51,24 @@ export const updateFeedback = async (req, res, next) => {
         next(error);
     }
 };
+
+export const approvingFeedbacks = async (req, res, next) => {
+    const feedback = await Feedback.findById(req.params.id);
+    if (!feedback) {
+        return next(errorhandler(404, 'Feedback not found!'));
+    }
+
+    try {
+        const updatedFeedback = await Feedback.findByIdAndUpdate(
+            req.params.id,
+            { status: 'Approved' },
+            { new: true }
+        );
+        res.status(200).json(updatedFeedback);
+    } catch (error) {
+        next(error);
+    }
+}
 
 
 export const approvedFeedbacks = async (req, res, next) => {
