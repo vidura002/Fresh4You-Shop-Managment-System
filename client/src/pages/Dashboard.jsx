@@ -27,12 +27,12 @@ const AdminDashboard = () => {
   };
 
   useEffect(() => {
-    fetchFeedbacks(); // Call fetchFeedbacks function when component mounts
+    fetchFeedbacks();
   }, []);
 
   const handleApprove = async (id) => {
     try {
-      const res = await fetch(`/api/feedback/update/${id}`, {
+      const res = await fetch(`/api/feedback/approve/${id}`, {
         method: 'POST',
       });
       const data = await res.json();
@@ -70,7 +70,6 @@ const AdminDashboard = () => {
 
   const generateReport = async () => {
     try {
-      // Create a new PDF document
       const pdfDoc = await PDFDocument.create();
       let currentPage = pdfDoc.addPage();
       let y = currentPage.getHeight() - 50;
@@ -125,33 +124,33 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className='max-w-3xl mx-auto mt-10'>
-      <h1 className='text-2xl font-bold text-slate-700'>Admin Dashboard</h1>
-      <div className="flex justify-between mb-4">
-        <div>
+    <div className='max-w-3xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg'>
+      <h1 className='text-3xl font-bold text-slate-700 mb-6'>Admin Dashboard</h1>
+      <div className="flex justify-between items-center mb-6">
+        <div className="flex items-center">
           <input
             type="text"
-            placeholder="Search..."
+            placeholder="Search by name..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="border border-gray-300 px-4 py-2 rounded-lg"
+            className="border border-gray-300 px-4 py-2 rounded-l-lg focus:outline-none focus:ring focus:border-blue-300"
           />
-          <button onClick={handleSearch} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">
+          <button onClick={handleSearch} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-lg focus:outline-none focus:ring focus:border-blue-300">
             Search
           </button>
-          <button onClick={resetSearch} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2">
+          <button onClick={resetSearch} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-l-lg focus:outline-none focus:ring focus:border-blue-300">
             Reset
           </button>
         </div>
-        <button onClick={generateReport} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button onClick={generateReport} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring focus:border-blue-300">
           Generate Report
         </button>
       </div>
       {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
-      {error && <p className='text-center my-7 text-2xl'>Error fetching data</p>}
-      <table className='w-full border-collapse border border-black'>
+      {error && <p className='text-center my-7 text-2xl text-red-500'>Error fetching data</p>}
+      <table className='w-full border-collapse border border-gray-200'>
         <thead>
-          <tr>
+          <tr className="bg-gray-100">
             <th className='border border-gray-300 p-2'>Name</th>
             <th className='border border-gray-300 p-2'>Email</th>
             <th className='border border-gray-300 p-2'>Message</th>
@@ -173,13 +172,13 @@ const AdminDashboard = () => {
                   <>
                     <button
                       onClick={() => handleApprove(feedback._id)}
-                      className='bg-green-700 text-white p-1 rounded-lg mr-2'
+                      className='bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded-md mr-2 focus:outline-none focus:ring focus:border-blue-300'
                     >
                       Approve
                     </button>
                     <button
                       onClick={() => handleDelete(feedback._id)}
-                      className='bg-red-700 text-white p-1 rounded-lg'
+                      className='bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded-md focus:outline-none focus:ring focus:border-blue-300'
                     >
                       Delete
                     </button>

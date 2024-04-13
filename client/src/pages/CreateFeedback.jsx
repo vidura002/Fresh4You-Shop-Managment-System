@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import Header from '../components/Header'; 
+
 // Define star icon components
 const StarIcon = ({ filled, onClick }) => (
   <span
@@ -80,8 +80,9 @@ export default function CreateFeedback() {
 
   return (
     <div className=' min-h-screen bg-cover bg-center' style={{backgroundImage: "url(src/images/bc1.jpg)"}}> 
-    <div className='max-w-3xl mx-auto mt-10 p-8 rounded-lg shadow-md bg-white bg-opacity-30'>
-      <h1 class='text-3xl font-bold text-gray-800 mb-8 text-center'>Create Feedback</h1>
+    <div className='max-w-3xl mx-auto mt-10 p-8 rounded-lg shadow-md bg-white bg-opacity-50'>
+    <h1 className='text-4xl underline decoration-4 font-serif font-bold bg-gradient-to-r from-green-500 to-green-700 text-white mb-8 text-center'>Create Feedback</h1>
+
 
       <form onSubmit={handleSubmit} className='mt-5'>
         <div className='flex flex-col space-y-4'>
@@ -124,7 +125,7 @@ export default function CreateFeedback() {
           />
           <button
             type='submit'
-            className='bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold transition duration-300 ease-in-out'
+            className='bg-blue-500 shadow-lg shadow-cyan-500/50  hover:bg-blue-600 text-white py-3 rounded-lg font-semibold transition duration-300 ease-in-out'
           >
             Create Feedback
           </button>
@@ -134,7 +135,7 @@ export default function CreateFeedback() {
       <div className='mt-8'>
         <button
           onClick={handleShowListings}
-          className='w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-semibold transition duration-300 ease-in-out'
+          className='w-full bg-green-500 shadow-lg shadow-cyan-600/50  hover:bg-green-600 text-white py-3 rounded-lg font-semibold transition duration-300 ease-in-out'
         >
           View Feedback
         </button>
@@ -158,7 +159,7 @@ export default function CreateFeedback() {
 
                   <div className='flex justify-end gap-6 mt-4'>
                     <button
-                      className='bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-6 rounded-lg font-semibold transition duration-300 ease-in-out'
+                      className='bg-yellow-500  hover:bg-yellow-600 text-white py-2 px-6 rounded-lg font-semibold transition duration-300 ease-in-out'
                     >
                       Edit
                     </button>

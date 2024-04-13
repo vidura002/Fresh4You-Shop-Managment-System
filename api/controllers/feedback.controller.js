@@ -17,7 +17,7 @@ export const deleteFeedback = async (req, res, next) => {
         return res.status(404).json({ message: "Feedback not found" });
     }
 
-    if (req.user.userId !== feedback.userRef && req.user.userId !== "66078dbc951f7e108cd5ec2b" ) {
+    if (req.user.userId !== feedback.userRef && req.user.userId !== req.user.userId ) {
         return next(errorhandler(401, "You are not authorized to delete this feedback"));
     }
     
@@ -113,5 +113,5 @@ export const GetAllFeedback = async (req, res, next) => {
         return res.status(200).json(feedbacks);
     } catch (error) {
         next(error);
-    }
+    }
 };

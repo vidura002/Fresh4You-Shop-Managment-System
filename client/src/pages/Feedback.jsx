@@ -22,6 +22,7 @@ export default function Feedback() {
     message: '',
     rating: 0, // New state for rating
   });
+  const [status, setStatus] = useState('Pending'); // State for status
   const params = useParams();
 
   useEffect(() => {
@@ -42,6 +43,7 @@ export default function Feedback() {
           message: data.message,
           rating: data.rating, // Set the initial rating from fetched data
         });
+        setStatus(data.status); // Set the status from fetched data
         setLoading(false);
         setError(false);
       } catch (error) {
@@ -64,7 +66,7 @@ export default function Feedback() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, status: 'Pending' }), // Update status to Pending here
       });
       const data = await res.json();
       if (data.success === false) {
@@ -72,6 +74,7 @@ export default function Feedback() {
         return;
       }
       setListing(data);
+      setStatus('Pending'); // Update the status state to Pending as well
       navigate('/create-feedback');
     } catch (error) {
       setError(true);
@@ -97,66 +100,70 @@ export default function Feedback() {
   };
 
   return (
-    <main>
-      {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
-      {error && <p className='text-center my-7 text-2xl'></p>}
-      {listing && (
-        <div className='max-w-3xl mx-auto mt-10'>
-          <h1 className='text-2xl font-bold text-slate-700'>Edit Feedback</h1>
-          <div className='flex flex-col space-y-4'>
-            <input
-              type='text'
-              placeholder='Name'
-              className='bg-slate-100 p-3 rounded-lg'
-              value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-            />
-            <input
-              type='email'
-              placeholder='Email'
-              className='bg-slate-100 p-3 rounded-lg'
-              value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
-            />
+    <div className='min-h-screen bg-cover bg-center' style={{backgroundImage: "url(src/images/bc2.jpg)"}}>
+      <main className="py-8">
+        {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
+        {error && <p className='text-center my-7 text-2xl'>Error occurred.</p>}
+        {listing && (
+          <div className='max-w-3xl mx-auto mt-10'>
+            <h1 className='text-2xl font-bold text-slate-700'>Edit Feedback</h1>
+            <p className="text-center">Status: {status}</p> {/* Display the status here */}
+            <div className='flex flex-col space-y-4'>
+              <input
+                type='text'
+                placeholder='Name'
+                className='bg-slate-100 p-3 rounded-lg'
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+              />
+              <input
+                type='email'
+                placeholder='Email'
+                className='bg-slate-100 p-3 rounded-lg'
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+              />
 
-            <div className='flex justify-center space-x-2'>
-              {[1, 2, 3, 4, 5].map((value) => (
-                <StarIcon
-                  key={value}
-                  filled={value <= formData.rating}
-                  onClick={() => handleRatingChange(value)}
-                />
-              ))}
+              <div className='flex justify-center space-x-2'>
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <StarIcon
+                    key={value}
+                    filled={value <= formData.rating}
+                    onClick={() => handleRatingChange(value)}
+                  />
+                ))}
+              </div>
+
+              <textarea
+                placeholder='Message'
+                className='bg-slate-100 p-3 rounded-lg'
+                value={formData.message}
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
+              />
+              <button
+                onClick={handleEdit}
+                className='bg-slate-700 text-white p-3 rounded-lg'
+              >
+                Edit Feedback
+              </button>
+
+              <button
+                onClick={handleDelete}
+                className='bg-red-700 text-white p-3 rounded-lg'
+              >
+                Delete Feedback
+              </button>
             </div>
-
-            <textarea
-              placeholder='Message'
-              className='bg-slate-100 p-3 rounded-lg'
-              value={formData.message}
-              onChange={(e) =>
-                setFormData({ ...formData, message: e.target.value })
-              }
-            />
-            <button
-              onClick={handleEdit}
-              className='bg-slate-700 text-white p-3 rounded-lg'
-            >
-              Edit Feedback
-            </button>
-
-            <button
-              onClick={handleDelete}
-              className='bg-red-700 text-white p-3 rounded-lg'
-            >
-              Delete Feedback
-            </button>
           </div>
-        </div>
-      )}
-    </main>
+        )}
+        
+      </main>
+    </div>
   );
 }
