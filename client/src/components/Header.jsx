@@ -6,8 +6,8 @@ import Logo from "../images/logo.jpg";
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   return (
-    <header className="bg-lime-500 shadow-md">
-      <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
+    <header className="bg-green-400 shadow-md">
+      <div className="flex justify-between items-center max-w-6xl mx-auto p-3 ">
         <Link to="/">
           <h1 className="font-bold text-7xl sm:text-xl flex flex-wrap mr-20 items-center space-x-1">
             <img src={Logo} alt="logo" className="w-14 h-14 rounded-full " />
@@ -24,7 +24,7 @@ export default function Header() {
           <FaSearch className="text-slate-700" />
         </form>
         <ul className="flex gap-6">
-          <Link to={""}>
+          <Link to={"/"}>
             <li className="hidden sm:inline text-slate-700 hover:underline text-xl">
               Home
             </li>
@@ -46,11 +46,6 @@ export default function Header() {
                 Sign In
               </li>
             )}
-          </Link>
-          <Link to={"/ShoppingCart"}>
-            <li className="hidden sm:inline text-slate-700 hover:underline text-xl">
-              Cart
-            </li>
           </Link>
         </ul>
       </div>

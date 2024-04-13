@@ -14,6 +14,7 @@ import productSlice from "./redux/productSlice";
 import OrderPayment from "./pages/OrderPayment";
 import { ShopTest } from "./pages/ShopTest";
 import AdminDashboard from "./pages/AdminDashboard";
+import DeliveryPlaces from "./pages/DeliveryPlaces";
 
 export default function App() {
   return (
@@ -39,6 +40,9 @@ export default function App() {
         {/*Order payment  */}
         <Route path="/orderpayment" element={<OrderPayment />}></Route>
         <Route path="/shop" element={<ShopTest />}></Route>
+
+        <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
+        <Route path="/DeliveryPlaces" element={<DeliveryPlaces />}></Route>
       </Routes>
     </BrowserRouter>
   );
