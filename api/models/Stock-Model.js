@@ -1,6 +1,8 @@
-import { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
-const FruitStock = new Mongoose.Schema({
+const { Schema } = mongoose;
+
+const FruitStockSchema = new Schema({
     FruitID:{
         type:String,
         required:true,
@@ -22,9 +24,7 @@ const FruitStock = new Mongoose.Schema({
         type: String,
         required: true,
     },
+});
 
-    });
-    
-const Stock = Mongoose.model("FruitStock", FruitStock);
+const Stock = mongoose.model("FruitStock", FruitStockSchema);
 export default Stock;
-

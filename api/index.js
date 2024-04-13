@@ -6,6 +6,7 @@ import authRouter from './routes/auth.route.js'
 import cookieParser from 'cookie-parser';
 import listingRouter from './routes/listing.route.js';
 import bodyParser from 'body-parser';
+import StockRouter from './routes/Stock-Route.js'
 
 
 
@@ -37,6 +38,7 @@ app.listen(3000, () => {
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
+app.use("/api/Stock", StockRouter);
 
 app.use((err, req, res, next)=>{
     const statusCode = err.statusCode || 500;
