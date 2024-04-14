@@ -36,7 +36,7 @@ const AddStock = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-green-100 shadow-md rounded-md">
+    <div className="max-w-md mx-auto mt-10 p-6 bg-green-200 shadow-md rounded-md">
       <div className="flex gap-2">
         <Link to="/AdminStock">
       <IoArrowBackCircleOutline className="text-4xl" /></Link>
@@ -104,7 +104,7 @@ const AddStock = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+          className="w-full bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-indigo-600"
         >
           Submit
         </button>
