@@ -156,7 +156,7 @@ export default function AdminStock() {
           <AdminSideBar />
         </div>
         <div className="grid-col-11 lg:col-span-10 md:col-span-9 h-max  text-black overflow-auto max-h-svh">
-          <h1 className="text-2xl ml-10 mt-10 inline-block">
+          <h1 className="text-2xl ml-10 mt-10 inline-block font-bold">
             Stock Management{" "}
           </h1>
           <div className="float-right mr-10 mt-10">
@@ -217,6 +217,7 @@ export default function AdminStock() {
               </div>
             </div>
           </div>
+          {searchResults.length === 0 && <p className="text-2xl text-center">No results found.</p>}<br/>
           <div className="grid justify-items-center ml-10 mr-10 ">
             <table
               rowsPerPageOptions={[5, 10, 25, 50]}
@@ -239,6 +240,7 @@ export default function AdminStock() {
                 </tr>
               </thead>
               <tbody>
+                
                 {searchResults.map((item, index) => (
                   <tr key={index}>
                     <td className="h-12 border-b-2 p-2">{item.ID}</td>

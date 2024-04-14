@@ -6,6 +6,7 @@ import authRouter from './routes/auth.route.js'
 import cookieParser from 'cookie-parser';
 import listingRouter from './routes/listing.route.js';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import StockRouter from './routes/Stock-Route.js'
 
 
@@ -21,6 +22,7 @@ mongoose.connect(process.env.MONGO).then(() => {
 
 const app = express();
 
+app.use(cors());
 app.get('/', (req, res) => {
     res.send('Hello World!')
   })

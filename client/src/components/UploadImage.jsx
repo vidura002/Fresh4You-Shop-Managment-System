@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-const UploadImage = ({ onImageUrlChange}) => {
+const UploadImage = ({ onImageUrlChange }) => {
   const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
 
@@ -21,8 +21,9 @@ const UploadImage = ({ onImageUrlChange}) => {
       setUploading(true); 
       await uploadBytes(storageRef, image);
       const url = await getDownloadURL(storageRef);
+      console.log("File uploaded: ", url);
       onImageUrlChange(url);
-      console.log("File uploaded");
+      setUploading(false);
     } catch (error) {
       console.error("Error uploading image:", error);
     } finally {
@@ -42,10 +43,10 @@ const UploadImage = ({ onImageUrlChange}) => {
       <div className="flex justify-center">
         <button
           onClick={handleUpload}
-          className={`bg-${uploading ? 'orange-900' : 'orange-500'} text-white py-2 px-4 font-medium rounded-md hover:bg-${uploading ? 'orange-900' : 'orange-600'} focus:outline-none focus:bg-${uploading ? 'orange-900' : 'orange-600'} mt-4`}
+          className={"bg-orange-600 text-white py-2 px-4 font-medium rounded-md mt-4 focus:outline-none focus:bg-orange-400"}
           disabled={uploading}
         >
-          {uploading ? 'Uploading...' : 'Upload'}
+         {uploading ? 'Uploading...' : 'Upload'}
         </button>
       </div>
     </div>
