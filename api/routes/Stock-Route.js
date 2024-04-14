@@ -3,6 +3,6 @@ import { CreateStock } from "../controllers/Stock-Controller.js";
 
 const router = express.Router();
 
-router.post("/stock", CreateStock);
+router.post("/createstock", CreateStock);
 
 export default  router;
