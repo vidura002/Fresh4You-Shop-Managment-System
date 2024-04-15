@@ -63,7 +63,7 @@ function FruitCatelog() {
     </div>
     <ul className="grid gap-5 md:grid-cols-3 lg:grid-cols-5 ml-10 mr-10 ">
       {data.map((item, index) => (
-        <li key={index} className="border border-gray-200 rounded-md overflow-hidden animate-fade-in shadow-xl transition duration-500 ease-out transform hover:scale-95">
+        <li key={index} className="border border-gray-200 rounded-md overflow-hidden animate-fade-in shadow-xl">
           <div className="flex items-center justify-center ">
           <img
             src={item.image}
