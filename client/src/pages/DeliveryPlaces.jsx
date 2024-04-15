@@ -1,6 +1,10 @@
 import React from 'react'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
+
+
 
 function DeliveryPlaces() {
     const addresses = [
@@ -47,7 +51,12 @@ function DeliveryPlaces() {
       return (
         <div>
             <Header/><br />
-            <h2 className="text-4xl font-semibold mb-4 text-center">Where We Deliver</h2><br />
+            <div className="flex gap-4 text-5xl font-semibold mb-4 place-content-center	 ">
+        <Link to="/FruitCatelog">
+      <IoArrowBackCircleOutline className="" /></Link>
+      <h2 className=""> Where We Deliver</h2>
+      </div>
+            <h2 className=""></h2><br />
             <table className="min-w-96	divide-x divide-y divide-gray-200 mx-auto">
                 <thead className="bg-gray-50">
                 <tr>

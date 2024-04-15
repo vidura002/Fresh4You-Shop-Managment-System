@@ -23,22 +23,25 @@ const Home = () => {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: inViewBanner ? 1 : 0, y: inViewBanner ? 0 : -50 }}
           transition={{ duration: 0.5 }}
-          className={`min-h-svh bg-[url('images/bg.png')] bg-center bg-cover flex justify-center items-center`}
+          className={`min-h-svh bg-[url('images/bg.png')] bg-center bg-cover`}
         >
-          <div className="p-6 md:p-10 lg:p-20">
-            <span className="text-4xl md:text-6xl font-semibold">Welcome to Fresh4You!</span>
-            <h1 className="text-xl md:text-3xl text-center md:text-justify antialiased">
-              Explore our fresh, delicious fruits sourced from local farms. Let's make healthy
-              snacking easy and delightful! Happy browsing! 🍎🍌🍇
+          <div className="grid grid-cols-2 pt-48 pl-40 pr-8">
+          <div className="">
+            <span className="text-4xl md:text-6xl font-semibold text-orange-800">Welcome to Fresh4You!</span><br/><br/>
+            <h1 className="text-xl md:text-3xl  md:text-justify antialiased">Explore our fresh, delicious fruits sourced from local farms. Let's make healthy
+              snacking easy and delightful! Happy browsing!
+              <br/><br/><span className="text-5xl">🍎🍌🍇</span>
             </h1>
             <br />
-            <button className="border-2 border-orange-600 hover:bg-orange-600 text-white text-orange-600 font-bold py-3 px-12 rounded transition-colors hover:text-white hover:bg-orange-500 hover:delay-100">
+            <button className="border-2 border-orange-600 hover:bg-orange-600 text-orange-600	 text-orange-600 font-bold py-3 px-12 rounded transition-colors hover:text-white hover:bg-orange-500 hover:delay-100">
               SHOP NOW
             </button>
           </div>
+          <div></div>
+          </div>
         </motion.div>
       </section>
-      <section ref={refAbout}>
+      <section id="about" ref={refAbout}>
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: inViewAbout ? 1 : 0, y: inViewAbout ? 0 : -50 }}
@@ -102,7 +105,7 @@ const Home = () => {
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: inViewItemCard ? 1 : 0, y: inViewItemCard ? 0 : -50 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 2 }}
           className={`min-h-svh bg-cover place-content-center screens-md`}
         >
           <ul className="grid gap-5 md:grid-cols-3 lg:grid-cols-5 ml-4 md:ml-10 mr-4 md:mr-10 p-4 md:p-10">
@@ -134,6 +137,15 @@ const Home = () => {
           </ul>
         </motion.div>
       </section>
+      <section ref={refItemCard}>
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: inViewItemCard ? 1 : 0, y: inViewItemCard ? 0 : -50 }}
+          transition={{ duration: 0.5 }}
+          className={`min-h-svh bg-[url('images/bg1.png')] bg-center bg-cover  justify-center items-center`}
+        >
+        </motion.div>
+        </section>
       <Footer />
     </div>
   );
