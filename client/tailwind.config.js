@@ -30,7 +30,8 @@ export default {
             30: '#56F0D4'
           },
           orange:{
-            10:'#FFDFBD'
+            10:'#FFDFBD',
+            20:'#D7CCC8'
           },
           
 
