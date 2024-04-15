@@ -9,6 +9,7 @@ import PrivateRoute from './components/PrivateRoute';
 import CreateListing from './pages/CreateListing';
 import AdminDashboard from './pages/AdminDashboard';
 import DeliveryPlaces from './pages/DeliveryPlaces';
+import DeliveryDetails from './pages/DeliveryDetails';
 
 export default function App() {
   return (
@@ -24,10 +25,11 @@ export default function App() {
         </Route>
         <Route path="/AdminDashboard" element={<AdminDashboard/>}></Route>
         <Route path="/DeliveryPlaces" element={<DeliveryPlaces/>}></Route>
+        <Route path="/DeliveryDetails" element={<DeliveryDetails/>}></Route>
     </Routes>
     
     </BrowserRouter>
-
+    
     
 
     
