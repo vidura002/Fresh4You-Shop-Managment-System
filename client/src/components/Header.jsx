@@ -2,6 +2,8 @@ import {FaSearch} from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Logo from '../images/logo.jpg'
+import { LiaShoppingCartSolid } from "react-icons/lia";
+import { PiArchiveBoxLight } from "react-icons/pi";
 
 export default function Header() {
     const {currentUser} = useSelector(state => state.user);
@@ -34,6 +36,13 @@ export default function Header() {
                      <li className=' text-slate-700 hover:underline text-xl'>Sign In</li> 
                     )}
               </Link> 
+              <Link to={'/'}>
+                <li className='hidden sm:inline text-slate-700 font-medium hover:underline text-3xl'><LiaShoppingCartSolid /></li>
+                </Link>
+                <li className='hidden sm:inline text-slate-700 font-medium hover:underline text-xl'>|</li>
+                <Link to={'/'}>
+                <li className='hidden sm:inline text-slate-700 font-medium hover:underline text-3xl'><PiArchiveBoxLight /></li>
+                </Link>
             </ul>
         </div>
         
