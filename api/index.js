@@ -21,15 +21,15 @@ app.use(bodyParser.json());
 
 //schema
 const schemaData = mongoose.Schema({
-    deliveryID : String,
-    orderID : String,
-    name : String,
-    method : String,
-    status : String
-
+    deliveryId: Number,
+    orderId: String,
+    name: String,
+    method: String,
+    status: String
 },{
-    timestamps : true
+    timestamps: true
 })
+
 
 const deliveryModel = mongoose.model("delivery2", schemaData)
 
@@ -75,9 +75,6 @@ app.delete("/delete/:id", async(req,res)=>{
   }).catch((err) => {
         console.log(err);
     })
-
-
-
 
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);

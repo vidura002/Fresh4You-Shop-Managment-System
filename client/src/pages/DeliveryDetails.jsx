@@ -14,7 +14,7 @@ function DeliveryDetails() {
         orderId : "",
         name : "",
         method : "",
-        status : "",
+        status : ""
     })
 
     const handleOnChange = (e)=>{
@@ -45,20 +45,21 @@ function DeliveryDetails() {
                     
                     <form onSubmit={handleSubmit}>
                     <div className='close-btn' onClick={()=>SetAddSection(false)}><IoCloseSharp/></div>
-                        <lable htmlFor="deliveryId">DeliveryID :</lable>
-                        <input type="number" id='deliveryId' name='deliveryId' onChange={handleOnChange}/>
 
-                        <lable htmlFor="orderId">OrderID :</lable>
-                        <input type="text" id='orderId' name='orderId' onChange={handleOnChange}/>
+                        <label htmlFor="deliveryId">DeliveryID :</label>
+                        <input type="number" id='deliveryId' name="deliveryId" onChange={handleOnChange}/>
 
-                        <lable htmlFor="name">Name :</lable>
-                        <input type="text" id='name' name='name' onChange={handleOnChange}/>
+                        <label htmlFor="orderId">OrderID :</label>
+                        <input type="text" id='orderId' name="orderId" onChange={handleOnChange}/>
 
-                        <lable htmlFor="method">Method :</lable>
-                        <input type="text" id='method' name='method' onChange={handleOnChange}/>
+                        <label htmlFor="name">Name :</label>
+                        <input type="text" id='name' name="name" onChange={handleOnChange}/>
 
-                        <lable htmlFor="status">Status :</lable>
-                        <input type="text" id='status' name='status' onChange={handleOnChange}/>
+                        <label htmlFor="method">Method :</label>
+                        <input type="text" id='method' name="method" onChange={handleOnChange}/>
+
+                        <label htmlFor="status">Status :</label>
+                        <input type="text" id='status' name="status" onChange={handleOnChange}/>
 
                         <button className='btn'>Submit</button>
 
