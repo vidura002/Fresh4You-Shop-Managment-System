@@ -11,6 +11,8 @@ import AdminDashboard from './pages/AdminDashboard';
 import DeliveryPlaces from './pages/DeliveryPlaces';
 import AddStock from './pages/AddStock';
 import AdminStock from './pages/AdminStock';
+import FruitCatelog from "./pages/FruitCatelog";
+import UpdateStock from "./pages/UpdateStock"
 
 export default function App() {
   return (
@@ -28,6 +30,8 @@ export default function App() {
         <Route path="/DeliveryPlaces" element={<DeliveryPlaces/>}></Route>
         <Route path="/AdminStock" element={<AdminStock/>}></Route>
         <Route path="/AddStock" element={<AddStock/>}></Route>
+        <Route path="/FruitCatelog" element={<FruitCatelog/>}></Route>
+        <Route path="/UpdateStock" element={<UpdateStock/>}></Route>
     </Routes>
     
     </BrowserRouter>

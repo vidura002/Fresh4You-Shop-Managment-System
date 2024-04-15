@@ -10,6 +10,7 @@ const AddStock = () => {
   const [fruitQuantity, setFruitQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImageUrl] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleImageUrlChange = (url) => {
     setImageUrl(url);
@@ -31,16 +32,29 @@ const AddStock = () => {
         console.error('Error adding data to MongoDB:', response.data.message);
       }
     } catch (error) {
-      console.error('Error adding data to MongoDB:', error);
+      if (error.response && error.response.status === 400 && error.response.data.error === 'FruitID already exists') {
+        setAlertMessage('Fruit ID already exists. Please enter a different Fruit ID.');
+      } else {
+        console.error('Error adding data to MongoDB:', error);
+      }
     }
   };
+
+  const clearForm = () => {
+    setFruitId('');
+    setFruitName('');
+    setFruitQuantity('');
+    setPrice('');
+    setImageUrl('');
+  };
+  
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-green-200 shadow-md rounded-md">
       <div className="flex gap-2">
         <Link to="/AdminStock">
       <IoArrowBackCircleOutline className="text-4xl" /></Link>
-      <h2 className="text-2xl font-semibold mb-4">Stock Information</h2>
+      <h2 className="text-2xl font-semibold mb-4"> Add Stock Information</h2>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -52,9 +66,13 @@ const AddStock = () => {
             id="fruitId"
             name="fruitId"
             value={fruitId}
-            onChange={(e) => setFruitId(e.target.value)}
+            onChange={(e) => {
+              setFruitId(e.target.value);
+              setAlertMessage(''); 
+            }}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           />
+           {alertMessage && <p className="text-red-500 mt-1">{alertMessage}</p>}
         </div>
         <div className="mb-4">
           <label htmlFor="fruitName" className="block text-gray-700 font-bold mb-2">
@@ -79,7 +97,7 @@ const AddStock = () => {
             name="fruitQuantity"
             value={fruitQuantity}
             onChange={(e) => setFruitQuantity(e.target.value)}
-            min="100"
+            min="0"
             max="100000"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           />
@@ -104,10 +122,17 @@ const AddStock = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-indigo-600"
+          className="w-full bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-600"
         >
           Submit
         </button>
+        <button
+            type="button"
+            onClick={clearForm}
+            className="mt-2 w-full bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none focus:bg-gray-400"
+          >
+            Clear
+          </button>
       </form>
     </div>
   );
