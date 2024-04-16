@@ -7,7 +7,7 @@ body{
 .container{
     padding:10px;
     /*background-color: red;*/
-    max-width: 700px;
+    max-width: fit-content;
     margin: auto;
     margin: 50px auto;
 }
@@ -70,4 +70,39 @@ body{
     border-radius: 20px;
     cursor: pointer;
 
+}
+.tablecontainer{
+    margin-top: 20px;
+  
+    border-radius: 10px;
+}
+.addContainer table{
+    border: 1px solid #c9c5c2;
+}
+
+.tablecontainer table thead tr{
+    background-color: #f0eaea;
+}
+.tablecontainer table thead tr th,
+.tablecontainer table tbody tr td{
+    min-width: 200px;
+    padding: 5px;
+    text-align: center;
+}
+
+.tablecontainer table tbody tr td{
+    border-bottom: 1px solid #c9c5c2;
+}
+.btn-edit,
+.btn-delete{
+    font-size: 16px;
+    padding: 5px 10px;
+    margin: 0px 10px;
+}
+.btn-edit{
+    background-color: yellow;
+}
+.btn-delete{
+    background-color: red;
+    color: white;
 }
