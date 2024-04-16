@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const offerSchema = new mongoose.Schema({
-    offerID: {
+  offerID: {
     type: String,
     required: true,
     unique: true,
@@ -24,10 +24,10 @@ const offerSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  image:{
-    type :String ,
-    required: true
-  }
+  image: {
+    type: String,
+    required: true,
+  },
 });
 
 const OfferModel = mongoose.model("Offers", offerSchema);

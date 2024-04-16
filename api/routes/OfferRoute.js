@@ -3,12 +3,12 @@ import { createOffer,GetOneOffer,GetAllOffers,DeleteOffer} from "../controllers/
 
 const router = express.Router();
 
-router.post("/create", createOffer);
+router.post("/create", createOffer);// create off route
 
-router.get("/GetAllOffers", GetAllOffers);
+router.get("/GetAllOffers", GetAllOffers);// Get all offer route
 
-router.get("/:id", GetOneOffer);
+router.get("/:id", GetOneOffer); // Get one offer route
 
-router.delete('/Delete/:id', DeleteOffer);
+router.delete('/Delete/:id', DeleteOffer); // Delete offer route
 
 export default router;

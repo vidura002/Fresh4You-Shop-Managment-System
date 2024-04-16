@@ -14,6 +14,7 @@ export default function AdminOffer() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
+  //get
   useEffect(() => {
     const fetchOffers = async () => {
       try {
@@ -29,6 +30,7 @@ export default function AdminOffer() {
     fetchOffers();
   }, []);
 
+  //delete
   const handleConfirmClick = (itemId) => {
     swt
       .fire({
@@ -56,6 +58,7 @@ export default function AdminOffer() {
       });
   };
 
+  //Serach offers
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
