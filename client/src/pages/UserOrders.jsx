@@ -91,7 +91,7 @@ const UserOrders = () => {
                 <strong>Paid Date & Time : </strong>
                 {order.createdAt}
               </p>
-              <div className="flex justify-between">
+              <div className="flex justify-end gap-2">
                 <button
                   className="btn bg-green-700 rounded-xl py-1 px-2"
                   onClick={() =>
