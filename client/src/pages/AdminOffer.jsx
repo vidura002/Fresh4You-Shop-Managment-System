@@ -42,7 +42,9 @@ export default function AdminOffer() {
       .then(async (result) => {
         if (result.isConfirmed) {
           try {
-            await axios.delete(`http://localhost:3000/api/offer/Delete/${itemId}`);
+            await axios.delete(
+              `http://localhost:3000/api/offer/Delete/${itemId}`
+            );
             swt.fire("Deleted!", `Item has been deleted`, "success");
           } catch (error) {
             console.error("Error deleting item:", error);
@@ -105,7 +107,6 @@ export default function AdminOffer() {
             <p className="text-center text-red-500">No Offer found.</p>
           )}
           <br />
-
           <div className="grid justify-items-center ml-10 mr-10 ">
             <table className="table-auto border-collapse w-full">
               <thead className="bg-gray-200">
