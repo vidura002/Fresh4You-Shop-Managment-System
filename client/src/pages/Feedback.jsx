@@ -100,12 +100,14 @@ export default function Feedback() {
   };
 
   return (
-    <div className='min-h-screen bg-cover bg-center' style={{backgroundImage: "url(src/images/bc2.jpg)"}}>
+    <div className='min-h-screen bg-cover bg-center' style={{backgroundImage: "url(src/images/bc2.jpg)" }}>
       <main className="py-8">
+        
         {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
         {error && <p className='text-center my-7 text-2xl'>Error occurred.</p>}
         {listing && (
-          <div className='max-w-3xl mx-auto mt-10'>
+          
+          <div className='max-w-3xl mx-auto mt-10'   >
             <h1 className='text-2xl font-bold text-slate-700'>Edit Feedback</h1>
             <p className="text-center">Status: {status}</p> {/* Display the status here */}
             <div className='flex flex-col space-y-4'>

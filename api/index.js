@@ -1,49 +1,62 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import userRouter from './routes/user.router.js'
-import authRouter from './routes/auth.route.js'
-import cookieParser from 'cookie-parser';
-import listingRouter from './routes/listing.route.js';
-import bodyParser from 'body-parser';
+import cookieParser from "cookie-parser";
 
+import authRoute from './routes/auth.route.js';
+
+import feedbackRoute from './routes/feedback.route.js';
 
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGO).then(() => {
-    console.log('Connected to MongoBD!');
-    }).catch((err) => {
-        console.log(err);
-    })
-
-
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-  })
-
-app.use(express.json());
 app.use(cookieParser());
+app.use(express.json());
 
-app.use(bodyParser.json());
+// Connect to MongoDB
 
-app.listen(3000, () => {
-    console.log('server is running port 3000');
- }
+mongoose.connect(process.env.MONGODB_URI).then(() => {
+    console.log('Connected to MongoDB!');
+    }
+).catch(err => {
+    console.error('Error connecting to mongoDB', err);
+    }
 );
 
-app.use("/api/user", userRouter);
-app.use("/api/auth", authRouter);
-app.use("/api/listing", listingRouter);
+// Set the __dirname to the current working directory
 
-app.use((err, req, res, next)=>{
-    const statusCode = err.statusCode || 500;
-    const message = err.message || 'Internal Server Error';
-    return res.status(statusCode).json({
-        success : false,
-        statusCode,
+
+
+// Start the server
+
+app.listen(3000, () => {
+    console.log('Server is running on port 3000!');
+    }
+);
+
+// Routes
+
+
+app.use('/api/auth', authRoute);
+
+app.use('/api/feedback', feedbackRoute);
+
+
+
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+})
+
+app.use((error, req, res, next) => {
+    console.log(error);
+    const status = error.statusCode || 500;
+    const message = error.message || 'Internal Server Error';
+    return res.status(status).json({
+        success: false,
+        status,
         message,
     });
 });
