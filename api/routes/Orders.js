@@ -8,6 +8,8 @@ import {
   updateOrder,
 } from "../controllers/OrderController.js";
 
+import { generatePdf } from "../controllers/ReceiptController.js";
+
 const router = express.Router();
 
 // get all orders
@@ -24,5 +26,8 @@ router.delete("/:id", deleteOrder);
 
 //UPDATE a order
 router.patch("/:id", updateOrder);
+
+//GENARATE receipt
+router.get("/download", generatePdf);
 
 export default router;

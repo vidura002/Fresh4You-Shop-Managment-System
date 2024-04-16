@@ -158,7 +158,9 @@ const OrderPayment = () => {
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <button type="submit">Pay Now</button>
+          <a href="/create">
+            <button type="submit">Pay Now</button>{" "}
+          </a>
         </div>
       </form>
     </div>
