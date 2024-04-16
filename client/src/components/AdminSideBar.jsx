@@ -28,7 +28,7 @@ function AdminSideBar()  {
             <FaUser className="inline-block"></FaUser>{' '}
             <span>User Management</span>
           </li></a>
-          <a href="/AdminDashboard"> 
+          <a href="/AdminOffer"> 
           <li className="text-4x text-black font-bold p-3 hover:bg-green-30 ease-in-out duration-300">
             <GiFruitBowl className="inline-block"></GiFruitBowl>{' '}
             <span>Fruit Offer Management</span>
