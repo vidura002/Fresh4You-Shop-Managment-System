@@ -2,6 +2,9 @@ import {FaSearch} from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Logo from '../images/logo.jpg'
+import { LiaShoppingCartSolid } from "react-icons/lia";
+import { SlHandbag } from "react-icons/sl";
+
 
 
 export default function Header() {
@@ -28,6 +31,7 @@ export default function Header() {
           />
           <FaSearch className="text-slate-700" />
         </form>
+<<<<<<< HEAD
 
         <ul className="flex gap-6">
           <Link to={""}>
@@ -57,4 +61,33 @@ export default function Header() {
       </div>
     </header>
   );
+=======
+            <ul className='flex gap-6'>
+                <Link to={'/'}>
+                <li className='hidden sm:inline text-slate-700 hover:underline text-xl'>Home</li>
+                </Link>
+                <Link to={'/About'}>
+                <li className='hidden sm:inline text-slate-700 hover:underline text-xl'>About</li>
+                </Link>
+                <Link to={'/profile'}>
+                {currentUser ? (
+                    <img className='rounded-full h-7 w-7 object-cover' src={currentUser.avatar} alt="profile" />
+                ) : (
+                     <li className=' text-slate-700 hover:underline text-xl'>Sign In</li> 
+                    )}
+              </Link> 
+              <Link to={'/'}>
+                <li className='hidden sm:inline text-slate-700 font-medium hover:underline text-3xl'><LiaShoppingCartSolid /></li>
+                </Link>
+                <li className='hidden sm:inline text-slate-700 font-medium hover:underline text-xl'>|</li>
+                <Link to={'/'}>
+                <li className='hidden sm:inline text-slate-700 font-medium hover:underline text-2xl'><SlHandbag /></li>
+                </Link>
+            </ul>
+        </div>
+        
+    </header>
+   
+  )
+>>>>>>> main
 }
