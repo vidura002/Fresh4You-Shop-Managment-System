@@ -10,7 +10,6 @@ import CreateListing from "./pages/CreateListing";
 import Order from "./pages/Order";
 import ShoppingCart from "./pages/ShoppingCart";
 import CartProducts from "./components/CartProducts";
-import productSlice from "./redux/productSlice";
 import OrderPayment from "./pages/OrderPayment";
 import AdminDashboard from "./pages/AdminDashboard";
 import DeliveryPlaces from "./pages/DeliveryPlaces";

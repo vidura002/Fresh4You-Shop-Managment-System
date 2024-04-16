@@ -91,16 +91,22 @@ const UserOrders = () => {
                 <strong>Paid Date & Time : </strong>
                 {order.createdAt}
               </p>
-              <button
-                onClick={() =>
-                  changeAddress(order._id, prompt("Enter new address:"))
-                }
-              >
-                Change Address
-              </button>
-              <button onClick={() => cancelOrder(order._id)}>
-                Cancel Order
-              </button>
+              <div className="flex justify-between">
+                <button
+                  className="btn bg-green-700 rounded-xl py-1 px-2"
+                  onClick={() =>
+                    changeAddress(order._id, prompt("Enter new address:"))
+                  }
+                >
+                  Change Address
+                </button>
+                <button
+                  className="btn bg-red-500 rounded-xl py-1 px-2"
+                  onClick={() => cancelOrder(order._id)}
+                >
+                  Cancel Order
+                </button>
+              </div>
             </div>
           ))}
       </div>
