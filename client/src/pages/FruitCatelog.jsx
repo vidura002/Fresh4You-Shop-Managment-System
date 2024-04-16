@@ -38,10 +38,10 @@ function FruitCatelog() {
         </Link>
         <h1 className="mt-5 mx-3">|</h1>
         <Link
-          to={"/offers"}
+          to={"/OfferCatalog"}
           className={
-            location.pathname === "/offers"
-              ? "text-black mt-5 hover:text-slate-500"
+            location.pathname === "/OfferCatalog"
+              ? "text-black mt-5 font-bold hover:text-slate-500"
               : "text-gray-500 mt-5 hover:text-slate-500"
           }
         >

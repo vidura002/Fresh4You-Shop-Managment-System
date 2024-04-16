@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AdminNavBar from "../components/AdminNavBar";
-import AdminSideBar from "../components/adminSideBar";
+import AdminSideBar from "../components/AdminSideBar";
 import { CgAddR } from "react-icons/cg";
 import { FaPenToSquare } from "react-icons/fa6";
 import { MdDeleteForever } from "react-icons/md";

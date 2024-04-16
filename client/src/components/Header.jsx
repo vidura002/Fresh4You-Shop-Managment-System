@@ -31,38 +31,7 @@ export default function Header() {
           />
           <FaSearch className="text-slate-700" />
         </form>
-<<<<<<< HEAD
-
-        <ul className="flex gap-6">
-          <Link to={""}>
-            <li className="hidden sm:inline text-slate-700 hover:underline text-xl">
-              Home
-            </li>
-          </Link>
-          <Link to={"/About"}>
-            <li className="hidden sm:inline text-slate-700 hover:underline text-xl">
-              About
-            </li>
-          </Link>
-          <Link to={"/profile"}>
-            {currentUser ? (
-              <img
-                className="rounded-full h-7 w-7 object-cover"
-                src={currentUser.avatar}
-                alt="profile"
-              />
-            ) : (
-              <li className=" text-slate-700 hover:underline text-xl">
-                Sign In
-              </li>
-            )}
-          </Link>
-        </ul>
-      </div>
-    </header>
-  );
-=======
-            <ul className='flex gap-6'>
+        <ul className='flex gap-6'>
                 <Link to={'/'}>
                 <li className='hidden sm:inline text-slate-700 hover:underline text-xl'>Home</li>
                 </Link>
@@ -84,10 +53,10 @@ export default function Header() {
                 <li className='hidden sm:inline text-slate-700 font-medium hover:underline text-2xl'><SlHandbag /></li>
                 </Link>
             </ul>
-        </div>
-        
+      </div>
     </header>
-   
-  )
->>>>>>> main
+  );
+
+            
+    
 }

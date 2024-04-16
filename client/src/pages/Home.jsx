@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React from "react";
-import Header from "../components/Header";
-import Banner from "../components/Banner";
-=======
+
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -19,18 +15,12 @@ const Home = () => {
   const [refAbout, inViewAbout] = useInView();
   const [refBenifit, inViewBenifit] = useInView();
   const [refItemCard, inViewItemCard] = useInView();
->>>>>>> main
+
 
   return (
     <div>
       <Header />
-<<<<<<< HEAD
-      <Banner />
-    </div>
-  );
-}
-
-=======
+     
       <section ref={refBanner}>
         <motion.div
           initial={{ opacity: 0, y: -50 }}
@@ -165,4 +155,3 @@ const Home = () => {
 };
 
 export default Home;
->>>>>>> main
