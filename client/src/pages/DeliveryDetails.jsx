@@ -26,6 +26,7 @@ function DeliveryDetails() {
         _id : ""
     });
     const [dataList, setDataList] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
 
     const handleOnChange = (e) => {
         const { value, name } = e.target;
@@ -36,7 +37,7 @@ function DeliveryDetails() {
     };
 
     const handleEdit = (el) => {
-        setFormDataEdit({ ...el }); // Update formDataEdit with the data of the item to be edited
+        setFormDataEdit({ ...el }); 
         setEditSection(true);
     }
 
@@ -99,11 +100,27 @@ function DeliveryDetails() {
         }));
     }
 
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+    }
+
+    const filteredDataList = dataList.filter(item =>
+        item.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return (
         <>
             <Header />
             <div className='container'>
-                <button className='btn btn-add' onClick={() => SetAddSection(true)}>ADD</button>
+                <div className="button-and-search">
+                    <button className='btn btn-add' onClick={() => SetAddSection(true)}>ADD</button>
+                    <input
+                        type="text"
+                        placeholder="Search by name"
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                    />
+                </div>
 
                 {addSection && (
                     <DeliveryFormTable
@@ -138,8 +155,8 @@ function DeliveryDetails() {
                             </tr>
                         </thead>
                         <tbody>
-                            {dataList.length > 0 ? (
-                                dataList.map((el) => (
+                            {filteredDataList.length > 0 ? (
+                                filteredDataList.map((el) => (
                                     <tr key={el._id}>
                                         <td>{el.deliveryId}</td>
                                         <td>{el.orderId}</td>
