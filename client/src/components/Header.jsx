@@ -2,6 +2,8 @@ import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Logo from "../images/logo.jpg";
+import { LiaShoppingCartSolid } from "react-icons/lia";
+import { SlHandbag } from "react-icons/sl";
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
@@ -34,16 +36,6 @@ export default function Header() {
               About
             </li>
           </Link>
-          <Link to={"/shoppingcart"}>
-            <li className="hidden sm:inline text-slate-700 hover:underline text-xl">
-              Cart
-            </li>
-          </Link>
-          <Link to={"/user-orders"}>
-            <li className="hidden sm:inline text-slate-700 hover:underline text-xl">
-              Orders
-            </li>
-          </Link>
           <Link to={"/profile"}>
             {currentUser ? (
               <img
@@ -56,6 +48,19 @@ export default function Header() {
                 Sign In
               </li>
             )}
+          </Link>
+          <Link to={"/shoppingcart"}>
+            <li className="hidden sm:inline text-slate-700 font-medium hover:underline text-3xl">
+              <LiaShoppingCartSolid />
+            </li>
+          </Link>
+          <li className="hidden sm:inline text-slate-700 font-medium hover:underline text-xl">
+            |
+          </li>
+          <Link to={"/user-orders"}>
+            <li className="hidden sm:inline text-slate-700 font-medium hover:underline text-2xl">
+              <SlHandbag />
+            </li>
           </Link>
         </ul>
       </div>

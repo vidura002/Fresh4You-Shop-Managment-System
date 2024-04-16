@@ -65,7 +65,7 @@ function FruitCatelog() {
         <input
           type="text"
           id="search"
-          onChange={(e) => handleFilter(e.target.value)}
+          // onChange={(e) => handleFilter(e.target.value)}
           className="border border-gray-300 rounded-md px-2 py-1 mb-4 block w-full"
         />
       </div>
