@@ -1,5 +1,4 @@
 import express from "express";
-import Offer from "../models/offers.model.js";
 
 const route = express.Router();
 

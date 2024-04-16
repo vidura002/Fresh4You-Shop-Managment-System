@@ -10,10 +10,6 @@ const offerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  category: {
-    type: String,
-    required: true,
-  },
   price: {
     type: Number,
     required: true,
@@ -29,6 +25,10 @@ const offerSchema = new mongoose.Schema({
   description: {
     type: String,
   },
+  image:{
+    type :String ,
+    required: true
+  }
 });
 
 const OfferModel = mongoose.model("Offer", offerSchema);
