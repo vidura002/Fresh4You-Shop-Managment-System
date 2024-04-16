@@ -44,7 +44,7 @@ const Order = () => {
           </div>
           <div className="px-4 text-gray-700">
             <h3 className="text-sm tracking-wider">Total Orders</h3>
-            <p className="text-3xl">{orders.length}</p>
+            <p className="text-3xl">{orders?.length}</p>
           </div>
         </div>
         <div className="flex items-center bg-white border rounded-sm overflow-hidden shadow">
@@ -59,7 +59,8 @@ const Order = () => {
           <div className="px-4 text-gray-700">
             <h3 className="text-sm tracking-wider">Total Value</h3>
             <p className="text-3xl">
-              Rs.{orders.reduce((acc, order) => acc + parseInt(order.total), 0)}
+              Rs.
+              {orders?.reduce((acc, order) => acc + parseInt(order.total), 0)}
             </p>
           </div>
         </div>
