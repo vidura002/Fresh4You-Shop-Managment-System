@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import './App.css';
 import { IoCloseSharp } from "react-icons/io5";
 import axios from "axios";
+import DeliveryFormTable from '../components/DeliveryFormTable';
 
 axios.defaults.baseURL = "http://localhost:3000/";
 
@@ -33,6 +34,7 @@ function DeliveryDetails() {
             if (data.success) {
                 SetAddSection(false);
                 alert(data.message);
+                getFetchData();
             }
         } catch (error) {
             console.error("Error:", error);
@@ -65,7 +67,6 @@ function DeliveryDetails() {
             console.error("Error:", error);
         }
     };
-    
 
     return (
         <>
@@ -74,28 +75,11 @@ function DeliveryDetails() {
                 <button className='btn btn-add' onClick={() => SetAddSection(true)}>ADD</button>
 
                 {addSection && (
-                    <div className='addContainer'>
-                        <form onSubmit={handleSubmit}>
-                            <div className='close-btn' onClick={() => SetAddSection(false)}><IoCloseSharp /></div>
-
-                            <label htmlFor="deliveryId">DeliveryID:</label>
-                            <input type="number" id='deliveryId' name="deliveryId" onChange={handleOnChange} />
-
-                            <label htmlFor="orderId">OrderID:</label>
-                            <input type="text" id='orderId' name="orderId" onChange={handleOnChange} />
-
-                            <label htmlFor="name">Name:</label>
-                            <input type="text" id='name' name="name" onChange={handleOnChange} />
-
-                            <label htmlFor="method">Method:</label>
-                            <input type="text" id='method' name="method" onChange={handleOnChange} />
-
-                            <label htmlFor="status">Status:</label>
-                            <input type="text" id='status' name="status" onChange={handleOnChange} />
-
-                            <button className='btn'>Submit</button>
-                        </form>
-                    </div>
+                    <DeliveryFormTable
+                        handleSubmit={handleSubmit}
+                        handleOnChange={handleOnChange}
+                        handleClose={() => SetAddSection(false)}
+                    />
                 )}
                 <div className='tablecontainer'>
                     <table>
@@ -106,34 +90,32 @@ function DeliveryDetails() {
                                 <th>Name</th>
                                 <th>Method</th>
                                 <th>Status</th>
-                                <th>
-
-                                </th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {
-                                dataList.map((el)=>{
-                                    return(
-                                        <tr>
-                                            <td>{el.deliveryId}</td>
-                                            <td>{el.orderId}</td>
-                                            <td>{el.name}</td>
-                                            <td>{el.method}</td>
-                                            <td>{el.status}</td>
-                                            <td>        
-                                                <button className='btn btn-edit'>Edit</button>
-                                                <button className='btn btn-delete' onClick={()=>handleDelete(el._id)}>Delete</button></td>
-                                        </tr>
-
-                                    )
-                                })
-                            }
-
+                            {dataList.length > 0 ? (
+                                dataList.map((el) => (
+                                    <tr key={el._id}>
+                                        <td>{el.deliveryId}</td>
+                                        <td>{el.orderId}</td>
+                                        <td>{el.name}</td>
+                                        <td>{el.method}</td>
+                                        <td>{el.status}</td>
+                                        <td>
+                                            <button className='btn btn-edit'>Edit</button>
+                                            <button className='btn btn-delete' onClick={() => handleDelete(el._id)}>Delete</button>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="6" style={{ textAlign: "center" }}>No Data</td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </>
     );
