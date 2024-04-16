@@ -141,7 +141,7 @@ export default function AdminStock() {
             <div className=" grid grid-col-2 bg-yellow-500 p-5 rounded-2xl">
               <div className="grid grid-cols-2">
                 <BsGraphDownArrow className="text-white text-4xl" />
-                <span className="text-xl font-medium">Number of Items less than 100</span>
+                <span className="text-xl font-medium">Number of Items less than 100kg</span>
                 <p> </p>
                 <p className="text-6xl  font-bold text-white inline-block align-middle">{itemsBelow100}</p>
               </div>

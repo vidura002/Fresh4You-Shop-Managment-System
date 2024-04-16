@@ -76,10 +76,14 @@ function FruitCatelog() {
             <p className="text-red-600 text-2xl">Rs.{item.price}.00 <span className="text-black text-lg">[Per 100g]</span></p>
             <br/>
             <button
-          className="w-full bg-green-800 text-white py-2 px-4 rounded-md hover:bg-green-700	 focus:outline-none focus:bg-indigo-600 animate-fade-in"
-        >
-          Add to Cart
-        </button>
+  className={`w-full bg-green-800 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:bg-indigo-600 animate-fade-in ${
+    item.FruitQuantity === 0 ? "bg-red-500 cursor-not-allowed hover:bg-red-500 " : ""
+  }`}
+  disabled={item.FruitQuantity === 0}
+>
+  {item.FruitQuantity === 0 ? "Sold Out" : "Add to Cart"}
+</button>
+
           </div>
         </li>
       ))}

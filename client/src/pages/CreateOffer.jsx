@@ -3,6 +3,8 @@ import OfferImageAdd from "../components/OfferImageAdd";
 import axios from 'axios';
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import Swal from 'sweetalert2';
+
 
 const CreateOffer = () => {
   const [offerID, setOfferID] = useState("");
@@ -32,6 +34,12 @@ const CreateOffer = () => {
         setQuantity('');
         setDescription('');
         setImageUrl('');
+        // Show success message with SweetAlert2
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Data successfully added to MongoDB!'
+        });
       } else {
         console.error('Error adding data to MongoDB:', response.data.message);
       }
@@ -43,6 +51,32 @@ const CreateOffer = () => {
       }
     }
   };
+
+  const handleCancelClick = () => {
+    Swal.fire({
+      icon: 'question',
+      title: 'Cancel',
+      text: 'Are you sure you want to cancel?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setOfferID('');
+        setName('');
+        setPrice('');
+        setVariant('');
+        setQuantity('');
+        setDescription('');
+        setImageUrl('');
+        setAlertMessage('');
+        history.push("/AdminOffer");
+      }
+    }).then(() => {
+      history.push("/AdminOffer");
+    });
+  };
+
 
   return (
     <div className="mt-10 ml-20 mr-20 p-10 bg-green-200 shadow-md rounded-md">
@@ -154,19 +188,20 @@ const CreateOffer = () => {
           <OfferImageAdd onImageUrlChange={handleImageUrlChange} />
         </div>
         <div className="flex gap-5 justify-end">
-        <button
-          type="submit"
-          className="w-72 bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-600"
-        >
-          Submit
-        </button>
-        <Link to={"/AdminOffer"}>
-        <button
-          type="button"
-          className=" w-72 bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none focus:bg-gray-400"
-        >
-          Cancle
-        </button></Link></div>
+          <button
+            type="submit"
+            className="w-72 bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-600"
+          >
+            Submit
+          </button>
+          <button
+            type="button"
+            className=" w-72 bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none focus:bg-gray-400"
+            onClick={handleCancelClick}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

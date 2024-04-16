@@ -30,4 +30,41 @@ const createOffer = async (req, res) => {
   }
 };
 
-export { createOffer };
+const GetAllOffers = async (req, res) => {
+  try {
+    const stock = await OfferModel.find();
+    res.status(200).json({ success: true, data: stock });
+  } catch (error) {
+    console.error("Error", error);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+  }
+
+  
+};
+
+const GetOneOffer = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const stockItem = await OfferModel.findById(id);
+    if (!stockItem) {
+      return res.status(404).json({ success: false, error: "Stock item not found" });
+    }
+    res.status(200).json({ success: true, data: stockItem });
+  } catch (error) {
+    console.error("Error", error);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+  }
+};
+
+const DeleteOffer = async (req, res) => {
+  try {
+      const fruit = await OfferModel.findByIdAndDelete(req.params.id);
+      if (!fruit) {
+          return res.status(404).json({ error: 'Fruit not found' });
+      }
+      res.json({ message: 'Fruit deleted successfully' });
+  } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+  }
+};
+export { createOffer,GetAllOffers,GetOneOffer, DeleteOffer };

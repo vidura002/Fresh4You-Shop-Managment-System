@@ -1,122 +1,71 @@
+import React, { useState, useEffect } from "react";
 import AdminNavBar from "../components/AdminNavBar";
 import AdminSideBar from "../components/AdminSideBar";
 import { CgAddR } from "react-icons/cg";
 import { IoMdTrash } from "react-icons/io";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoIosCreate } from "react-icons/io";
-import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import swt from "sweetalert2";
 
-export default function AdminStock() {
-  const [offers, setOffers] = useState([
-    {
-      id: "Offer001",
-      name: "Bascket_01",
-      price: "1800.00",
-      variant: "M",
-      quantity: "2",
-      category: "Imported",
-      description: "small, taste yummy fruit",
-      image: "img.png",
-      delet: "",
-      update: "",
-    },
-    {
-      id: "Offer001",
-      name: "Bascket_01",
-      price: "1800.00",
-      variant: "M",
-      quantity: "2",
-      category: "Imported",
-      description: "small, taste yummy fruit",
-      image: "img.png",
-      delet: "",
-      update: "",
-    },
-    {
-      id: "Offer001",
-      name: "Bascket_01",
-      price: "1800.00",
-      variant: "M",
-      quantity: "2",
-      category: "Imported",
-      description: "small, taste yummy fruit",
-      image: "img.png",
-      delet: "",
-      update: "",
-    },
-    {
-      id: "Offer001",
-      name: "Bascket_01",
-      price: "1800.00",
-      variant: "M",
-      quantity: "2",
-      category: "Imported",
-      description: "small, taste yummy fruit",
-      image: "img.png",
-      delet: "",
-      update: "",
-    },
-    {
-      id: "Offer001",
-      name: "Bascket_01",
-      price: "1800.00",
-      variant: "M",
-      quantity: "2",
-      category: "Imported",
-      description: "small, taste yummy fruit",
-      image: "img.png",
-      delet: "",
-      update: "",
-    },
-    {
-      id: "Offer001",
-      name: "Bascket_01",
-      price: "1800.00",
-      variant: "M",
-      quantity: "2",
-      category: "Imported",
-      description: "small, taste yummy fruit",
-      image: "img.png",
-      delet: "",
-      update: "",
-    },
-    {
-      id: "Offer001",
-      name: "Bascket_01",
-      price: "1800.00",
-      variant: "M",
-      quantity: "2",
-      category: "Imported",
-      description: "small, taste yummy fruit",
-      image: "img.png",
-      delet: "",
-      update: "",
-    },
-    {
-      id: "Offer001",
-      name: "Bascket_01",
-      price: "1800.00",
-      variant: "M",
-      quantity: "2",
-      category: "Imported",
-      description: "small, taste yummy fruit",
-      image: "img.png",
-      delet: "",
-      update: "",
-    },
-    {
-      id: "Offer001",
-      name: "Bascket_01",
-      price: "1800.00",
-      variant: "M",
-      quantity: "2",
-      category: "Imported",
-      description: "small, taste yummy fruit",
-      image: "img.png",
-      delet: "",
-      update: "",
-    },
-  ]);
+export default function AdminOffer() {
+  const [offers, setOffers] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const fetchOffers = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/api/offer/GetAllOffers"
+        );
+        setOffers(response.data.data);
+      } catch (error) {
+        console.error("Error fetching offers:", error);
+      }
+    };
+
+    fetchOffers();
+  }, []);
+
+  const handleConfirmClick = (itemId) => {
+    swt
+      .fire({
+        title: "Are you sure?",
+        text: "Delete this item from Stock",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel it",
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            await axios.delete(`http://localhost:3000/api/offer/Delete/${itemId}`);
+            swt.fire("Deleted!", `Item has been deleted`, "success");
+          } catch (error) {
+            console.error("Error deleting item:", error);
+            swt.fire("Error", "Failed to delete item", "error");
+          }
+        } else if (result.dismiss === swt.DismissReason.cancel) {
+          swt.fire("Cancelled", "This item is still in stock ", "error");
+        }
+      });
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  useEffect(() => {
+    const results = offers.filter(
+      (offer) =>
+        offer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        offer.offerID.toString().includes(searchTerm)
+    );
+    setSearchResults(results);
+  }, [searchTerm, offers]);
 
   return (
     <div className="">
@@ -124,7 +73,7 @@ export default function AdminStock() {
         <AdminNavBar />
       </div>
       <div className="grid gap-4  lg:grid-cols-12 md:grid-cols-12 divide-x ">
-        <div className="grid-col-1  lg:col-span-2 md:col-span-3 md:overflow-auto ">
+        <div className="grid-col-1  lg:col-span-2 md:col-span-3 ">
           <AdminSideBar />
         </div>
         <div className="grid-col-11 lg:col-span-10 md:col-span-9 h-max  text-black overflow-auto max-h-svh">
@@ -145,56 +94,61 @@ export default function AdminStock() {
           <br />
           <div className="flex justify-center">
             <input
+              value={searchTerm}
+              onChange={handleSearchChange}
               type="text"
               placeholder="Search..."
               className="border border-gray-300 rounded-md px-4 py-2 w-96  focus:outline-none focus:border-blue-500"
             />
           </div>
+          {searchResults.length === 0 && (
+            <p className="text-center text-red-500">No Offer found.</p>
+          )}
           <br />
 
           <div className="grid justify-items-center ml-10 mr-10 ">
-            <table className="border-spacing-2">
-              <thead className="text-left">
-                <tr className="border-gray-950 bg-neutral-300 text-2x ">
-                  <th className="w-48 h-12 rounded-tl-2xl border-b-2 p-2">
-                    id
-                  </th>
-                  <th className="w-48 h-12  border-b-2">name</th>
-                  <th className="w-48 h-12  border-b-2">price</th>
-                  <th className="w-48 h-12  border-b-2">variant</th>
-                  <th className="w-48 h-12 border-b-2">quantity</th>
-                  <th className="w-48 h-12  border-b-2">category</th>
-                  <th className="w-32 h-12 border-b-2">description</th>
-                  <th className="w-48 h-12 border-b-2">Image</th>
-                  <th className="w-32 h-12 border-b-2">Update</th>
-                  <th className="w-32 h-12 border-b-2 rounded-tr-2xl">
-                    Delete
-                  </th>
+            <table className="table-auto border-collapse w-full">
+              <thead className="bg-gray-200">
+                <tr>
+                  <th className="px-4 py-2">ID</th>
+                  <th className="px-4 py-2">Name</th>
+                  <th className="px-4 py-2">Price</th>
+                  <th className="px-4 py-2">Variant</th>
+                  <th className="px-4 py-2">Quantity</th>
+                  <th className="px-4 py-2">Description</th>
+                  <th className="px-4 py-2">Image</th>
+                  <th className="px-4 py-2">Update</th>
+                  <th className="px-4 py-2">Delete</th>
                 </tr>
               </thead>
               <tbody>
-                {offers.map((item, index) => {
-                  return <tr key={index}>
-                    <td className="h-12 border-b-2 p-2">{item.id}</td>
-                    <td className="border-b-2">{item.name}</td>
-                    <td className="border-b-2">{item.price}</td>
-                    <td className="border-b-2">{item.variant}</td>
-                    <td className="border-b-2">{item.quantity}</td>
-                    <td className="border-b-2">{item.category}</td>
-                    <td className="border-b-2">{item.description}</td>
-                    <td className="border-b-2">{item.image}</td>
-                    <td className="border-b-2 w-32">
-                      <a href="/UpdateOffer">
-                        <IoIosCreate className="text-green-600 text-2xl" />
-                      </a>
+                {searchResults.map((offer, index) => (
+                  <tr key={index}>
+                    <td className="border-y px-4 py-2">{offer.offerID}</td>
+                    <td className="border-y px-4 py-2">{offer.name}</td>
+                    <td className="border-y px-4 py-2">Rs{offer.price}.00</td>
+                    <td className="border-y px-4 py-2">{offer.variant}</td>
+                    <td className="border-y px-4 py-2">{offer.quantity}</td>
+                    <td className="border-y px-4 py-2">{offer.description}</td>
+                    <td className="border-y px-4 py-2">
+                      <img
+                        src={offer.image}
+                        alt={offer.name}
+                        className="w-16 h-16 object-cover flex items-center justify-center rounded-2xl p-1"
+                      />
                     </td>
-                    <td className="border-b-2 w-32">
-                      <a href="/">
+                    <td className="border-y px-4 py-2">
+                      <Link to="/UpdateOffer">
+                        <IoIosCreate className="text-green-600 text-2xl" />
+                      </Link>
+                    </td>
+                    <td className="border-y px-4 py-2">
+                      <button onClick={() => handleConfirmClick(offer._id)}>
                         <IoMdTrash className="text-red-600 text-2xl" />
-                      </a>
+                      </button>
                     </td>
                   </tr>
-               })}
+                ))}
               </tbody>
             </table>
           </div>

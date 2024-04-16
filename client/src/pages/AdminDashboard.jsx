@@ -36,7 +36,7 @@ function AdminDashboard() {
             <h1 className="text-2xl">User Management</h1>
           </div>
         </Link>
-        <Link to="/">
+        <Link to="/AdminOffer">
           <div className="p-10 bg-yellow-200 w-64 h-48 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out transform hover:scale-105 font-bold text-center text-xl shadow-2xl">
             <div className="flex justify-center items-center">
               <GiFruitBowl className="text-6xl" />
