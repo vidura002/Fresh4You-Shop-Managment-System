@@ -15,6 +15,7 @@ const ShoppingCart = () => {
     (acc, curr) => acc + parseInt(curr.qty),
     0
   );
+  console.log(productCartItem);
 
   return (
     <>

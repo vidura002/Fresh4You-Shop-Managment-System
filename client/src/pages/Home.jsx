@@ -17,7 +17,7 @@ const Home = () => {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <section ref={refBanner}>
         <motion.div
           initial={{ opacity: 0, y: -50 }}
@@ -26,10 +26,13 @@ const Home = () => {
           className={`min-h-svh bg-[url('images/bg.png')] bg-center bg-cover flex justify-center items-center`}
         >
           <div className="p-6 md:p-10 lg:p-20">
-            <span className="text-4xl md:text-6xl font-semibold">Welcome to Fresh4You!</span>
+            <span className="text-4xl md:text-6xl font-semibold">
+              Welcome to Fresh4You!
+            </span>
             <h1 className="text-xl md:text-3xl text-center md:text-justify antialiased">
-              Explore our fresh, delicious fruits sourced from local farms. Let's make healthy
-              snacking easy and delightful! Happy browsing! 🍎🍌🍇
+              Explore our fresh, delicious fruits sourced from local farms.
+              Let's make healthy snacking easy and delightful! Happy browsing!
+              🍎🍌🍇
             </h1>
             <br />
             <button className="border-2 border-orange-600 hover:bg-orange-600 text-white text-orange-600 font-bold py-3 px-12 rounded transition-colors hover:text-white hover:bg-orange-500 hover:delay-100">
@@ -46,13 +49,17 @@ const Home = () => {
           className={`min-h-svh bg-[url('images/aboutBackground.jpg')] bg-center bg-cover flex justify-center items-center`}
         >
           <div className="p-6 md:p-10 lg:p-20 ">
-            <span className="text-4xl md:text-6xl font-semibold">About Us</span><br/><br/>
+            <span className="text-4xl md:text-6xl font-semibold">About Us</span>
+            <br />
+            <br />
             <h1 className="text-xl md:text-3xl text-center  antialiased  leading-relaxed">
-              <span className="text-orange-700">Welcome to Fresh4You!</span> We're your go-to source for top-quality fruits and unbeatable
-              freshness. Founded by Asidu, we're passionate about providing you with the best fruits
-              for every occasion. With fair prices and a commitment to social responsibility,
-              Fresh4You is your trusted partner for vibrant living. Explore our website and
-              experience the taste of freshness today!
+              <span className="text-orange-700">Welcome to Fresh4You!</span>{" "}
+              We're your go-to source for top-quality fruits and unbeatable
+              freshness. Founded by Asidu, we're passionate about providing you
+              with the best fruits for every occasion. With fair prices and a
+              commitment to social responsibility, Fresh4You is your trusted
+              partner for vibrant living. Explore our website and experience the
+              taste of freshness today!
               <br />
               <br />
               <hr className="h- border-t border-gray-400" />
@@ -66,32 +73,43 @@ const Home = () => {
       <section ref={refBenifit}>
         <motion.div
           initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: inViewBenifit ? 1 : 0, y: inViewBenifit ? 0 : -50 }}
+          animate={{
+            opacity: inViewBenifit ? 1 : 0,
+            y: inViewBenifit ? 0 : -50,
+          }}
           transition={{ duration: 2 }}
           className={`min-h-svh bg-[url('images/juice_image.jpg')] bg-center bg-cover  justify-center items-center`}
         >
           <div className="p-6 md:p-10 lg:p-20">
-            <span className="text-4xl md:text-6xl font-bold text-white">Our Benifits</span>
+            <span className="text-4xl md:text-6xl font-bold text-white">
+              Our Benifits
+            </span>
             <div className="flex flex-col md:flex-row mt-8 gap-8">
               <div className="box bg-orange-600 shadow-orange-500/50 px-8 py-12 md:py-20 lg:py-32 rounded-3xl flex flex-col justify-center items-center transition duration-300 ease-in transform hover:scale-105 origin-center ">
-                <h2 className="text-2xl md:text-3xl font-bold text-center">Fresh Fruit</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-center">
+                  Fresh Fruit
+                </h2>
                 <p className="text-center text-lg md:text-xl">
-                  Indulge in freshness. Hand-picked and delivered for you to enjoy. Taste the
-                  difference today.
+                  Indulge in freshness. Hand-picked and delivered for you to
+                  enjoy. Taste the difference today.
                 </p>
               </div>
               <div className="box bg-yellow-400 shadow-yellow-500/150 px-8 py-12 md:py-20 lg:py-32 rounded-3xl flex flex-col justify-center items-center transition duration-300 ease-in transform hover:scale-95">
-                <h2 className="text-2xl md:text-3xl font-bold text-center">Fast Delivery</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-center">
+                  Fast Delivery
+                </h2>
                 <p className="text-center text-lg md:text-xl">
-                  Experience lightning-fast delivery with us. Get what you need, when you need it.
-                  Your satisfaction, our priority.
+                  Experience lightning-fast delivery with us. Get what you need,
+                  when you need it. Your satisfaction, our priority.
                 </p>
               </div>
               <div className="box bg-lime-600 shadow-white-500/50 px-8 py-12 md:py-20 lg:py-32 rounded-3xl flex flex-col justify-center items-center transition duration-500 ease-in transform hover:scale-105 origin-center ">
-                <h2 className="text-2xl md:text-3xl font-bold text-center">Fruit Offer</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-center">
+                  Fruit Offer
+                </h2>
                 <p className="text-center text-lg md:text-xl">
-                  Discover fresh delights with our fruit offer. Premium picks at unbeatable prices.
-                  Don't miss out!
+                  Discover fresh delights with our fruit offer. Premium picks at
+                  unbeatable prices. Don't miss out!
                 </p>
               </div>
             </div>
@@ -101,7 +119,10 @@ const Home = () => {
       <section ref={refItemCard}>
         <motion.div
           initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: inViewItemCard ? 1 : 0, y: inViewItemCard ? 0 : -50 }}
+          animate={{
+            opacity: inViewItemCard ? 1 : 0,
+            y: inViewItemCard ? 0 : -50,
+          }}
           transition={{ duration: 0.5 }}
           className={`min-h-svh bg-cover place-content-center screens-md`}
         >

@@ -19,10 +19,18 @@ const OrderPayment = () => {
 
     // Custom validation logic
     let error = {};
-    if (name === "cardNumber" && !/^\d{16}$/.test(value)) {
-      error.cardNumber = "Invalid card number";
-    } else if (name === "cvv" && !/^\d{3}$/.test(value)) {
-      error.cvv = "Invalid CVV";
+    if (name === "cardNumber") {
+      if (!/^\d{16}$/.test(value)) {
+        error.cardNumber = "Invalid card number";
+      } else {
+        error.cardNumber = "";
+      }
+    } else if (name === "cvv") {
+      if (!/^\d{3}$/.test(value)) {
+        error.cvv = "Invalid CVV";
+      } else {
+        error.cvv = "";
+      }
     }
 
     setErrors({ ...errors, ...error });
@@ -57,10 +65,7 @@ const OrderPayment = () => {
   };
 
   return (
-    <div
-      className="paymentcontainer"
-      style={{ backgroundImage: `url(${backgroundPhoto})` }}
-    >
+    <div className="paymentcontainer">
       <form onSubmit={handleSubmit}>
         <h1>Payment Form</h1>
         <div className="flex gap-4">

@@ -15,7 +15,6 @@ import OrderPayment from "./pages/OrderPayment";
 import { ShopTest } from "./pages/ShopTest";
 import AdminDashboard from "./pages/AdminDashboard";
 import DeliveryPlaces from "./pages/DeliveryPlaces";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddStock from "./pages/AddStock";
 import AdminStock from "./pages/AdminStock";
 import FruitCatelog from "./pages/FruitCatelog";
