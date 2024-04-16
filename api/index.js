@@ -50,9 +50,9 @@ app.post("/create", async(req,res)=>{
 //update data
 app.put("/update",async(req,res)=>{
     console.log(req.body)
-    const {id,...rest} = req.body
+    const {_id,...rest} = req.body
     console.log(rest)
-    const data =await deliveryModel.updateOne({_id : id}, rest)
+    const data =await deliveryModel.updateOne({_id : _id}, rest)
     res.send({success : true, message : "data updated successfully", data : data})
     
 })
@@ -75,6 +75,7 @@ app.delete("/delete/:id", async(req,res)=>{
   }).catch((err) => {
         console.log(err);
     })
+
 
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
