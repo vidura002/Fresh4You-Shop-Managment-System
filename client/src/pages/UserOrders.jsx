@@ -22,26 +22,46 @@ const UserOrders = () => {
   }, []);
 
   const cancelOrder = async (orderId) => {
-    const response = await fetch(`/api/orders/${orderId}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      const response = await fetch(`/api/orders/${orderId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    if (response.ok) {
-      setOrders(orders.filter((order) => order._id !== orderId));
-    } else {
-      console.error("Failed to cancel the order");
+      if (response.ok) {
+        setOrders(orders.filter((order) => order._id !== orderId));
+      } else {
+        console.error("Failed to cancel the order");
+      }
+    } catch (error) {
+      console.error("Failed to cancel the order:", error);
     }
   };
 
-  const changeAddress = (orderId, newAddress) => {
-    setOrders(
-      orders.map((order) =>
-        order._id === orderId ? { ...order, address: newAddress } : order
-      )
-    );
+  const changeAddress = async (orderId, newAddress) => {
+    try {
+      const response = await fetch(`/api/orders/${orderId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ address: newAddress }),
+      });
+
+      if (response.ok) {
+        setOrders(
+          orders.map((order) =>
+            order._id === orderId ? { ...order, address: newAddress } : order
+          )
+        );
+      } else {
+        console.error("Failed to change address");
+      }
+    } catch (error) {
+      console.error("Failed to change address:", error);
+    }
   };
 
   return (
