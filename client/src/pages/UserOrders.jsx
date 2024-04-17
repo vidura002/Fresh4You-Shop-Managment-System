@@ -21,14 +21,25 @@ const UserOrders = () => {
     fetchOrders();
   }, []);
 
-  const cancelOrder = (orderId) => {
-    setOrders(orders.filter((order) => order.id !== orderId));
+  const cancelOrder = async (orderId) => {
+    const response = await fetch(`/api/orders/${orderId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      setOrders(orders.filter((order) => order._id !== orderId));
+    } else {
+      console.error("Failed to cancel the order");
+    }
   };
 
   const changeAddress = (orderId, newAddress) => {
     setOrders(
       orders.map((order) =>
-        order.id === orderId ? { ...order, address: newAddress } : order
+        order._id === orderId ? { ...order, address: newAddress } : order
       )
     );
   };
@@ -36,17 +47,13 @@ const UserOrders = () => {
   return (
     <div className="mx-auto max-w-5xl px-4">
       <div className="Order">
-        <h2>ORDERS</h2>
+        <h2>MY ORDERS</h2>
         {orders &&
           orders.map((order, index) => (
             <div className="order-details" key={index}>
               <p>
                 <strong>Order ID : </strong>
                 {order._id}
-              </p>
-              <p>
-                <strong>Customer ID : </strong>
-                {order.user}
               </p>
               <p>
                 <strong>Fruit Details : </strong>
@@ -66,10 +73,13 @@ const UserOrders = () => {
               </p>
               <button
                 onClick={() =>
-                  changeAddress(order.id, prompt("Enter new address:"))
+                  changeAddress(order._id, prompt("Enter new address:"))
                 }
               >
                 Change Address
+              </button>
+              <button onClick={() => cancelOrder(order._id)}>
+                Cancel Order
               </button>
             </div>
           ))}
