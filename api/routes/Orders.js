@@ -33,6 +33,6 @@ router.patch("/:id", updateOrder);
 router.get("/download", generatePdf);
 
 //GET user orders
-router.get("/user-orders", getUserOrder);
+router.get("/user/orders", verifyToken, getUserOrder);
 
 export default router;

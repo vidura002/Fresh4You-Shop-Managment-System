@@ -39,6 +39,11 @@ export default function Header() {
               Cart
             </li>
           </Link>
+          <Link to={"/user-orders"}>
+            <li className="hidden sm:inline text-slate-700 hover:underline text-xl">
+              Orders
+            </li>
+          </Link>
           <Link to={"/profile"}>
             {currentUser ? (
               <img

@@ -47,7 +47,6 @@ const OrderPayment = () => {
   };
 
   const handleSubmit = useCallback(async () => {
-    console.log("kkk", productCartItem);
     try {
       const response = await fetch("/api/orders", {
         method: "POST",
@@ -59,7 +58,7 @@ const OrderPayment = () => {
             return {
               id: m.FruitID,
               name: m.FruitName,
-              qty: m.FruitQuantity,
+              qty: m.qty,
               price: m.price,
               image: m.image,
             };

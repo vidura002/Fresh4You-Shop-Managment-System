@@ -7,19 +7,19 @@ const OrderDetails = ({ order }) => {
       </p>
       <p>
         <strong>Customer ID : </strong>
-        {order.CustomerID}
+        {order.user}
       </p>
       <p>
         <strong>Fruit Details : </strong>
-        {order.Items}
+        {order.items.map((m) => `${m.name}(${m.qty})`).join(", ")}
       </p>
       <p>
         <strong>Shopping Address : </strong>
-        {order.Address}
+        {order.address}
       </p>
       <p>
         <strong>Total Price : </strong>
-        {order.Price}
+        Rs.{order.total.toFixed(2)}
       </p>
       <p>
         <strong>Paid Date & Time : </strong>

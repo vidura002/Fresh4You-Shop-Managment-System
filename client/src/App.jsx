@@ -33,8 +33,6 @@ export default function App() {
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/create-listing" element={<CreateListing />}></Route>
           <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
-
-          <Route path="/user-orders" element={<UserOrders />}></Route>
         </Route>
 
         {/* Orders */}
@@ -42,6 +40,7 @@ export default function App() {
         <Route path="/shoppingcart" element={<ShoppingCart />}></Route>
         <Route path="/cartproducts" element={<CartProducts />}></Route>
         <Route path="/productSlice" element={<productSlice />}></Route>
+        <Route path="/user-orders" element={<UserOrders />}></Route>
 
         {/*Order payment  */}
         <Route path="/orderpayment" element={<OrderPayment />}></Route>
