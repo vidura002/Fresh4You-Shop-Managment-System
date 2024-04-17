@@ -40,13 +40,20 @@ export default function Signin() {
         });
 
         const data = await res.json();
-        console.log(data);
+        console.log(data.role);
         if(data.success == false){
             dispatch(signInFailure(data.message));
             return;
         }
         dispatch(signInSuccess(data));
-        navigate('/');
+        // eslint-disable-next-line no-debugger
+        debugger;
+        if (data.role=="admin") {
+            navigate('/AdminDashboard');
+        } else if (data.role=="supplier"){
+            navigate('/SupplierDashboard');
+        }
+        
 
         } catch (error) {
             dispatch(signInFailure(error.message));

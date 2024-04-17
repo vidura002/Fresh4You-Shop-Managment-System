@@ -67,3 +67,17 @@ export const UserListings = async (req , res , next) => {
         return next(errorHandler(401, 'You can only view your own Listings!'));
     }
 };
+
+
+export const AllUserListings = async (req , res , next) => {
+
+    try {
+        const users = await User.find();
+        res.json({
+          message: "users fetch success",
+          data: users
+        });
+      } catch (err) {
+        return res.status(500).json({ message: err.message });
+      }
+};
