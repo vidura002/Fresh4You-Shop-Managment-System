@@ -14,16 +14,13 @@ import StockRouter from './routes/Stock-Route.js'
 
 dotenv.config();
 
+
 const app = express();
-app.use(cors());
-dotenv.config();
 
- 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+
 
 app.use(cors());
+
 app.get('/', (req, res) => {
     res.send('Hello World!')
   })
