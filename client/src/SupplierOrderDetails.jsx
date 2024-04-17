@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Button } from "bootstrap";
 
 function SupplierOrderDetails() {
   const [supplierOrderDetails, setSupplierOrderDetails] = useState([]);
@@ -11,6 +12,7 @@ function SupplierOrderDetails() {
   }, []);
 
   return (
+    <div className="min-h-screen bg-cover bg-center" style={{backgroundImage: "url(src/pages/assest/supplier.png)"}}>
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
       <div className="w-50 bg-white rounded p-3">
         <table className="table">
@@ -44,7 +46,10 @@ function SupplierOrderDetails() {
         </table>
       </div>
     </div>
+    </div>
   );
 }
 
+
 export default SupplierOrderDetails;
+
