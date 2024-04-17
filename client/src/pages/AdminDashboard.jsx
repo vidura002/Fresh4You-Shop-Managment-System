@@ -42,7 +42,7 @@ function AdminDashboard() {
             <h1 className="text-2xl">Fruit Offer Management</h1>
           </div>
         </Link>
-        <Link to="/">
+        <Link to="/Orders">
           <div className="p-10 bg-blue-200 w-64 h-48 rounded-2xl hover:bg-blue-300 transition duration-300 ease-in-out transform hover:scale-105 font-bold text-center text-xl shadow-2xl">
             <div className="flex justify-center items-center">
               <GoListOrdered className="text-6xl" />

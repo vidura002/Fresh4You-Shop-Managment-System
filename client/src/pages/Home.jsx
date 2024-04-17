@@ -7,6 +7,7 @@ import fruit04 from "../images/Guava.png";
 import fruit05 from "../images/Orange.png";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
+import Header from "../components/Header";
 
 const Home = () => {
   const [refBanner, inViewBanner] = useInView();
@@ -16,7 +17,7 @@ const Home = () => {
 
   return (
     <div>
-      {/* <Header /> */}
+      <Header />
       <section ref={refBanner}>
         <motion.div
           initial={{ opacity: 0, y: -50 }}

@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
 import { setDataProduct, addCartItem } from "../redux/productSlice";
 import { useDispatch } from "react-redux";
+import Header from "../components/Header";
 
 function FruitCatelog() {
   const location = useLocation();
@@ -33,6 +34,7 @@ function FruitCatelog() {
 
   return (
     <div>
+      <Header />
       <div className="flex items-center justify-center text-2xl ">
         <Link
           to={"/FruitCatelog"}

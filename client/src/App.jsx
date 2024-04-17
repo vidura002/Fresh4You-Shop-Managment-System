@@ -22,7 +22,6 @@ import UserOrders from "./pages/UserOrders";
 export default function App() {
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/signup" element={<Register />}></Route>
@@ -31,8 +30,8 @@ export default function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/create-listing" element={<CreateListing />}></Route>
-          <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
         </Route>
+        <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
 
         {/* Orders */}
         <Route path="/orders" element={<Order />}></Route>
