@@ -99,3 +99,28 @@ export const getUserOrder = async (req, res) => {
 
   res.status(200).json(order);
 };
+
+// order search
+
+export const getOrderSearch = async (req, res, next) => {
+  try {
+    const limit = parseInt(req.query.limit) || 10;
+    const startIndex = parseInt(req.query.startIndex) || 0;
+
+    const searchTerm = req.query.searchTerm || "";
+
+    const sort = req.query.sort || "createdAt";
+    const order = req.query.order || "desc";
+
+    const orders = await Orders.find({
+      address: { $regex: searchTerm, $options: "i" },
+    })
+      .sort({ [sort]: order })
+      .skip(startIndex)
+      .limit(limit);
+
+    return res.status(200).json(events);
+  } catch (error) {
+    next(error);
+  }
+};

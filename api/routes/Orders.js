@@ -7,6 +7,7 @@ import {
   deleteOrder,
   updateOrder,
   getUserOrder,
+  getOrderSearch,
 } from "../controllers/OrderController.js";
 import { verifyToken } from "../utils/verifyUser.js";
 
@@ -34,5 +35,8 @@ router.get("/download", generatePdf);
 
 //GET user orders
 router.get("/user/orders", verifyToken, getUserOrder);
+
+//ORDER Search
+router.get("/search/get", getOrderSearch);
 
 export default router;
