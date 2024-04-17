@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function getStatusColor(status) {
   switch (status) {
@@ -16,8 +17,8 @@ export function getStatusColor(status) {
 }
 
 const Order = () => {
-  const [orders, setOrders] = useState(null);
-  useEffect(() => {
+  //const [orders, setOrders] = useState(null);
+  /*useEffect(() => {
     const fetchOrders = async () => {
       const response = await fetch("http://localhost:3000/api/orders");
       const json = await response.json();
@@ -28,7 +29,52 @@ const Order = () => {
       }
     };
     fetchOrders();
-  }, []);
+  }, []);*/
+  const navigate = useNavigate();
+  const [searchData, setSearchData] = useState({
+    searchTerm: "",
+    sort: "created_at",
+    order: "desc",
+  });
+  const [loading, setLoading] = useState(false);
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchTerm = urlParams.get("searchTerm") || "";
+    const type = urlParams.get("type") || "all";
+    const sort = urlParams.get("sort") || "created_at";
+    const order = urlParams.get("order") || "desc";
+    setSearchData({ searchTerm, type, sort, order });
+
+    const fetchPkg = async () => {
+      setLoading(true);
+      const searchQuery = urlParams.toString();
+      const res = await fetch(
+        `http://localhost:3000/api/orders/search/get?${searchQuery}`
+      );
+
+      const data = await res.json();
+      console.log("Fetched data:", data);
+      setOrders(data);
+      setLoading(false);
+    };
+    fetchPkg();
+  }, [location.search]);
+
+  const handleChange = (e) => {
+    if (e.target.id === "searchTerm") {
+      setSearchData({ ...searchData, searchTerm: e.target.value });
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParame = new URLSearchParams();
+    urlParame.set("searchTerm", searchData.searchTerm);
+    const searchQuery = urlParame.toString();
+    navigate(`/orders?${searchQuery}`);
+  };
 
   return (
     <div className="mx-auto max-w-5xl px-4">
@@ -66,6 +112,18 @@ const Order = () => {
         </div>
       </div>
       <div className="Order">
+        <input
+          type="text"
+          placeholder="Search..."
+          onChange={handleChange}
+          id="searchTerm"
+        />
+        <button
+          onClick={handleSubmit}
+          className="bg-transparent hover:bg-blue-500 text-blue-900 font-semibold text-2xl  hover:text-white border border-blue-900 hover:border-transparent rounded ml-10 px-16"
+        >
+          Search
+        </button>
         <h2>ORDERS</h2>
         <div className="overflow-hidden">
           <table className="font-inter w-full table-auto border-separate border-spacing-y-1 overflow-scroll text-left md:overflow-auto">
@@ -79,6 +137,9 @@ const Order = () => {
                 </th>
                 <th className="whitespace-nowrap py-3 text-sm font-normal text-[#212B36]">
                   Order Date
+                </th>
+                <th className="whitespace-nowrap py-3 text-sm font-normal text-[#212B36]">
+                  Address
                 </th>
                 <th className="whitespace-nowrap py-3 text-sm font-normal text-[#212B36]">
                   Status
@@ -105,6 +166,9 @@ const Order = () => {
                   </td>
                   <td className="px-1 py-4 text-sm font-normal text-[#637381]">
                     {order.createdAt.split("T")[0]}
+                  </td>
+                  <td className="px-1 py-4 text-sm font-normal text-[#637381]">
+                    {order.address}
                   </td>
                   <td className="px-1 py-4">
                     <div className="w-max">

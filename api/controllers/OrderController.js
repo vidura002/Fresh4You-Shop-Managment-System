@@ -119,7 +119,7 @@ export const getOrderSearch = async (req, res, next) => {
       .skip(startIndex)
       .limit(limit);
 
-    return res.status(200).json(events);
+    return res.status(200).json(orders);
   } catch (error) {
     next(error);
   }
