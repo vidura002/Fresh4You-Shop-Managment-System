@@ -1,4 +1,6 @@
 import React, { useCallback, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import mastercard from "../assest/mc.png";
 import paypal from "../assest/pp.png";
 import visa from "../assest/vi.png";
@@ -73,6 +75,7 @@ const OrderPayment = () => {
         throw new Error("Payment failed");
       }
 
+      toast.success("Order successful!");
       console.log("Payment successful");
     } catch (error) {
       console.error("Error processing payment:", error.message);
@@ -183,6 +186,7 @@ const OrderPayment = () => {
           </button>{" "}
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };
