@@ -1,18 +1,19 @@
 import supplierRoutes from "./routes/suppliers.js";
 import SupplierOrderModels from "./models/SupplierOrderModel.js";
 
-import express from 'express';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import userRouter from './routes/user.router.js'
-import authRouter from './routes/auth.route.js'
-import cookieParser from 'cookie-parser';
-import listingRouter from './routes/listing.route.js';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import StockRouter from './routes/Stock-Route.js'
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import userRouter from "./routes/user.router.js";
+import authRouter from "./routes/auth.route.js";
+import cookieParser from "cookie-parser";
+import listingRouter from "./routes/listing.route.js";
+import bodyParser from "body-parser";
+import cors from "cors";
+import StockRouter from "./routes/Stock-Route.js";
 
-
+import userRouter from "./routes/user.router.js";
+import orderRoutes from "./routes/Orders.js";
 
 dotenv.config();
 
@@ -72,9 +73,12 @@ app.post("/createOrder", async (req, res) => {
     .then((supplierorders) => res.json(supplierorders))
     .catch((err) => res.json(err));
 });
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-  })
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 
 app.use(express.json());
 app.use(cookieParser());
@@ -90,6 +94,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
 app.use("/api/Suppliers", supplierRoutes);
 app.use("/api/Stock", StockRouter);
+app.use("/api/orders", orderRoutes);
+app.use("/api/stock", StockRouter);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

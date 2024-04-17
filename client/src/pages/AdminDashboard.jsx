@@ -1,5 +1,4 @@
 import React from "react";
-import AdminSideBar from "../components/AdminSideBar";
 import AdminNavBar from "../components/AdminNavBar";
 import { Link } from "react-router-dom";
 import { IoHomeSharp } from "react-icons/io5";
@@ -83,7 +82,7 @@ function AdminDashboard() {
             <h1 className="text-2xl">Feedback & Rewiew</h1>
           </div>
         </Link>
-        <Link to="/Signin" >
+        <Link to="/Signin">
           <div className="p-10 bg-red-400 w-64 h-48 rounded-2xl hover:bg-red-500 transition duration-300 ease-in-out transform hover:scale-105 font-bold text-center text-xl shadow-2xl">
             <div className="flex justify-center items-center">
               <RiLogoutCircleLine className="text-6xl" />
@@ -91,7 +90,6 @@ function AdminDashboard() {
             <h1 className="text-2xl">Logout</h1>
           </div>
         </Link>
-        
       </div>
     </div>
   );
