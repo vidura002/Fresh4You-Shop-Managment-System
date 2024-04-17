@@ -1,5 +1,4 @@
 import supplierRoutes from "./routes/suppliers.js";
-import cors from "cors";
 import SupplierOrderModels from "./models/SupplierOrderModel.js";
 
 import express from 'express';

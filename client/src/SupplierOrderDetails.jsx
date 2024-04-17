@@ -13,7 +13,7 @@ function SupplierOrderDetails() {
 
   return (
     <div className="min-h-screen bg-cover bg-center" style={{backgroundImage: "url(src/pages/assest/supplier.png)"}}>
-    <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
+   {/*} <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">*/}
       <div className="w-50 bg-white rounded p-3">
         <table className="table">
           <thead>
@@ -45,7 +45,7 @@ function SupplierOrderDetails() {
           </tbody>
         </table>
       </div>
-    </div>
+    {/*</div>*/}
     </div>
   );
 }
