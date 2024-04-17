@@ -8,13 +8,14 @@ import { IoIosCreate } from "react-icons/io";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import swt from "sweetalert2";
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 export default function AdminOffer() {
   const [offers, setOffers] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  //get
   useEffect(() => {
     const fetchOffers = async () => {
       try {
@@ -30,7 +31,6 @@ export default function AdminOffer() {
     fetchOffers();
   }, []);
 
-  //delete
   const handleConfirmClick = (itemId) => {
     swt
       .fire({
@@ -58,7 +58,6 @@ export default function AdminOffer() {
       });
   };
 
-  //Serach offers
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -71,6 +70,64 @@ export default function AdminOffer() {
     );
     setSearchResults(results);
   }, [searchTerm, offers]);
+
+  const generateReport = () => {
+    // Create new jsPDF instance
+    const doc = new jsPDF();
+
+    // Get current date and time
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleString(); // Format the date and time as a string
+
+    // Define the column headers and rows for the table
+    const title = "Offer Report";
+    const headers = ["ID", "Name", "Price", "Variant", "Quantity", "Description"];
+    const rows = searchResults.map((offer) => [
+      offer.offerID,
+      offer.name,
+      `Rs${offer.price}.00`,
+      offer.variant,
+      offer.quantity,
+      offer.description,
+    ]);
+
+    // Define Tailwind CSS styles for the table
+    const styles = {
+      headStyles: {
+        fillColor: "#6B7280", // Tailwind gray-500 background color for header
+        textColor: "#FFFFFF", // Tailwind white text color for header
+        fontSize: 13,
+        fontStyle: "bold",
+      },
+      bodyStyles: {
+        textColor: "#111827", // Tailwind black text color for body
+        fontSize: 12,
+      },
+      alternateRowStyles: {
+        fillColor: "#F3F4F6", // Tailwind gray-100 background color for alternate rows
+      }
+    };
+
+    // Add topic "Fresh4You"
+    doc.setFontSize(20);
+    doc.text("Fresh4You Fruit shop", 14, 15);
+
+    // Add logo image
+    
+
+    // Add title "Offer Report" and generated date
+    doc.setFontSize(16);
+    doc.text(title, 14, 40);
+    doc.setFontSize(12);
+    doc.text(`Generated on: ${formattedDate}`, 14, 50); // Add the formatted date string
+
+    // Add table
+    doc.autoTable({ head: [headers], body: rows, startY: 60, styles });
+
+    // Save PDF
+    doc.save('offer_report.pdf');
+};
+
 
   return (
     <div className="">
@@ -110,8 +167,14 @@ export default function AdminOffer() {
             <p className="text-center text-red-500">No Offer found.</p>
           )}
           <br />
+          <div className="text-right mr-10 mt-10">
+  <button onClick={generateReport} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    Generate report
+  </button>
+</div>
+
           <div className="grid justify-items-center ml-10 mr-10 ">
-            <table className="table-auto border-collapse w-full">
+            <table id="offer-table" className="table-auto border-collapse w-full">
               <thead className="bg-gray-200">
                 <tr>
                   <th className="px-4 py-2">ID</th>
@@ -147,7 +210,7 @@ export default function AdminOffer() {
                       </Link>
                     </td>
                     <td className="border-y px-4 py-2">
-                      <button onClick={() => handleConfirmClick(offer._id)}  className="flex justify-center">
+                      <button onClick={() => handleConfirmClick(offer._id)} className="flex justify-center">
                         <IoMdTrash className="text-red-600 text-2xl" />
                       </button>
                     </td>

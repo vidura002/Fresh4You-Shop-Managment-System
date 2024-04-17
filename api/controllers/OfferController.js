@@ -72,4 +72,24 @@ const DeleteOffer = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-export { createOffer, GetAllOffers, GetOneOffer, DeleteOffer };
+
+const UpdateOffer = async (req, res) => {
+  const { id } = req.params; 
+  const { offerID, name, price, variant, quantity, description, image } =
+  req.body;
+  try {
+    const updatedItem = await OfferModel.findByIdAndUpdate(id, {
+      offerID, name, price, variant, quantity, description, image ,
+    }, { new: true }); 
+    if (!updatedItem){
+      return res.status(404).json({ message: 'offer item not found' });
+    }
+    res.status(200).json(updatedItem);
+  } catch (error) {
+    console.error('Error updating offer item:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+export { createOffer, GetAllOffers, GetOneOffer, DeleteOffer,UpdateOffer };
+
+
