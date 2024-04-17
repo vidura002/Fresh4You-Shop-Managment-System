@@ -4,20 +4,44 @@ const Schema = mongoose.Schema;
 
 const orderSchema = new Schema(
   {
-    CustomerID: {
+    user: {
       type: String,
       required: true,
     },
-    Items: {
+    items: [
+      {
+        id: {
+          type: String,
+          required: true,
+        },
+        name: {
+          type: String,
+          required: true,
+        },
+        qty: {
+          type: Number,
+          required: true,
+        },
+        price: {
+          type: Number,
+          required: true,
+        },
+        image: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    address: {
       type: String,
       required: true,
     },
-    Address: {
-      type: String,
-      required: true,
-    },
-    Price: {
+    total: {
       type: Number,
+      required: true,
+    },
+    status: {
+      type: String,
       required: true,
     },
   },

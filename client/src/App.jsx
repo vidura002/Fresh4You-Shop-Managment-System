@@ -12,13 +12,13 @@ import ShoppingCart from "./pages/ShoppingCart";
 import CartProducts from "./components/CartProducts";
 import productSlice from "./redux/productSlice";
 import OrderPayment from "./pages/OrderPayment";
-import { ShopTest } from "./pages/ShopTest";
 import AdminDashboard from "./pages/AdminDashboard";
 import DeliveryPlaces from "./pages/DeliveryPlaces";
 import AddStock from "./pages/AddStock";
 import AdminStock from "./pages/AdminStock";
 import FruitCatelog from "./pages/FruitCatelog";
 import UpdateStock from "./pages/UpdateStock";
+import UserOrders from "./pages/UserOrders";
 
 export default function App() {
   return (
@@ -33,6 +33,8 @@ export default function App() {
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/create-listing" element={<CreateListing />}></Route>
           <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
+
+          <Route path="/user-orders" element={<UserOrders />}></Route>
         </Route>
 
         {/* Orders */}
@@ -43,7 +45,6 @@ export default function App() {
 
         {/*Order payment  */}
         <Route path="/orderpayment" element={<OrderPayment />}></Route>
-        <Route path="/shop" element={<ShopTest />}></Route>
 
         <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
         <Route path="/DeliveryPlaces" element={<DeliveryPlaces />}></Route>

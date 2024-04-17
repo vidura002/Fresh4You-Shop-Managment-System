@@ -6,7 +6,9 @@ import {
   getOrder,
   deleteOrder,
   updateOrder,
+  getUserOrder,
 } from "../controllers/OrderController.js";
+import { verifyToken } from "../utils/verifyUser.js";
 
 import { generatePdf } from "../controllers/ReceiptController.js";
 
@@ -19,7 +21,7 @@ router.get("/", getOrders);
 router.get("/:id", getOrder);
 
 //POST a new order
-router.post("/", createOrder);
+router.post("/", verifyToken, createOrder);
 
 //DELETE a order
 router.delete("/:id", deleteOrder);
@@ -29,5 +31,8 @@ router.patch("/:id", updateOrder);
 
 //GENARATE receipt
 router.get("/download", generatePdf);
+
+//GET user orders
+router.get("/user-orders", getUserOrder);
 
 export default router;

@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import mastercard from "../assest/mc.png";
 import paypal from "../assest/pp.png";
 import visa from "../assest/vi.png";
 import "../index.css";
-import backgroundPhoto from "../assest/fruit2.png";
+import { useSelector } from "react-redux";
 
 const OrderPayment = () => {
+  const productCartItem = useSelector((state) => state.product.cartItem);
   const [formData, setFormData] = useState({
     cardNumber: "",
     expiryDate: "",
@@ -13,6 +14,10 @@ const OrderPayment = () => {
     shoppingAddress: "",
   });
   const [errors, setErrors] = useState({});
+  const totalPrice = productCartItem.reduce(
+    (acc, curr) => acc + parseInt(curr.total),
+    0
+  );
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,17 +46,28 @@ const OrderPayment = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Proceed with submission
+  const handleSubmit = useCallback(async () => {
+    console.log("kkk", productCartItem);
     try {
-      const response = await fetch("/charge", {
+      const response = await fetch("/api/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          items: productCartItem.map((m) => {
+            return {
+              id: m.FruitID,
+              name: m.FruitName,
+              qty: m.FruitQuantity,
+              price: m.price,
+              image: m.image,
+            };
+          }),
+          address: formData.shoppingAddress,
+          total: totalPrice,
+          status: "Paid",
+        }),
       });
 
       if (!response.ok) {
@@ -62,11 +78,11 @@ const OrderPayment = () => {
     } catch (error) {
       console.error("Error processing payment:", error.message);
     }
-  };
+  }, [formData, totalPrice, productCartItem]);
 
   return (
     <div className="paymentcontainer">
-      <form onSubmit={handleSubmit}>
+      <form>
         <h1>Payment Form</h1>
         <div className="flex gap-4">
           {" "}
@@ -163,9 +179,9 @@ const OrderPayment = () => {
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <a href="/create">
-            <button type="submit">Pay Now</button>{" "}
-          </a>
+          <button type="button" onClick={() => handleSubmit()}>
+            Pay Now
+          </button>{" "}
         </div>
       </form>
     </div>

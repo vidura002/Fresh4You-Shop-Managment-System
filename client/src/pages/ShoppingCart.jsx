@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import CartProducts from "../components/CartProducts";
 import { Link } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
 
 const ShoppingCart = () => {
   const productCartItem = useSelector((state) => state.product.cartItem);
@@ -15,7 +16,6 @@ const ShoppingCart = () => {
     (acc, curr) => acc + parseInt(curr.qty),
     0
   );
-  console.log(productCartItem);
 
   return (
     <>
@@ -23,6 +23,21 @@ const ShoppingCart = () => {
         <h2 className="text-lg md:text-2xl font-bold bg-lime-300	">
           - My Cart -
         </h2>
+        <div
+          id="searchContainer"
+          class="flex items-center justify-center w-full"
+        >
+          <div class="flex items-center justify-between max-w-screen-sm border rounded-full">
+            <input
+              type="text"
+              placeholder="search fruits here .."
+              class="w-full pl-2"
+            />
+            <div class="text-lg min-w-[50px] h-8 bg-green-600 flex items-center justify-center rounded-r-full text-white">
+              <FaSearch />
+            </div>
+          </div>
+        </div>
 
         {productCartItem[0] ? (
           <div className="my-4 flex gap-3">
