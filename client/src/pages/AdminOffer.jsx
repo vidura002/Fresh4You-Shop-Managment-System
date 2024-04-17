@@ -35,7 +35,7 @@ export default function AdminOffer() {
     swt
       .fire({
         title: "Are you sure?",
-        text: "Delete this item from Stock",
+        text: "Delete this Offer item !",
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Yes, delete it!",
@@ -128,26 +128,26 @@ export default function AdminOffer() {
               <tbody>
                 {searchResults.map((offer, index) => (
                   <tr key={index}>
-                    <td className="border-y px-4 py-2">{offer.offerID}</td>
-                    <td className="border-y px-4 py-2">{offer.name}</td>
-                    <td className="border-y px-4 py-2">Rs{offer.price}.00</td>
-                    <td className="border-y px-4 py-2">{offer.variant}</td>
-                    <td className="border-y px-4 py-2">{offer.quantity}</td>
-                    <td className="border-y px-4 py-2">{offer.description}</td>
-                    <td className="border-y px-4 py-2">
+                    <td className="border px-4 py-2">{offer.offerID}</td>
+                    <td className="border px-4 py-2 w-48">{offer.name}</td>
+                    <td className="border px-4 py-2">Rs{offer.price}.00</td>
+                    <td className="border px-4 py-2">{offer.variant}</td>
+                    <td className="border px-4 py-2 text-center">{offer.quantity}</td>
+                    <td className="border px-4 py-2">{offer.description}</td>
+                    <td className="border px-4 py-2 w-28">
                       <img
                         src={offer.image}
                         alt={offer.name}
-                        className="w-16 h-16 object-cover flex items-center justify-center rounded-2xl p-1"
+                        className="w-16 h-16 object-cover flex justify-center rounded-2xl p-1"
                       />
                     </td>
-                    <td className="border-y px-4 py-2">
-                      <Link to="/UpdateOffer">
+                    <td className="border-y px-4 py-2 ">
+                      <Link to="/UpdateOffer" className="flex justify-center">
                         <IoIosCreate className="text-green-600 text-2xl" />
                       </Link>
                     </td>
                     <td className="border-y px-4 py-2">
-                      <button onClick={() => handleConfirmClick(offer._id)}>
+                      <button onClick={() => handleConfirmClick(offer._id)}  className="flex justify-center">
                         <IoMdTrash className="text-red-600 text-2xl" />
                       </button>
                     </td>
