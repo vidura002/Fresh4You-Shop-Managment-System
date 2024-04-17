@@ -6,6 +6,8 @@ import authRouter from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import listingRouter from "./routes/listing.route.js";
 import supplierRoutes from "./routes/suppliers.js";
+import cors from "cors";
+import SupplierOrderModels from "./models/SupplierOrderModel.js";
 
 dotenv.config();
 
@@ -20,8 +22,51 @@ mongoose
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+
+app.get("/supplier_orders", async (req, res) => {
+  SupplierOrderModels.find({})
+    .then((supplierorders) => res.json(supplierorders))
+    .catch((err) => res.json(err));
+});
+
+app.get("/getSupplierOrder/:id", async (req, res) => {
+  const id = req.params.id;
+  SupplierOrderModels.findById({ _id: id })
+    .then((supplierorders) => res.json(supplierorders))
+    .catch((err) => res.json(err));
+});
+
+app.put("/updateOrder/:id", async (req, res) => {
+  const id = req.params.id;
+  SupplierOrderModels.findByIdAndUpdate(
+    { _id: id },
+    {
+      fruit: req.body.fruit,
+      qty: req.body.qty,
+      date: req.body.date,
+      supplier_id: req.body.supplier_id,
+      status: req.body.status,
+    }
+  )
+    .then((supplierorders) => res.json(supplierorders))
+    .catch((err) => res.json(err));
+});
+
+app.delete("/supplier_orders/deleteUser/:id", (req, res) => {
+  const id = req.params.id;
+  SupplierOrderModels.findByIdAndDelete({ _id: id })
+    .then((res) => res.json(res))
+    .catch((err) => res.json(err));
+});
+
+app.post("/createOrder", async (req, res) => {
+  SupplierOrderModels.create(req.body)
+    .then((supplierorders) => res.json(supplierorders))
+    .catch((err) => res.json(err));
+});
 
 app.listen(3000, () => {
   console.log("server is running port 3000");

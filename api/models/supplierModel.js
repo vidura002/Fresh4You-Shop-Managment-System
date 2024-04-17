@@ -20,6 +20,6 @@ const supplierSchema = new Schema(
   { timestamps: true }
 );
 
-const Suplier = mongoose.model("Supplier", supplierSchema);
+const Supplier = mongoose.model("Supplier", supplierSchema);
 
-export default Suplier;
+export default Supplier;
