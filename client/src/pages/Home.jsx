@@ -6,6 +6,7 @@ import fruit03 from "../images/Avocado.png";
 import fruit04 from "../images/Guava.png";
 import fruit05 from "../images/Orange.png";
 import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [refBanner, inViewBanner] = useInView();
@@ -39,7 +40,7 @@ const Home = () => {
               </h1>
               <br />
               <button className="border-2 border-orange-600 hover:bg-orange-600 text-orange-600	 text-orange-600 font-bold py-3 px-12 rounded transition-colors hover:text-white hover:bg-orange-500 hover:delay-100">
-                SHOP NOW
+                <Link to="/FruitCatelog">SHOP NOW</Link>
               </button>
             </div>
             <div></div>
