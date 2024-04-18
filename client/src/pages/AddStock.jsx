@@ -48,13 +48,31 @@ const AddStock = () => {
     setImageUrl('');
   };
   
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+
+    if (id === "fruitName") {
+      // Check if the entered value contains only letters
+      if (/^[A-Za-z\s]+$/.test(value) || value === "") {
+        // If the entered value contains only letters or is empty, update the state
+        setFruitName(value);
+      }
+    } else {
+      // For other fields, directly update the state
+      setFormData({
+        ...formData,
+        [id]: value
+      });
+    }
+  };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-green-200 shadow-md rounded-md">
       <div className="flex gap-2">
         <Link to="/AdminStock">
-      <IoArrowBackCircleOutline className="text-4xl" /></Link>
-      <h2 className="text-2xl font-semibold mb-4"> Add Stock Information</h2>
+          <IoArrowBackCircleOutline className="text-4xl" />
+        </Link>
+        <h2 className="text-2xl font-semibold mb-4"> Add Stock Information</h2>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -83,7 +101,7 @@ const AddStock = () => {
             id="fruitName"
             name="fruitName"
             value={fruitName}
-            onChange={(e) => setFruitName(e.target.value)}
+            onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           />
         </div>
