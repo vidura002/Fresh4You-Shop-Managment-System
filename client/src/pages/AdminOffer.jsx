@@ -8,8 +8,8 @@ import { IoIosCreate } from "react-icons/io";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import swt from "sweetalert2";
-import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 export default function AdminOffer() {
   const [offers, setOffers] = useState([]);
@@ -26,7 +26,9 @@ export default function AdminOffer() {
         );
         setOffers(response.data.data);
         setTotalItems(response.data.data.length);
-        const zeroQuantityItemsCount = response.data.data.filter(offer => offer.quantity === 0).length;
+        const zeroQuantityItemsCount = response.data.data.filter(
+          (offer) => offer.quantity === 0
+        ).length;
         setZeroQuantityItems(zeroQuantityItemsCount);
       } catch (error) {
         console.error("Error fetching offers:", error);
@@ -63,6 +65,7 @@ export default function AdminOffer() {
       });
   };
 
+  //search
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -76,17 +79,22 @@ export default function AdminOffer() {
     setSearchResults(results);
   }, [searchTerm, offers]);
 
+  //report genaration
   const generateReport = () => {
-    // Create new jsPDF instance
     const doc = new jsPDF();
 
-    // Get current date and time
     const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleString(); // Format the date and time as a string
+    const formattedDate = currentDate.toLocaleString();
 
-    // Define the column headers and rows for the table
     const title = "Offer Report";
-    const headers = ["ID", "Name", "Price", "Variant", "Quantity", "Description"];
+    const headers = [
+      "ID",
+      "Name",
+      "Price",
+      "Variant",
+      "Quantity",
+      "Description",
+    ];
     const rows = searchResults.map((offer) => [
       offer.offerID,
       offer.name,
@@ -96,43 +104,34 @@ export default function AdminOffer() {
       offer.description,
     ]);
 
-    // Define Tailwind CSS styles for the table
     const styles = {
       headStyles: {
-        fillColor: "#6B7280", // Tailwind gray-500 background color for header
-        textColor: "#FFFFFF", // Tailwind white text color for header
+        fillColor: "#6B7280",
+        textColor: "#FFFFFF",
         fontSize: 13,
         fontStyle: "bold",
       },
       bodyStyles: {
-        textColor: "#111827", // Tailwind black text color for body
+        textColor: "#111827",
         fontSize: 12,
       },
       alternateRowStyles: {
-        fillColor: "#F3F4F6", // Tailwind gray-100 background color for alternate rows
-      }
+        fillColor: "#F3F4F6",
+      },
     };
 
-    // Add topic "Fresh4You"
     doc.setFontSize(20);
     doc.text("Fresh4You Fruit shop", 14, 15);
 
-    // Add logo image
-    
-
-    // Add title "Offer Report" and generated date
     doc.setFontSize(16);
     doc.text(title, 14, 40);
     doc.setFontSize(12);
-    doc.text(`Generated on: ${formattedDate}`, 14, 50); // Add the formatted date string
+    doc.text(`Generated on: ${formattedDate}`, 14, 50);
 
-    // Add table
     doc.autoTable({ head: [headers], body: rows, startY: 60, styles });
 
-    // Save PDF
-    doc.save('offer_report.pdf');
-};
-
+    doc.save(`Offer_report_${formattedDate}.pdf`);
+  };
 
   return (
     <div className="">
@@ -147,7 +146,6 @@ export default function AdminOffer() {
           <h1 className="text-2xl ml-10 mt-10 inline-block">
             Offer Management/home{" "}
           </h1>
-
           <div className="float-right mr-10 mt-10">
             <a href="/OfferNotification">
               <IoMdNotificationsOutline className="text-black text-3xl" />
@@ -170,27 +168,33 @@ export default function AdminOffer() {
           </div>
           {searchResults.length === 0 && (
             <p className="text-center text-red-500">No Offer found.</p>
-          )}<br></br>
+          )}
+          <br></br>
           <div className="text-center grid grid-cols-2 gap-4 mx-10 text-white">
-  <div className="bg-green-600 rounded-md p-4 text-white">
-    <p className="text-lg font-semibold">Total Offers</p>
-    <p className="text-5xl font-bold">{totalItems}</p>
-  </div>
-  <div className="bg-red-600 rounded-md p-4">
-    <p className="text-lg font-semibold">Sold out Offers</p>
-    <p className="text-5xl font-bold">{zeroQuantityItems}</p>
-  </div>
-</div>
-
+            <div className="bg-green-600 rounded-md p-4 text-white">
+              <p className="text-lg font-semibold">Total Offers</p>
+              <p className="text-5xl font-bold">{totalItems}</p>
+            </div>
+            <div className="bg-red-600 rounded-md p-4">
+              <p className="text-lg font-semibold">Sold out Offers</p>
+              <p className="text-5xl font-bold">{zeroQuantityItems}</p>
+            </div>
+          </div>
           <br />
           <div className="text-right mr-10 mt-10">
-            <button onClick={generateReport} className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+            <button
+              onClick={generateReport}
+              className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
+            >
               Generate report
             </button>
-          </div> <br />
-
+          </div>{" "}
+          <br />
           <div className="grid justify-items-center ml-10 mr-10 ">
-            <table id="offer-table" className="table-auto border-collapse w-full">
+            <table
+              id="offer-table"
+              className="table-auto border-collapse w-full"
+            >
               <thead className="bg-gray-200">
                 <tr>
                   <th className="px-4 py-2">ID</th>
@@ -211,7 +215,9 @@ export default function AdminOffer() {
                     <td className="border px-4 py-2 w-48">{offer.name}</td>
                     <td className="border px-4 py-2">Rs{offer.price}.00</td>
                     <td className="border px-4 py-2">{offer.variant}</td>
-                    <td className="border px-4 py-2 text-center">{offer.quantity}</td>
+                    <td className="border px-4 py-2 text-center">
+                      {offer.quantity}
+                    </td>
                     <td className="border px-4 py-2">{offer.description}</td>
                     <td className="border px-4 py-2 w-28">
                       <img
@@ -226,7 +232,10 @@ export default function AdminOffer() {
                       </Link>
                     </td>
                     <td className="border-y px-4 py-2">
-                      <button onClick={() => handleConfirmClick(offer._id)} className="flex justify-center">
+                      <button
+                        onClick={() => handleConfirmClick(offer._id)}
+                        className="flex justify-center"
+                      >
                         <IoMdTrash className="text-red-600 text-2xl" />
                       </button>
                     </td>
@@ -235,7 +244,6 @@ export default function AdminOffer() {
               </tbody>
             </table>
           </div>
-         
         </div>
       </div>
     </div>

@@ -19,25 +19,20 @@ const CreateOffer = () => {
     setImageUrl(url);
   };
 
-  // Validation function to check if the input contains only letters
   const isValidName = (input) => {
     return /^[A-Za-z\s]+$/.test(input);
   };
 
-  // Validation function to check if the input is a positive number
   const isValidPositiveNumber = (input) => {
     return /^[1-9]\d*$/.test(input);
   };
 
-  // Validation function to check if the input is a positive decimal number
   const isValidPositiveDecimalNumber = (input) => {
     return /^\d*\.?\d*$/.test(input) && parseFloat(input) > 0;
   };
 
-  //Create and submit button handle
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Validate inputs before submitting
     if (!isValidName(name)) {
       setAlertMessage("Name should contain only letters.");
       return;
@@ -50,7 +45,6 @@ const CreateOffer = () => {
       setAlertMessage("Quantity should be a positive integer.");
       return;
     }
-    // If all validations pass, proceed to submit the form
     const OfferData = {
       offerID,
       name,
@@ -95,7 +89,6 @@ const CreateOffer = () => {
     }
   };
 
-  // Cancel Button handle
   const handleCancelClick = () => {
     Swal.fire({
       icon: "question",
@@ -147,7 +140,6 @@ const CreateOffer = () => {
                 }}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               />
-             
             </div>
             <div className="mb-4">
               <label
@@ -172,7 +164,7 @@ const CreateOffer = () => {
                 }}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               />
-               {alertMessage && (
+              {alertMessage && (
                 <p className="text-red-500 mt-1">{alertMessage}</p>
               )}
             </div>

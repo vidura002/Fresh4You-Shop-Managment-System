@@ -11,19 +11,20 @@ function OfferCatalog() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/offer/GetAllOffers");
-      console.log("API :", response.data); 
-      setData(response.data.data); 
+      const response = await axios.get(
+        "http://localhost:3000/api/offer/GetAllOffers"
+      );
+      console.log("API :", response.data);
+      setData(response.data.data);
     } catch (error) {
       console.error("Error :", error);
     }
-  };  
+  };
 
   useEffect(() => {
     fetchData();
-  }, []); 
+  }, []);
 
-  // Function to handle changes in the search input field
   const handleFilter = (value) => {
     setSearchTerm(value);
   };
@@ -56,7 +57,7 @@ function OfferCatalog() {
       </div>
       <br />
       <hr />
-      
+
       <div className="bg-gray-200 p-4 grid grid-cols-3">
         <div></div>
         <div>
@@ -79,23 +80,32 @@ function OfferCatalog() {
             item.name.toLowerCase().includes(searchTerm.toLowerCase())
           )
           .map((item, index) => (
-            <li key={index} className="border border-gray-200 rounded-md overflow-hidden animate-fade-in shadow-xl">
+            <li
+              key={index}
+              className="border border-gray-200 rounded-md overflow-hidden animate-fade-in shadow-xl"
+            >
               <div className="flex items-center justify-center">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className=""
-                />
+                <img src={item.image} alt={item.name} className="" />
               </div>
               <div className="p-4">
-                <h2 className="text-lg font-semibold">{item.name}{" "}<span className="text-xl text-green-900">[{item.variant}]</span></h2>
-                <p className="text-red-600 text-2xl">Rs.{item.price}.00 <span className="text-black text-lg">[Per 1 item]</span></p>
+                <h2 className="text-lg font-semibold">
+                  {item.name}{" "}
+                  <span className="text-xl text-green-900">
+                    [{item.variant}]
+                  </span>
+                </h2>
+                <p className="text-red-600 text-2xl">
+                  Rs.{item.price}.00{" "}
+                  <span className="text-black text-lg">[Per 1 item]</span>
+                </p>
                 <hr />
                 <p>{item.description}</p>
                 <br />
                 <button
                   className={`w-full bg-green-800 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:bg-indigo-600 animate-fade-in ${
-                    item.quantity === 0 ? "bg-red-500 cursor-not-allowed hover:bg-red-500" : ""
+                    item.quantity === 0
+                      ? "bg-red-500 cursor-not-allowed hover:bg-red-500"
+                      : ""
                   }`}
                   disabled={item.quantity === 0}
                 >
@@ -105,8 +115,9 @@ function OfferCatalog() {
             </li>
           ))}
       </ul>
-      <br /><br />
-      <Footer/>
+      <br />
+      <br />
+      <Footer />
     </div>
   );
 }
