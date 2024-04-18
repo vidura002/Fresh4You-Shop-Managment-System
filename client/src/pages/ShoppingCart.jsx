@@ -23,7 +23,7 @@ const ShoppingCart = () => {
       <Header />
       <div
         className=" min-h-screen bg-cover bg-center"
-        style={{ backgroundImage: "url(src/assest/FS1.jpg)" }}
+        style={{ backgroundImage: "url(src/assest/A4.jpg)" }}
       >
         <div className="p-2 md:p-4">
           <h2 className="text-lg md:text-2xl font-bold bg-lime-300	">

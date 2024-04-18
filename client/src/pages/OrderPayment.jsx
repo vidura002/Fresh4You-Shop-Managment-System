@@ -92,7 +92,7 @@ const OrderPayment = () => {
       <Header />
       <div
         className=" min-h-screen bg-cover bg-center"
-        style={{ backgroundImage: "url(src/assest/ZZ.jpg)" }}
+        style={{ backgroundImage: "url(src/assest/A1.jpg)" }}
       >
         <div className="paymentcontainer">
           <form>
