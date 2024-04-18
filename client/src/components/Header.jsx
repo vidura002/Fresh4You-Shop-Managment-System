@@ -36,7 +36,7 @@ export default function Header() {
               About
             </li>
           </Link>
-          <Link to={"/profile"}>
+          <Link to={"/signin"}>
             {currentUser ? (
               <img
                 className="rounded-full h-7 w-7 object-cover"
@@ -45,10 +45,11 @@ export default function Header() {
               />
             ) : (
               <li className=" text-slate-700 hover:underline text-xl">
-                Sign In
+                Log Out
               </li>
             )}
           </Link>
+
           <Link to={"/shoppingcart"}>
             <li className="hidden sm:inline text-slate-700 font-medium hover:underline text-3xl">
               <LiaShoppingCartSolid />

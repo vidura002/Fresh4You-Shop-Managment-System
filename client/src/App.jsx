@@ -3,7 +3,6 @@ import Home from "./pages/Home";
 import Signin from "./pages/Signin";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
-import Header from "./components/Header";
 import Register from "./pages/Register";
 import PrivateRoute from "./components/PrivateRoute";
 import CreateListing from "./pages/CreateListing";
@@ -18,6 +17,7 @@ import AdminStock from "./pages/AdminStock";
 import FruitCatelog from "./pages/FruitCatelog";
 import UpdateStock from "./pages/UpdateStock";
 import UserOrders from "./pages/UserOrders";
+import OrderReceipt from "./pages/OrderReceipt";
 
 export default function App() {
   return (
@@ -42,6 +42,7 @@ export default function App() {
 
         {/*Order payment  */}
         <Route path="/orderpayment" element={<OrderPayment />}></Route>
+        <Route path="/orderReceipt" element={<OrderReceipt />}></Route>
 
         <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
         <Route path="/DeliveryPlaces" element={<DeliveryPlaces />}></Route>

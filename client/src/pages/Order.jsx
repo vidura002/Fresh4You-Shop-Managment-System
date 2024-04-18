@@ -126,18 +126,22 @@ const Order = () => {
               </div>
             </div>
             <div className="Order">
-              <input
-                type="text"
-                placeholder="Search..."
-                onChange={handleChange}
-                id="searchTerm"
-              />
-              <button
-                onClick={handleSubmit}
-                className="bg-transparent hover:bg-blue-500 text-blue-900 font-semibold text-2xl  hover:text-white border border-blue-900 hover:border-transparent rounded ml-10 px-16"
-              >
-                Search
-              </button>
+              <div className="flex justify-center">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  onChange={handleChange}
+                  id="searchTerm"
+                  className=" w-8/12"
+                />
+                <button
+                  onClick={handleSubmit}
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold text-lg px-6 py-3 border border-transparent hover:border-blue-500 rounded ml-10"
+                >
+                  Search
+                </button>
+              </div>
+
               <h2>ORDERS</h2>
               <div className="overflow-hidden">
                 <table className="font-inter w-full table-auto border-separate border-spacing-y-1 overflow-scroll text-left md:overflow-auto">

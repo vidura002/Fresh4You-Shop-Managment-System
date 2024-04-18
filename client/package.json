@@ -16,6 +16,7 @@
     "axios": "^1.6.8",
     "firebase": "^10.7.1",
     "framer-motion": "^11.0.28",
+    "jspdf": "^2.5.1",
     "pdf-creator-node": "^2.3.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

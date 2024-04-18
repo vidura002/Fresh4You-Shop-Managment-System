@@ -8,8 +8,10 @@ import "../index.css";
 import { useSelector } from "react-redux";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const OrderPayment = () => {
+  const navigate = useNavigate();
   const productCartItem = useSelector((state) => state.product.cartItem);
   const [formData, setFormData] = useState({
     cardNumber: "",
@@ -78,7 +80,8 @@ const OrderPayment = () => {
       }
 
       toast.success("Order successful!");
-      console.log("Payment successful");
+      const data = await response.json();
+      navigate("/OrderReceipt/", { state: data });
     } catch (error) {
       console.error("Error processing payment:", error.message);
     }
@@ -87,112 +90,117 @@ const OrderPayment = () => {
   return (
     <>
       <Header />
-      <div className="paymentcontainer">
-        <form>
-          <h1>Payment Form</h1>
-          <div className="flex gap-4">
-            {" "}
-            <img src={mastercard} height={20} width={60} alt="Mastercard" />
-            <img src={paypal} height={20} width={60} alt="Paypal" />
-            <img src={visa} height={20} width={60} alt="Visa" />
-          </div>
-          <div className="cardNumber">
-            <h2>Card Number :</h2>
-            <div className="input-field">
-              <input
-                type="text"
-                id="cardNumber"
-                name="cardNumber"
-                value={formData.cardNumber}
-                onChange={handleChange}
-                required
-              />
-              {errors.cardNumber && (
-                <p className="error">{errors.cardNumber}</p>
-              )}
+      <div
+        className=" min-h-screen bg-cover bg-center"
+        style={{ backgroundImage: "url(src/assest/ZZ.jpg)" }}
+      >
+        <div className="paymentcontainer">
+          <form>
+            <h1>Payment Form</h1>
+            <div className="flex gap-4">
+              {" "}
+              <img src={mastercard} height={20} width={60} alt="Mastercard" />
+              <img src={paypal} height={20} width={60} alt="Paypal" />
+              <img src={visa} height={20} width={60} alt="Visa" />
             </div>
-          </div>
-          <div className="row">
-            <div className="cvv">
-              <h2>CVV :</h2>
+            <div className="cardNumber">
+              <h2>Card Number :</h2>
               <div className="input-field">
                 <input
                   type="text"
-                  id="cvv"
-                  name="cvv"
-                  value={formData.cvv}
+                  id="cardNumber"
+                  name="cardNumber"
+                  value={formData.cardNumber}
                   onChange={handleChange}
                   required
                 />
-                {errors.cvv && <p className="error">{errors.cvv}</p>}
+                {errors.cardNumber && (
+                  <p className="error">{errors.cardNumber}</p>
+                )}
               </div>
             </div>
-            <div className="expiryDate">
-              <h2>Expiry Date :</h2>
-              <div className="selection">
-                <div className="date flex gap-1 ">
-                  {" "}
-                  <select
-                    name="expiryDate"
-                    id="months"
-                    className="input-border"
+            <div className="row">
+              <div className="cvv">
+                <h2>CVV :</h2>
+                <div className="input-field">
+                  <input
+                    type="text"
+                    id="cvv"
+                    name="cvv"
+                    value={formData.cvv}
                     onChange={handleChange}
                     required
-                  >
-                    <option value=""> </option>
-                    <option value="jan">Jan</option>
-                    <option value="feb">Feb</option>
-                    <option value="mar">Mar</option>
-                    <option value="apr">Apr</option>
-                    <option value="may">May</option>
-                    <option value="jun">Jun</option>
-                    <option value="jul">Jul</option>
-                    <option value="aug">Aug</option>
-                    <option value="sep">Sep</option>
-                    <option value="oct">Oct</option>
-                    <option value="nov">Nov</option>
-                    <option value="dec">Dec</option>
-                  </select>
-                  <select
-                    name="expiryDate"
-                    id="years"
-                    className="input-border"
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value=""> </option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
-                    <option value="2026">2026</option>
-                    <option value="2027">2027</option>
-                    <option value="2028">2028</option>
-                    <option value="2029">2029</option>
-                  </select>
+                  />
+                  {errors.cvv && <p className="error">{errors.cvv}</p>}
+                </div>
+              </div>
+              <div className="expiryDate">
+                <h2>Expiry Date :</h2>
+                <div className="selection">
+                  <div className="date flex gap-1 ">
+                    {" "}
+                    <select
+                      name="expiryDate"
+                      id="months"
+                      className="input-border"
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value=""> </option>
+                      <option value="jan">Jan</option>
+                      <option value="feb">Feb</option>
+                      <option value="mar">Mar</option>
+                      <option value="apr">Apr</option>
+                      <option value="may">May</option>
+                      <option value="jun">Jun</option>
+                      <option value="jul">Jul</option>
+                      <option value="aug">Aug</option>
+                      <option value="sep">Sep</option>
+                      <option value="oct">Oct</option>
+                      <option value="nov">Nov</option>
+                      <option value="dec">Dec</option>
+                    </select>
+                    <select
+                      name="expiryDate"
+                      id="years"
+                      className="input-border"
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value=""> </option>
+                      <option value="2024">2024</option>
+                      <option value="2025">2025</option>
+                      <option value="2026">2026</option>
+                      <option value="2027">2027</option>
+                      <option value="2028">2028</option>
+                      <option value="2029">2029</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="shoppingAddress">
-            {" "}
-            <h2>Shopping Address :</h2>
-            <div className="input-field">
-              <input
-                type="text"
-                id="shoppingAddress"
-                name="shoppingAddress"
-                value={formData.shoppingAddress}
-                onChange={handleChange}
-                required
-              />
+            <div className="shoppingAddress">
+              {" "}
+              <h2>Shopping Address :</h2>
+              <div className="input-field">
+                <input
+                  type="text"
+                  id="shoppingAddress"
+                  name="shoppingAddress"
+                  value={formData.shoppingAddress}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
             </div>
-          </div>
-          <div className="flex items-center justify-center">
-            <button type="button" onClick={() => handleSubmit()}>
-              Pay Now
-            </button>{" "}
-          </div>
-        </form>
-        <ToastContainer />
+            <div className="flex items-center justify-center">
+              <button type="button" onClick={() => handleSubmit()}>
+                Pay Now
+              </button>{" "}
+            </div>
+          </form>
+          <ToastContainer />
+        </div>
       </div>
       <Footer />
     </>
