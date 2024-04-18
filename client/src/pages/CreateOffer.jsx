@@ -19,9 +19,38 @@ const CreateOffer = () => {
     setImageUrl(url);
   };
 
-  //Create and submit button hadel
+  // Validation function to check if the input contains only letters
+  const isValidName = (input) => {
+    return /^[A-Za-z\s]+$/.test(input);
+  };
+
+  // Validation function to check if the input is a positive number
+  const isValidPositiveNumber = (input) => {
+    return /^[1-9]\d*$/.test(input);
+  };
+
+  // Validation function to check if the input is a positive decimal number
+  const isValidPositiveDecimalNumber = (input) => {
+    return /^\d*\.?\d*$/.test(input) && parseFloat(input) > 0;
+  };
+
+  //Create and submit button handle
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Validate inputs before submitting
+    if (!isValidName(name)) {
+      setAlertMessage("Name should contain only letters.");
+      return;
+    }
+    if (!isValidPositiveDecimalNumber(price)) {
+      setAlertMessage("Price should be a positive number.");
+      return;
+    }
+    if (!isValidPositiveNumber(quantity)) {
+      setAlertMessage("Quantity should be a positive integer.");
+      return;
+    }
+    // If all validations pass, proceed to submit the form
     const OfferData = {
       offerID,
       name,
@@ -66,7 +95,7 @@ const CreateOffer = () => {
     }
   };
 
-  //Cancel Button hadle
+  // Cancel Button handle
   const handleCancelClick = () => {
     Swal.fire({
       icon: "question",
@@ -75,23 +104,18 @@ const CreateOffer = () => {
       showCancelButton: true,
       confirmButtonText: "Yes",
       cancelButtonText: "No",
-    })
-      .then((result) => {
-        if (result.isConfirmed) {
-          setOfferID("");
-          setName("");
-          setPrice("");
-          setVariant("");
-          setQuantity("");
-          setDescription("");
-          setImageUrl("");
-          setAlertMessage("");
-          history.push("/AdminOffer");
-        }
-      })
-      .then(() => {
-        history.push("/AdminOffer");
-      });
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setOfferID("");
+        setName("");
+        setPrice("");
+        setVariant("");
+        setQuantity("");
+        setDescription("");
+        setImageUrl("");
+        setAlertMessage("");
+      }
+    });
   };
 
   return (
@@ -105,7 +129,6 @@ const CreateOffer = () => {
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-10">
           <div>
-            {" "}
             <div className="mb-4">
               <label
                 htmlFor="offerID"
@@ -124,9 +147,7 @@ const CreateOffer = () => {
                 }}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               />
-              {alertMessage && (
-                <p className="text-red-500 mt-1">{alertMessage}</p>
-              )}
+             
             </div>
             <div className="mb-4">
               <label
@@ -140,9 +161,20 @@ const CreateOffer = () => {
                 id="name"
                 name="name"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  const inputName = e.target.value;
+                  if (/^[A-Za-z\s]+$/.test(inputName) || inputName === "") {
+                    setName(inputName);
+                    setAlertMessage("");
+                  } else {
+                    setAlertMessage("Name should contain only letters.");
+                  }
+                }}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               />
+               {alertMessage && (
+                <p className="text-red-500 mt-1">{alertMessage}</p>
+              )}
             </div>
             <div className="mb-4">
               <label
@@ -221,8 +253,7 @@ const CreateOffer = () => {
         </div>
 
         <div className="mb-4">
-          <OfferImageAdd onImageUrlChange={handleImageUrlChange} />{" "}
-          {/*import OfferImageAdd component*/}
+          <OfferImageAdd onImageUrlChange={handleImageUrlChange} />
         </div>
         <div className="flex gap-5 justify-end">
           <button

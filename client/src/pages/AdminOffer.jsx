@@ -15,6 +15,8 @@ export default function AdminOffer() {
   const [offers, setOffers] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [totalItems, setTotalItems] = useState(0);
+  const [zeroQuantityItems, setZeroQuantityItems] = useState(0);
 
   useEffect(() => {
     const fetchOffers = async () => {
@@ -23,6 +25,9 @@ export default function AdminOffer() {
           "http://localhost:3000/api/offer/GetAllOffers"
         );
         setOffers(response.data.data);
+        setTotalItems(response.data.data.length);
+        const zeroQuantityItemsCount = response.data.data.filter(offer => offer.quantity === 0).length;
+        setZeroQuantityItems(zeroQuantityItemsCount);
       } catch (error) {
         console.error("Error fetching offers:", error);
       }
@@ -165,13 +170,24 @@ export default function AdminOffer() {
           </div>
           {searchResults.length === 0 && (
             <p className="text-center text-red-500">No Offer found.</p>
-          )}
+          )}<br></br>
+          <div className="text-center grid grid-cols-2 gap-4 mx-10 text-white">
+  <div className="bg-green-600 rounded-md p-4 text-white">
+    <p className="text-lg font-semibold">Total Offers</p>
+    <p className="text-5xl font-bold">{totalItems}</p>
+  </div>
+  <div className="bg-red-600 rounded-md p-4">
+    <p className="text-lg font-semibold">Sold out Offers</p>
+    <p className="text-5xl font-bold">{zeroQuantityItems}</p>
+  </div>
+</div>
+
           <br />
           <div className="text-right mr-10 mt-10">
-  <button onClick={generateReport} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-    Generate report
-  </button>
-</div>
+            <button onClick={generateReport} className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+              Generate report
+            </button>
+          </div> <br />
 
           <div className="grid justify-items-center ml-10 mr-10 ">
             <table id="offer-table" className="table-auto border-collapse w-full">
@@ -219,6 +235,7 @@ export default function AdminOffer() {
               </tbody>
             </table>
           </div>
+         
         </div>
       </div>
     </div>

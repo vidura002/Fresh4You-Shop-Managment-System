@@ -53,17 +53,19 @@ function FruitCatelog() {
       </div>
       <br />
       <hr />
-      <br />
-      <div className="bg-gray-200 p-4 ">
-        <h2 className="text-lg font-semibold mb-4 ">Filters</h2>
+      
+      <div className="bg-gray-200 p-4 grid grid-cols-3">
+        <div></div>
+        <div><h2 className="text-lg font-semibold mb-4 ">Filters</h2>
         <label htmlFor="search ">Search:</label>
         <input
           type="text"
           id="search"
           onChange={(e) => handleFilter(e.target.value)}
           className="border border-gray-300 rounded-md px-2 py-1 mb-4 block w-96 "
-        />
-      </div>
+        /></div>
+        <div></div>
+      </div><br />
       <ul className="grid gap-5 md:grid-cols-3 lg:grid-cols-5 ml-10 mr-10 ">
         {data.map((item, index) => (
           <li
