@@ -3,6 +3,7 @@ import UploadImage from "../components/UploadImage";
 import axios from 'axios';
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const AddStock = () => {
   const [fruitId, setFruitId] = useState("");
@@ -28,14 +29,34 @@ const AddStock = () => {
         setFruitQuantity('');
         setPrice('');
         setImageUrl('');
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Data successfully added to MongoDB!',
+        });
       } else {
         console.error('Error adding data to MongoDB:', response.data.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: response.data.message,
+        });
       }
     } catch (error) {
       if (error.response && error.response.status === 400 && error.response.data.error === 'FruitID already exists') {
         setAlertMessage('Fruit ID already exists. Please enter a different Fruit ID.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Fruit ID already exists. Please enter a different Fruit ID.',
+        });
       } else {
         console.error('Error adding data to MongoDB:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error adding data to MongoDB!',
+        });
       }
     }
   };
@@ -46,6 +67,11 @@ const AddStock = () => {
     setFruitQuantity('');
     setPrice('');
     setImageUrl('');
+    Swal.fire({
+      icon: 'success',
+      title: 'Cleared',
+      text: 'Form cleared successfully!',
+    });
   };
   
   const handleChange = (e) => {
@@ -141,13 +167,28 @@ const AddStock = () => {
         <button
           type="submit"
           className="w-full bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-600"
+          onClick={() => {
+            Swal.fire({
+              icon: 'info',
+              title: 'Submitting...',
+              text: 'Please wait...',
+              showConfirmButton: false,
+            });
+          }}
         >
           Submit
         </button>
         <button
             type="button"
-            onClick={clearForm}
             className="mt-2 w-full bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none focus:bg-gray-400"
+            onClick={() => {
+              Swal.fire({
+                icon: 'info',
+                title: 'Clearing...',
+                text: 'Please wait...',
+                showConfirmButton: false,
+              });
+            }}
           >
             Clear
           </button>
