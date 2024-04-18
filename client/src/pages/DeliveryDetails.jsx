@@ -111,6 +111,7 @@ function DeliveryDetails() {
     return (
         <>
             <Header />
+            <div className=' min-h-screen bg-cover bg-center' style={{backgroundImage: "url(src/images/bg.png)"}}>
             <div className='container'>
                 <div className="button-and-search">
                     <button className='btn btn-add' onClick={() => SetAddSection(true)}>ADD</button>
@@ -177,6 +178,7 @@ function DeliveryDetails() {
                         </tbody>
                     </table>
                 </div>
+            </div>
             </div>
         </>
     );
