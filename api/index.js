@@ -11,13 +11,9 @@ import bodyParser from 'body-parser';
 import StockRouter from './routes/Stock-Route.js'
 
 
-
 dotenv.config();
 
-
 const app = express();
-
-
 
 app.use(cors());
 
@@ -28,7 +24,6 @@ app.get('/', (req, res) => {
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
-
 
 
 app.listen(3000, () => {
