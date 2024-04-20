@@ -3,14 +3,14 @@ import Home from './pages/Home';
 import Signin from './pages/Signin';
 import About from './pages/About';
 import Profile from './pages/Profile';
-import Header from './components/Header'
+import Header from './components/Header';
 import Register from './pages/Register';
 import PrivateRoute from './components/PrivateRoute';
 import CreateListing from './pages/CreateListing';
 import AdminDashboard from './pages/AdminDashboard';
 import DeliveryPlaces from './pages/DeliveryPlaces';
 import DeliveryDetails from './pages/DeliveryDetails';
-import AdminDelivery from '/.pages/AdminDelivery';
+import AdminDelivery from './pages/AdminDelivery';
 
 export default function App() {
   return (
@@ -27,6 +27,7 @@ export default function App() {
         <Route path="/AdminDashboard" element={<AdminDashboard/>}></Route>
         <Route path="/DeliveryPlaces" element={<DeliveryPlaces/>}></Route>
         <Route path="/DeliveryDetails" element={<DeliveryDetails/>}></Route>
+        <Route path="/AdminDelivery" element={<AdminDelivery/>}></Route>
     </Routes>
     
     </BrowserRouter>
