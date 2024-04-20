@@ -74,7 +74,7 @@ export default function AdminOffer() {
     const results = offers.filter(
       (offer) =>
         offer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        offer.offerID.toString().includes(searchTerm)
+        offer.offerID.toString().includes(searchTerm)||offer.variant.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
   }, [searchTerm, offers]);
@@ -140,9 +140,9 @@ export default function AdminOffer() {
       </div>
       <div className="grid gap-4  lg:grid-cols-12 md:grid-cols-12 divide-x ">
         <div className="grid-col-1  lg:col-span-2 md:col-span-3 ">
-          <AdminSideBar />
+          <AdminSideBar  className=""/>
         </div>
-        <div className="grid-col-11 lg:col-span-10 md:col-span-9 h-max  text-black overflow-auto max-h-svh">
+        <div className="grid-col-11 lg:col-span-10 md:col-span-9 h-max  text-black scroll-smooth overflow-auto h-full h-dvh ">
           <h1 className="text-2xl ml-10 mt-10 inline-block">
             Offer Management/home{" "}
           </h1>
@@ -180,7 +180,6 @@ export default function AdminOffer() {
               <p className="text-5xl font-bold">{zeroQuantityItems}</p>
             </div>
           </div>
-          <br />
           <div className="text-right mr-10 mt-10">
             <button
               onClick={generateReport}

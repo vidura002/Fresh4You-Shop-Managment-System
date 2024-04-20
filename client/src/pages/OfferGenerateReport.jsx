@@ -8,10 +8,8 @@ export default function OfferGenerateReport() {
   const { searchResults } = location.state;
 
   const generateReport = () => {
-    // Create new jsPDF instance
     const doc = new jsPDF();
 
-    // Define the column headers and rows for the table
     const title = "Offer Report"
     const headers = ["ID", "Name", "Price", "Variant", "Quantity", "Description"];
     const rows = searchResults.map((offer) => [
@@ -23,27 +21,24 @@ export default function OfferGenerateReport() {
       offer.description
     ]);
 
-    // Define Tailwind CSS styles for the table
     const styles = {
       headStyles: {
-        fillColor: "#6B7280", // Tailwind gray-500 background color for header
-        textColor: "#FFFFFF", // Tailwind white text color for header
+        fillColor: "#6B7280", 
+        textColor: "#FFFFFF", 
         fontSize: 12,
         fontStyle: "bold",
       },
       bodyStyles: {
-        textColor: "#111827", // Tailwind black text color for body
+        textColor: "#111827", 
         fontSize: 10,
       },
       alternateRowStyles: {
-        fillColor: "#F3F4F6", // Tailwind gray-100 background color for alternate rows
+        fillColor: "#F3F4F6", 
       }
     };
     doc.text(title, 14, 10);
-    // Set table column widths and add the table to the PDF
     doc.autoTable({ head: [headers], body: rows, styles });
 
-    // Save PDF
     doc.save('offer_report.pdf');
   };
 

@@ -14,11 +14,14 @@ const CreateOffer = () => {
   const [description, setDescription] = useState("");
   const [image, setImageUrl] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
+  const [alertMessageNumber, setAlertMessageNumber] = useState("");
+  const [alertMessageQuantity, setAlertMessageQuantity] = useState("");
 
   const handleImageUrlChange = (url) => {
     setImageUrl(url);
   };
 
+  //validation part
   const isValidName = (input) => {
     return /^[A-Za-z\s]+$/.test(input);
   };
@@ -38,11 +41,11 @@ const CreateOffer = () => {
       return;
     }
     if (!isValidPositiveDecimalNumber(price)) {
-      setAlertMessage("Price should be a positive number.");
+      setAlertMessageNumber("Price should be a positive number.");
       return;
     }
     if (!isValidPositiveNumber(quantity)) {
-      setAlertMessage("Quantity should be a positive integer.");
+      setAlertMessageQuantity("Quantity should be a positive integer.");
       return;
     }
     const OfferData = {
@@ -113,6 +116,7 @@ const CreateOffer = () => {
 
   return (
     <div className="mt-10 ml-20 mr-20 p-10 bg-green-200 shadow-md rounded-md">
+        
       <div className="flex gap-2">
         <Link to="/AdminOffer">
           <IoArrowBackCircleOutline className="text-4xl" />
@@ -164,9 +168,7 @@ const CreateOffer = () => {
                 }}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               />
-              {alertMessage && (
-                <p className="text-red-500 mt-1">{alertMessage}</p>
-              )}
+            {alertMessage && (<p className="text-red-500 mt-1">{alertMessage}</p>)}
             </div>
             <div className="mb-4">
               <label
@@ -202,8 +204,9 @@ const CreateOffer = () => {
                 step="0.01"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               />
+              {alertMessageNumber && (<p className="text-red-500 mt-1">{alertMessageNumber}</p>)}
             </div>
-
+            
             <div className="mb-4">
               <label
                 htmlFor="quantity"
@@ -220,6 +223,7 @@ const CreateOffer = () => {
                 min="0"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               />
+               {alertMessageQuantity && (<p className="text-red-500 mt-1">{alertMessageQuantity}</p>)}
             </div>
             <div className="mb-4">
               <label
