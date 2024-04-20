@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import UploadImage from "../components/UploadImage";
-import axios from 'axios';
+import axios from "axios";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 const AddStock = () => {
   const [fruitId, setFruitId] = useState("");
@@ -19,61 +19,76 @@ const AddStock = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const stockData = { FruitID: fruitId, FruitName: fruitName, FruitQuantity: fruitQuantity, price: price, image: image };
+    const stockData = {
+      FruitID: fruitId,
+      FruitName: fruitName,
+      FruitQuantity: fruitQuantity,
+      price: price,
+      image: image,
+    };
     try {
-      const response = await axios.post('http://localhost:3000/api/stock/createstock', stockData);
+      const response = await axios.post(
+        "http://localhost:3000/api/stock/createstock",
+        stockData
+      );
       if (response.data.success) {
-        console.log('Data successfully added to MongoDB!');
-        setFruitId('');
-        setFruitName('');
-        setFruitQuantity('');
-        setPrice('');
-        setImageUrl('');
+        console.log("Data successfully added to MongoDB!");
+        setFruitId("");
+        setFruitName("");
+        setFruitQuantity("");
+        setPrice("");
+        setImageUrl("");
         Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: 'Data successfully added to MongoDB!',
+          icon: "success",
+          title: "Success",
+          text: "Data successfully added to MongoDB!",
         });
       } else {
-        console.error('Error adding data to MongoDB:', response.data.message);
+        console.error("Error adding data to MongoDB:", response.data.message);
         Swal.fire({
-          icon: 'error',
-          title: 'Error',
+          icon: "error",
+          title: "Error",
           text: response.data.message,
         });
       }
     } catch (error) {
-      if (error.response && error.response.status === 400 && error.response.data.error === 'FruitID already exists') {
-        setAlertMessage('Fruit ID already exists. Please enter a different Fruit ID.');
+      if (
+        error.response &&
+        error.response.status === 400 &&
+        error.response.data.error === "FruitID already exists"
+      ) {
+        setAlertMessage(
+          "Fruit ID already exists. Please enter a different Fruit ID."
+        );
         Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Fruit ID already exists. Please enter a different Fruit ID.',
+          icon: "error",
+          title: "Error",
+          text: "Fruit ID already exists. Please enter a different Fruit ID.",
         });
       } else {
-        console.error('Error adding data to MongoDB:', error);
+        console.error("Error adding data to MongoDB:", error);
         Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Error adding data to MongoDB!',
+          icon: "error",
+          title: "Error",
+          text: "Error adding data to MongoDB!",
         });
       }
     }
   };
 
   const clearForm = () => {
-    setFruitId('');
-    setFruitName('');
-    setFruitQuantity('');
-    setPrice('');
-    setImageUrl('');
+    setFruitId("");
+    setFruitName("");
+    setFruitQuantity("");
+    setPrice("");
+    setImageUrl("");
     Swal.fire({
-      icon: 'success',
-      title: 'Cleared',
-      text: 'Form cleared successfully!',
+      icon: "success",
+      title: "Cleared",
+      text: "Form cleared successfully!",
     });
   };
-  
+
   const handleChange = (e) => {
     const { id, value } = e.target;
 
@@ -87,7 +102,7 @@ const AddStock = () => {
       // For other fields, directly update the state
       setFormData({
         ...formData,
-        [id]: value
+        [id]: value,
       });
     }
   };
@@ -102,7 +117,10 @@ const AddStock = () => {
       </div>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label htmlFor="fruitId" className="block text-gray-700 font-bold mb-2">
+          <label
+            htmlFor="fruitId"
+            className="block text-gray-700 font-bold mb-2"
+          >
             Fruit ID
           </label>
           <input
@@ -112,14 +130,17 @@ const AddStock = () => {
             value={fruitId}
             onChange={(e) => {
               setFruitId(e.target.value);
-              setAlertMessage(''); 
+              setAlertMessage("");
             }}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
           />
-           {alertMessage && <p className="text-red-500 mt-1">{alertMessage}</p>}
+          {alertMessage && <p className="text-red-500 mt-1">{alertMessage}</p>}
         </div>
         <div className="mb-4">
-          <label htmlFor="fruitName" className="block text-gray-700 font-bold mb-2">
+          <label
+            htmlFor="fruitName"
+            className="block text-gray-700 font-bold mb-2"
+          >
             Fruit Name
           </label>
           <input
@@ -132,7 +153,10 @@ const AddStock = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="fruitQuantity" className="block text-gray-700 font-bold mb-2">
+          <label
+            htmlFor="fruitQuantity"
+            className="block text-gray-700 font-bold mb-2"
+          >
             Fruit Quantity (kg)
           </label>
           <input
@@ -169,9 +193,9 @@ const AddStock = () => {
           className="w-full bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-600"
           onClick={() => {
             Swal.fire({
-              icon: 'info',
-              title: 'Submitting...',
-              text: 'Please wait...',
+              icon: "info",
+              title: "Submitting...",
+              text: "Please wait...",
               showConfirmButton: false,
             });
           }}
@@ -179,19 +203,19 @@ const AddStock = () => {
           Submit
         </button>
         <button
-            type="button"
-            className="mt-2 w-full bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none focus:bg-gray-400"
-            onClick={() => {
-              Swal.fire({
-                icon: 'info',
-                title: 'Clearing...',
-                text: 'Please wait...',
-                showConfirmButton: false,
-              });
-            }}
-          >
-            Clear
-          </button>
+          type="button"
+          className="mt-2 w-full bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none focus:bg-gray-400"
+          onClick={() => {
+            Swal.fire({
+              icon: "info",
+              title: "Clearing...",
+              text: "Please wait...",
+              showConfirmButton: false,
+            });
+          }}
+        >
+          Clear
+        </button>
       </form>
     </div>
   );

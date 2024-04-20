@@ -40,7 +40,9 @@ export default function AdminStock() {
       .then(async (result) => {
         if (result.isConfirmed) {
           try {
-            await axios.delete(`http://localhost:3000/api/Stock/Delete/${itemId}`);
+            await axios.delete(
+              `http://localhost:3000/api/Stock/Delete/${itemId}`
+            );
             swal.fire("Deleted!", `Item has been deleted`, "success");
           } catch (error) {
             console.error("Error deleting item:", error);
@@ -58,8 +60,8 @@ export default function AdminStock() {
         const response = await axios.get(
           "http://localhost:3000/api/Stock/getAll"
         );
-        console.log("API:", response.data); 
-        setData(response.data.data); 
+        console.log("API:", response.data);
+        setData(response.data.data);
 
         const below100 = response.data.data.filter(
           (item) => item.FruitQuantity < 100
@@ -93,7 +95,7 @@ export default function AdminStock() {
     const doc = new jsPDF();
 
     const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleString(); 
+    const formattedDate = currentDate.toLocaleString();
 
     const title = "Stck Report";
     const headers = ["Fruit ID", "Fruit Name", "Quantity", "Price"];
@@ -106,18 +108,18 @@ export default function AdminStock() {
 
     const styles = {
       headStyles: {
-        fillColor: "#4CAF50", 
-        textColor: "#FFFFFF", 
+        fillColor: "#4CAF50",
+        textColor: "#FFFFFF",
         fontSize: 13,
         fontStyle: "bold",
       },
       bodyStyles: {
-        textColor: "#111827", 
+        textColor: "#111827",
         fontSize: 12,
       },
       alternateRowStyles: {
-        fillColor: "#F3F4F6", 
-      }
+        fillColor: "#F3F4F6",
+      },
     };
 
     doc.setFontSize(20);
@@ -126,11 +128,11 @@ export default function AdminStock() {
     doc.setFontSize(16);
     doc.text(title, 14, 40);
     doc.setFontSize(12);
-    doc.text(`Generated on: ${formattedDate}`, 14, 50); 
+    doc.text(`Generated on: ${formattedDate}`, 14, 50);
 
     doc.autoTable({ head: [headers], body: rows, startY: 60, styles });
 
-    doc.save('StockDetails.pdf');
+    doc.save("StockDetails.pdf");
 
     swal.fire({
       icon: "success",
@@ -188,23 +190,33 @@ export default function AdminStock() {
                 <TiShoppingCart className="text-white text-4xl" />
                 <span className="text-xl font-medium">Total Fruit Item</span>
                 <p></p>
-                <p className="text-6xl  font-bold text-white inline-block align-middle">{rowCount}</p>
+                <p className="text-6xl  font-bold text-white inline-block align-middle">
+                  {rowCount}
+                </p>
               </div>
             </div>
             <div className=" grid grid-col-2 bg-yellow-500 p-5 rounded-2xl">
               <div className="grid grid-cols-2">
                 <BsGraphDownArrow className="text-white text-4xl" />
-                <span className="text-xl font-medium">Number of Items less than 100kg</span>
+                <span className="text-xl font-medium">
+                  Number of Items less than 100kg
+                </span>
                 <p> </p>
-                <p className="text-6xl  font-bold text-white inline-block align-middle">{itemsBelow100}</p>
+                <p className="text-6xl  font-bold text-white inline-block align-middle">
+                  {itemsBelow100}
+                </p>
               </div>
             </div>
             <div className="grid grid-col-3 bg-red-600 p-5 rounded-2xl">
               <div className="grid grid-cols-2">
                 <BsCartX className="text-white text-4xl" />
-                <span className="text-xl text-slate-300 font-medium">Out of Stock</span>
+                <span className="text-xl text-slate-300 font-medium">
+                  Out of Stock
+                </span>
                 <p> </p>
-                <p className="text-6xl font-bold text-slate-300 inline-block align-middle">{outOfStockItemCount}</p>
+                <p className="text-6xl font-bold text-slate-300 inline-block align-middle">
+                  {outOfStockItemCount}
+                </p>
               </div>
             </div>
           </div>
@@ -243,18 +255,16 @@ export default function AdminStock() {
                         className="w-16 h-16 object-cover flex items-center justify-center rounded-2xl p-1"
                       />
                     </td>
-                    <td className="border-b-2 w-16">
-                      
-                    </td>
+                    <td className="border-b-2 w-16"></td>
                     <td className="border-b-2 w-16">
                       <a href="/UpdateStock">
                         <FaPenToSquare className="text-green-600 text-2xl" />
                       </a>
                     </td>
                     <td className="border-b-2 w-16">
-                    <button onClick={() => handleConfirmClick(item._id)}>
+                      <button onClick={() => handleConfirmClick(item._id)}>
                         <MdDeleteForever className="text-red-600 text-3xl" />
-                    </button>
+                      </button>
                     </td>
                   </tr>
                 ))}
