@@ -142,7 +142,7 @@ export default function AdminOffer() {
         <div className="grid-col-1  lg:col-span-2 md:col-span-3 ">
           <AdminSideBar  className=""/>
         </div>
-        <div className="grid-col-11 lg:col-span-10 md:col-span-9 h-max  text-black scroll-smooth overflow-auto h-full h-dvh ">
+        <div className="grid-col-11 lg:col-span-10 md:col-span-9 h-max  text-black scroll-smooth overflow-auto max-h-svh ">
           <h1 className="text-2xl ml-10 mt-10 inline-block">
             Offer Management/home{" "}
           </h1>
