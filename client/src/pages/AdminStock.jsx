@@ -11,7 +11,9 @@ import { RiAiGenerate } from "react-icons/ri";
 import { BsCartX } from "react-icons/bs";
 import { TiShoppingCart } from "react-icons/ti";
 import { BsGraphDownArrow } from "react-icons/bs";
-import swt from "sweetalert2";
+import swal from "sweetalert2";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 export default function AdminStock() {
   const [data, setData] = useState([]);
@@ -26,7 +28,7 @@ export default function AdminStock() {
   };
 
   const handleConfirmClick = (itemId) => {
-    swt
+    swal
       .fire({
         title: "Are you sure?",
         text: "Delete this item from Stock",
@@ -39,13 +41,13 @@ export default function AdminStock() {
         if (result.isConfirmed) {
           try {
             await axios.delete(`http://localhost:3000/api/Stock/Delete/${itemId}`);
-            swt.fire("Deleted!", `Item has been deleted`, "success");
+            swal.fire("Deleted!", `Item has been deleted`, "success");
           } catch (error) {
             console.error("Error deleting item:", error);
-            swt.fire("Error", "Failed to delete item", "error");
+            swal.fire("Error", "Failed to delete item", "error");
           }
-        } else if (result.dismiss === swt.DismissReason.cancel) {
-          swt.fire("Cancelled", "This item is still in stock ", "error");
+        } else if (result.dismiss === swal.DismissReason.cancel) {
+          swal.fire("Cancelled", "This item is still in stock ", "error");
         }
       });
   };
@@ -87,6 +89,56 @@ export default function AdminStock() {
     setSearchResults(results);
   }, [searchTerm, data]);
 
+  const generateReport = () => {
+    const doc = new jsPDF();
+
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleString(); 
+
+    const title = "Stck Report";
+    const headers = ["Fruit ID", "Fruit Name", "Quantity", "Price"];
+    const rows = searchResults.map((item) => [
+      item.FruitID,
+      item.FruitName,
+      `${item.FruitQuantity} kg`,
+      `Rs.${item.price}.00`,
+    ]);
+
+    const styles = {
+      headStyles: {
+        fillColor: "#4CAF50", 
+        textColor: "#FFFFFF", 
+        fontSize: 13,
+        fontStyle: "bold",
+      },
+      bodyStyles: {
+        textColor: "#111827", 
+        fontSize: 12,
+      },
+      alternateRowStyles: {
+        fillColor: "#F3F4F6", 
+      }
+    };
+
+    doc.setFontSize(20);
+    doc.text("Fresh4You Fruit shop", 14, 15);
+
+    doc.setFontSize(16);
+    doc.text(title, 14, 40);
+    doc.setFontSize(12);
+    doc.text(`Generated on: ${formattedDate}`, 14, 50); 
+
+    doc.autoTable({ head: [headers], body: rows, startY: 60, styles });
+
+    doc.save('StockDetails.pdf');
+
+    swal.fire({
+      icon: "success",
+      title: "Report Generated",
+      text: "The report has been successfully generated!",
+    });
+  };
+
   return (
     <div className="">
       <div>
@@ -110,9 +162,10 @@ export default function AdminStock() {
             </a>
           </div>
           <div className="float-right mr-10 mt-10">
-            <a href="/AddStock">
-              <RiAiGenerate className="text-green-600 text-3xl" />
-            </a>
+            <RiAiGenerate
+              className="text-green-600 text-3xl cursor-pointer"
+              onClick={generateReport}
+            />
           </div>
           <br />
           <div className="flex justify-center">
