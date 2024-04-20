@@ -10,6 +10,7 @@ import CreateListing from './pages/CreateListing';
 import AdminDashboard from './pages/AdminDashboard';
 import DeliveryPlaces from './pages/DeliveryPlaces';
 import DeliveryDetails from './pages/DeliveryDetails';
+import AdminDelivery from '/.pages/AdminDelivery';
 
 export default function App() {
   return (
