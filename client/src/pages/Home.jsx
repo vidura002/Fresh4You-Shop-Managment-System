@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -15,9 +16,11 @@ const Home = () => {
   const [refBenifit, inViewBenifit] = useInView();
   const [refItemCard, inViewItemCard] = useInView();
 
+
   return (
     <div>
       <Header />
+     
       <section ref={refBanner}>
         <motion.div
           initial={{ opacity: 0, y: -50 }}

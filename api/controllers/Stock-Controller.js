@@ -1,6 +1,5 @@
 import FruitStock from "../models/Stock-Model.js";
 
-//Create new stock
 const CreateStock = async (req, res) => {
   try {
     const { FruitID, FruitName, FruitQuantity, price, image } = req.body;
