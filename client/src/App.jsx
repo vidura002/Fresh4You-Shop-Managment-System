@@ -23,8 +23,6 @@ import UpdateStock from "./pages/UpdateStock"
 export default function App() {
   return (
     <BrowserRouter>
-      
-
     <Routes>
         <Route path='/'  element= {<Home />} ></Route>
         <Route path='/signup'  element= {<Register />}></Route>
