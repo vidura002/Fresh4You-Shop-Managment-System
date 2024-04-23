@@ -91,11 +91,11 @@ export default function AdminStock() {
 
   const generateReport = () => {
     const doc = new jsPDF();
-
+    
     const currentDate = new Date();
     const formattedDate = currentDate.toLocaleString(); 
-
-    const title = "Stck Report";
+    const shopName = "Fresh4You Fruit shop";
+    const title = "Stock Report";
     const headers = ["Fruit ID", "Fruit Name", "Quantity", "Price"];
     const rows = searchResults.map((item) => [
       item.FruitID,
@@ -103,7 +103,7 @@ export default function AdminStock() {
       `${item.FruitQuantity} kg`,
       `Rs.${item.price}.00`,
     ]);
-
+  
     const styles = {
       headStyles: {
         fillColor: "#4CAF50", 
@@ -119,25 +119,29 @@ export default function AdminStock() {
         fillColor: "#F3F4F6", 
       }
     };
-
+  
+    const logo = new Image();
+    logo.src = '../src/images/report.png'; 
+    doc.addImage(logo, 'PNG', 10, 10, 20, 20);
+  
     doc.setFontSize(20);
-    doc.text("Fresh4You Fruit shop", 14, 15);
-
+    doc.text(shopName, 30, 23);
     doc.setFontSize(16);
     doc.text(title, 14, 40);
     doc.setFontSize(12);
     doc.text(`Generated on: ${formattedDate}`, 14, 50); 
-
     doc.autoTable({ head: [headers], body: rows, startY: 60, styles });
-
-    doc.save('StockDetails.pdf');
-
+  
+  
+    doc.save(`Stock_Report_${formattedDate}.pdf`);
+  
     swal.fire({
       icon: "success",
       title: "Report Generated",
       text: "The report has been successfully generated!",
     });
   };
+  
 
   return (
     <div className="">

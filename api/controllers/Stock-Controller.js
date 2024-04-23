@@ -1,8 +1,15 @@
 import FruitStock from "../models/Stock-Model.js";
 
+const generateFruitID = () => {
+  const randomNumber = Math.floor(100000 + Math.random() * 900000);
+  return "F" + randomNumber; 
+};
+
 const CreateStock = async (req, res) => {
   try {
-    const { FruitID, FruitName, FruitQuantity, price, image } = req.body;
+    const {FruitName, FruitQuantity, price, image } = req.body;
+
+    const FruitID = generateFruitID();
 
     const existingStock = await FruitStock.findOne({ FruitID });
     if (existingStock) {
