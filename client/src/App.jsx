@@ -28,8 +28,8 @@ import UserOrders from "./pages/UserOrders";
 export default function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
-        <Header />
         <Route path="/" element={<Home />}></Route>
         <Route path="/signup" element={<Register />}></Route>
         <Route path="/signin" element={<Signin />}></Route>

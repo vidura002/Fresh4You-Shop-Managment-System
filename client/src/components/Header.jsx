@@ -17,25 +17,25 @@ export default function Header() {
             <span className="text-green-800">4You</span>
           </h1>
         </Link>
-        <form className="bg-slate-100 p-3 rounded-lg flex items-center">
+       {/* <form className="bg-slate-100 p-3 rounded-lg flex items-center">
           <input
             type="text"
             placeholder="Search..."
             className="bg-transparent focus:outline-none w-24 sm:w-64"
           />
           <FaSearch className="text-slate-700" />
-        </form>
+  </form>*/}
         <ul className="flex gap-6">
           <Link to={"/"}>
             <li className="hidden sm:inline text-slate-700 hover:underline text-xl">
               Home
             </li>
           </Link>
-          <Link to={"/About"}>
+          <Link to={"/supplier_details"}>
             <li className="hidden sm:inline text-slate-700 hover:underline text-xl">
-              About
+              Supplier-Details
             </li>
-          </Link>
+</Link>
           <Link to={"/profile"}>
             {currentUser ? (
               <img
@@ -45,12 +45,12 @@ export default function Header() {
               />
             ) : (
               <li className=" text-slate-700 hover:underline text-xl">
-                Sign In
+                Log Out
               </li>
             )}
           </Link>
-          <Link to={"/shoppingcart"}>
-            <li className="hidden sm:inline text-slate-700 font-medium hover:underline text-3xl">
+          <Link to={"/signin"}>
+            {/*<li className="hidden sm:inline text-slate-700 font-medium hover:underline text-3xl">
               <LiaShoppingCartSolid />
             </li>
           </Link>
@@ -60,7 +60,7 @@ export default function Header() {
           <Link to={"/user-orders"}>
             <li className="hidden sm:inline text-slate-700 font-medium hover:underline text-2xl">
               <SlHandbag />
-            </li>
+          </li>*/}
           </Link>
         </ul>
       </div>

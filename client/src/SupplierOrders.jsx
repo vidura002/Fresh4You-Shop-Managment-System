@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import AdminNavBar from "./components/AdminNavBar";
+import AdminSideBar from "./components/AdminSideBar";
+
 
 function SupplierOrders() {
   const [supplierorders, setSupplierOrders] = useState([]);
@@ -22,8 +25,17 @@ function SupplierOrders() {
       .catch((err) => console.log(err));
   };
   return (
-    <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
-      <div className="w-50 bg-white rounded p-3">
+    <div className="min-h-screen bg-cover bg-center" style={{backgroundImage: "url(src/pages/assest/orange.jpg)"}}>
+    {/*<div className="d-flex vh-100 bg-primary justify-content-center align-items-center">*/}
+    {/*<div>
+      <AdminNavBar />
+  </div>*/}
+    <div className="w-full max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 p-4"></div>
+      <div className="w-50 bg-white rounded p-3 mx-auto">
+        
+        {/*<div className="grid-col-1 lg:col-span-2 md:col-span-3">
+          <AdminSideBar />
+</div>*/}
         <Link to="/create" className="btn btn-success">
           Add +
         </Link>
@@ -49,7 +61,7 @@ function SupplierOrders() {
                   <td>
                     <Link
                       to={`/update/${supplierorder._id}`}
-                      className="btn btn-success"
+                      className="btn btn-success mr-2"
                     >
                       Update
                     </Link>
@@ -65,9 +77,13 @@ function SupplierOrders() {
             })}
           </tbody>
         </table>
+        
       </div>
+    {/*</div>*/}
     </div>
+   
   );
 }
 
 export default SupplierOrders;
+

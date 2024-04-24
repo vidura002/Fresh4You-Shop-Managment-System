@@ -12,7 +12,6 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import StockRouter from "./routes/Stock-Route.js";
 
-import userRouter from "./routes/user.router.js";
 import orderRoutes from "./routes/Orders.js";
 
 dotenv.config();

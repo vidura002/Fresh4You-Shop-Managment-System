@@ -43,10 +43,11 @@ function UpdateOrder() {
   };
 
   return (
-    <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
-      <div className="w-50 bg-white rounded p-3">
+    
+    <div className="d-flex vh-100 bg- justify-content-center align-items-center">
+      <div className="w-50 bg-white rounded p-3 mx-auto">
         <form onSubmit={Update}>
-          <h2>Update Order</h2>
+          <h8><b><center>Update Order</center></b></h8>
           <div className="mb-2">
             <label htmlFor="">Fruit</label>
             <input
@@ -100,7 +101,8 @@ function UpdateOrder() {
           <button className="btn btn-success">Update</button>
         </form>
       </div>
-    </div>
+   </div>
+    
   );
 }
 

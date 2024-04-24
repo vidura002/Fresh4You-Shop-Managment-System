@@ -62,6 +62,7 @@ const SupplierDetails = () => {
   }, []);*/
 
   return (
+    <div className="min-h-screen bg-cover bg-center" style={{backgroundImage: "url(src/pages/assest/orange.jpg)"}}>
     <div className="supplier_details">
         <input
             type="text"
@@ -82,6 +83,7 @@ const SupplierDetails = () => {
           ))}
       </div>
       <SupplierForm />
+    </div>
     </div>
   );
 };
