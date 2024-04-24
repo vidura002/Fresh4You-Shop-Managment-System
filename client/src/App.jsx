@@ -10,7 +10,7 @@ import CreateListing from './pages/CreateListing';
 import AdminDashboard from './pages/AdminDashboard';
 import DeliveryPlaces from './pages/DeliveryPlaces';
 import DeliveryDetails from './pages/DeliveryDetails';
-import AdminDelivery from './pages/AdminDelivery';
+import addDel from './pages/addDel';
 
 export default function App() {
   return (
@@ -27,7 +27,8 @@ export default function App() {
         <Route path="/AdminDashboard" element={<AdminDashboard/>}></Route>
         <Route path="/DeliveryPlaces" element={<DeliveryPlaces/>}></Route>
         <Route path="/DeliveryDetails" element={<DeliveryDetails/>}></Route>
-        <Route path="/AdminDelivery" element={<AdminDelivery/>}></Route>
+        <Route path="/addDel" element={<addDel/>}></Route>
+
     </Routes>
     
     </BrowserRouter>
