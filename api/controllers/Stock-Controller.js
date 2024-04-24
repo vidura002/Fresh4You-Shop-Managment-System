@@ -8,14 +8,12 @@ const generateFruitID = () => {
 const CreateStock = async (req, res) => {
   try {
     const {FruitName, FruitQuantity, price, image } = req.body;
-
     const FruitID = generateFruitID();
-
     const existingStock = await FruitStock.findOne({ FruitID });
+
     if (existingStock) {
       return res.status(400).json({ error: "FruitID already exists" });
     }
-
     const newStock = new FruitStock({
       FruitID,
       FruitName,
@@ -45,8 +43,6 @@ const GetAllStock = async (req, res) => {
     console.error("Error", error);
     res.status(500).json({ success: false, error: "Internal Server Error" });
   }
-
-  
 };
 
 const GetOneStock = async (req, res) => {
@@ -64,23 +60,20 @@ const GetOneStock = async (req, res) => {
 };
 
 const UpdateStock = async (req, res) => {
-  const { id } = req.params; // Extract _id from request parameters
-  const { FruitName, FruitQuantity, price, image } = req.body; // Extract updated data from request body
+  const { id } = req.params; 
+  const { FruitName, FruitQuantity, price, image } = req.body; 
 
   try {
-    // Find the stock item by _id and update its details
     const updatedItem = await FruitStock.findByIdAndUpdate(id, {
       FruitName,
       FruitQuantity,
       price,
       image,
-    }, { new: true }); // { new: true } option returns the updated document
+    }, { new: true }); 
 
     if (!updatedItem) {
       return res.status(404).json({ message: 'Stock item not found' });
     }
-
-    // If update is successful, send back the updated item
     res.status(200).json(updatedItem);
   } catch (error) {
     console.error('Error updating stock item:', error);
