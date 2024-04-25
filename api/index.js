@@ -1,6 +1,5 @@
 import supplierRoutes from "./routes/suppliers.js";
 import SupplierOrderModels from "./models/SupplierOrderModel.js";
-
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -12,7 +11,6 @@ import listingRouter from "./routes/listing.route.js";
 import offerRoute from "./routes/OfferRoute.js";
 import bodyParser from "body-parser";
 import StockRouter from "./routes/Stock-Route.js";
-
 import orderRoutes from "./routes/Orders.js";
 
 dotenv.config();
@@ -32,6 +30,7 @@ app.use(bodyParser.json());
 app.listen(3000, () => {
   console.log("server is running port 3000");
 });
+
 app.use("/api/Offer", offerRoute);
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
@@ -88,21 +87,6 @@ app.post("/createOrder", async (req, res) => {
   SupplierOrderModels.create(req.body)
     .then((supplierorders) => res.json(supplierorders))
     .catch((err) => res.json(err));
-});
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-app.use(express.json());
-app.use(cookieParser());
-
-app.use(bodyParser.json());
-
-app.listen(3000, () => {
-  console.log("server is running port 3000");
 });
 
 app.use("/api/user", userRouter);

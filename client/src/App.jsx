@@ -51,10 +51,7 @@ export default function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/create-listing" element={<CreateListing />}></Route>
-          <Route path="/create-listing" element={<CreateListing />}></Route>
-          <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
         </Route>
-
         <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
         <Route path="/DeliveryPlaces" element={<DeliveryPlaces />}></Route>
         <Route path="/AdminOffer" element={<AdminOffer />}></Route>
