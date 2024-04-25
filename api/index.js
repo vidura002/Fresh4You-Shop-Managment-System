@@ -9,7 +9,7 @@ import listingRouter from "./routes/listing.route.js";
 import offerRoute from "./routes/OfferRoute.js";
 import bodyParser from 'body-parser';
 import StockRouter from './routes/Stock-Route.js'
-
+import orderRoutes from "./routes/Orders.js";
 
 dotenv.config();
 
@@ -33,7 +33,8 @@ app.use("/api/Offer", offerRoute);
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
-app.use("/api/Stock", StockRouter);
+app.use("/api/orders", orderRoutes);
+app.use("/api/stock", StockRouter);
 
 mongoose
   .connect(process.env.MONGO)

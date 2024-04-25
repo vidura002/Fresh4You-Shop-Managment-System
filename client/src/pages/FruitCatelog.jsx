@@ -1,11 +1,14 @@
 import React, { useState, useEffect, Suspense } from "react";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
-import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { setDataProduct, addCartItem } from "../redux/productSlice";
+import { useDispatch } from "react-redux";
+import Header from "../components/Header";
 
 function FruitCatalog() {
   const location = useLocation();
+  const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState([]);
@@ -19,6 +22,7 @@ function FruitCatalog() {
         "http://localhost:3000/api/Stock/getAll"
       );
       console.log("API :", response.data);
+      dispatch(setDataProduct(response.data.data));
       setData(response.data.data);
       setLoading(false);
     } catch (error) {
@@ -44,6 +48,9 @@ function FruitCatalog() {
   // Handle search term change
   const handleFilter = (value) => {
     setSearchTerm(value);
+  };
+  const handleAddToCart = (data) => {
+    dispatch(addCartItem(data));
   };
 
   return (
@@ -90,8 +97,10 @@ function FruitCatalog() {
         <div></div>
       </div>
       <br />
-      
-      <Suspense fallback={<div className="text-center text-6xl">Loading...</div>}>
+
+      <Suspense
+        fallback={<div className="text-center text-6xl">Loading...</div>}
+      >
         <ul className="grid gap-5 md:grid-cols-3 lg:grid-cols-5 ml-10 mr-10">
           {loading ? (
             <div className="text-center my-4">Loading...</div>
@@ -112,6 +121,7 @@ function FruitCatalog() {
                   </p>
                   <br />
                   <button
+                    onClick={() => handleAddToCart(item)}
                     className={`w-full bg-green-800 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:bg-indigo-600 animate-fade-in ${
                       item.FruitQuantity === 0
                         ? "bg-red-500 cursor-not-allowed hover:bg-red-500 "
@@ -127,7 +137,7 @@ function FruitCatalog() {
           )}
         </ul>
       </Suspense>
-    
+
       <br />
       <Footer />
     </div>

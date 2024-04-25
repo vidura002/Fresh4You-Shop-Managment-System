@@ -17,8 +17,15 @@ import AdminDashboard from './pages/AdminDashboard';
 import DeliveryPlaces from './pages/DeliveryPlaces';
 import AddStock from './pages/AddStock';
 import AdminStock from './pages/AdminStock';
+
+import Order from "./pages/Order";
+import ShoppingCart from "./pages/ShoppingCart";
+import CartProducts from "./components/CartProducts";
+import OrderPayment from "./pages/OrderPayment";
 import FruitCatelog from "./pages/FruitCatelog";
-import UpdateStock from "./pages/UpdateStock"
+import UpdateStock from "./pages/UpdateStock";
+import UserOrders from "./pages/UserOrders";
+import OrderReceipt from "./pages/OrderReceipt";
 
 export default function App() {
   return (
@@ -44,8 +51,18 @@ export default function App() {
         <Route path="/AddStock" element={<AddStock/>}></Route>
         <Route path="/FruitCatelog" element={<FruitCatelog/>}></Route>
         <Route path="/UpdateStock" element={<UpdateStock/>}></Route>
+      
+        {/* Orders */}
+        <Route path="/orders" element={<Order />}></Route>
+        <Route path="/shoppingcart" element={<ShoppingCart />}></Route>
+        <Route path="/cartproducts" element={<CartProducts />}></Route>
+        <Route path="/productSlice" element={<productSlice />}></Route>
+        <Route path="/user-orders" element={<UserOrders />}></Route>
+
+        {/*Order payment  */}
+        <Route path="/orderpayment" element={<OrderPayment />}></Route>
+        <Route path="/orderReceipt" element={<OrderReceipt />}></Route>
       </Routes>
-    
     </BrowserRouter>
   );
 }
