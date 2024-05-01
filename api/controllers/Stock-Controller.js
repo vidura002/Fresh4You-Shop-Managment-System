@@ -1,8 +1,11 @@
 import FruitStock from "../models/Stock-Model.js";
 
+let fruitIDCounter = 10000;
+
 const generateFruitID = () => {
-  const randomNumber = Math.floor(100000 + Math.random() * 900000);
-  return "F" + randomNumber; 
+  const fruitID = "F" + fruitIDCounter;
+  fruitIDCounter++; 
+  return fruitID;
 };
 
 const CreateStock = async (req, res) => {
@@ -93,6 +96,29 @@ const DeleteStock = async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
   }
 };
-export { CreateStock, GetAllStock, GetOneStock, DeleteStock, UpdateStock };
+
+
+const UpdateQuantity = async (req, res) => {
+  const { id, quantity } = req.body;
+
+  try {
+    const stockItem = await FruitStock.findById(id);
+
+    if (!stockItem) {
+      return res.status(404).json({ message: "Stock item not found" });
+    }
+
+    stockItem.FruitQuantity -= quantity;
+
+    await stockItem.save();
+
+    res.status(200).json({ message: "Stock quantity updated successfully" });
+  } catch (error) {
+    console.error("Error updating stock quantity:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export { CreateStock, GetAllStock, GetOneStock, DeleteStock, UpdateStock, UpdateQuantity };
 
 

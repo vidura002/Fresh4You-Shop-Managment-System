@@ -22,6 +22,8 @@ export default function AdminStock() {
   const [rowCount, setRowCount] = useState(0);
   const [outOfStockItemCount, setOutOfStockItemCount] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
+  const [notificationList, setNotificationList] = useState([]);
+
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -52,6 +54,30 @@ export default function AdminStock() {
       });
   };
 
+  const handleNotificationClick = () => {
+    swal.fire({
+      title: "Stock Notifications",
+      html: generateNotificationList(),
+    });
+  };
+
+  const generateNotificationList = () => {
+    if (notificationList.length === 0) {
+      return "<p>No notifications</p>";
+    }
+
+    let html = "<ul>";
+    notificationList.forEach((item) => {
+      const notificationStyle = item.FruitQuantity === 0 ? "color: red;" : "";
+    html += `<li style="${notificationStyle}">${item.FruitID}: ${item.FruitQuantity}kg</li>`;
+    
+    });
+    html += "</ul>";
+
+    return html;
+  };
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -72,6 +98,10 @@ export default function AdminStock() {
           (item) => item.FruitQuantity <= 0
         );
         setOutOfStockItemCount(outOfStockItems.length);
+
+        const notifications = below100.concat(outOfStockItems);
+        setNotificationList(notifications);
+
       } catch (error) {
         console.error("Error:", error);
       }
@@ -157,7 +187,7 @@ export default function AdminStock() {
             Stock Management{" "}
           </h1>
           <div className="float-right mr-10 mt-10">
-            <IoMdNotificationsOutline className="text-black text-3xl" />
+            <IoMdNotificationsOutline className="text-black text-3xl cursor-pointer" onClick={handleNotificationClick}/>
             <span></span>
           </div>
           <div className="float-right mr-10 mt-10">

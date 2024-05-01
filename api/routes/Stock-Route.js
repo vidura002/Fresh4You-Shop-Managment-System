@@ -1,5 +1,5 @@
 import express from "express"
-import { CreateStock, GetAllStock, GetOneStock, UpdateStock, DeleteStock } from "../controllers/Stock-Controller.js";
+import { CreateStock, GetAllStock, GetOneStock, UpdateStock, DeleteStock ,UpdateQuantity } from "../controllers/Stock-Controller.js";
 
 const router = express.Router();
 
@@ -10,6 +10,8 @@ router.get("/getAll", GetAllStock);
 router.get("/:id", GetOneStock);
 
 router.put('/Update/:id', UpdateStock);
+
+router.put("/updateQuantity", UpdateQuantity)
 
 router.delete('/Delete/:id', DeleteStock);
 

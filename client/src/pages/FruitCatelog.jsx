@@ -11,7 +11,6 @@ function FruitCatelog() {
   const [filteredData, setFilteredData] = useState([]);
 
   // Fetch data from API
-  //get all offers
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -43,12 +42,29 @@ function FruitCatelog() {
     setSearchTerm(value);
   };
 
+  // Function to handle adding item to cart with specified quantity in kg
+  const handleAddToCart = async (itemId, quantity) => {
+    try {
+      // Make a POST request to update the stock quantity
+      await axios.post(`http://localhost:3000/api/stock/updateQuantity`, {
+        itemId: itemId,
+        quantity: quantity, // Pass the specified quantity
+      });
+
+      // Fetch data again to reflect the updated stock
+      fetchData();
+
+      // Optionally, you can display a success message or perform other actions
+      console.log("Item added to cart successfully!");
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+    }
+  };
 
   return (
     <div>
       <Header />
       <div className="flex items-center justify-center text-2xl">
-
         <Link
           to={"/FruitCatelog"}
           className={
@@ -75,17 +91,20 @@ function FruitCatelog() {
       <hr />
       <div className="bg-gray-200 p-4 grid grid-cols-3 justify-center">
         <div></div>
-        <div><h2 className="text-lg font-semibold mb-4">Filters</h2>
-        <label htmlFor="search">Search:</label>
-        <input
-          type="text"
-          id="search"
-          value={searchTerm}
-          onChange={(e) => handleFilter(e.target.value)}
-          className="border border-gray-300 rounded-md px-2 py-1 mb-4 block w-96"
-        /></div><div></div>
-        
-      </div><br></br>
+        <div>
+          <h2 className="text-lg font-semibold mb-4">Filters</h2>
+          <label htmlFor="search">Search:</label>
+          <input
+            type="text"
+            id="search"
+            value={searchTerm}
+            onChange={(e) => handleFilter(e.target.value)}
+            className="border border-gray-300 rounded-md px-2 py-1 mb-4 block w-96"
+          />
+        </div>
+        <div></div>
+      </div>
+      <br></br>
       <ul className="grid gap-5 md:grid-cols-3 lg:grid-cols-5 ml-10 mr-10">
         {filteredData.map((item, index) => (
           <li
@@ -103,12 +122,13 @@ function FruitCatelog() {
               </p>
               <br />
               <button
-                className={`w-full bg-green-800 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:bg-indigo-600 animate-fade-in ${
+                className={`w-full bg-green-800 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:bg-green-600 animate-fade-in ${
                   item.FruitQuantity === 0
                     ? "bg-red-500 cursor-not-allowed hover:bg-red-500 "
                     : ""
                 }`}
                 disabled={item.FruitQuantity === 0}
+                onClick={() => handleAddToCart(item.itemId, 0.1)} // Example: Add 100g (0.1 kg) to cart
               >
                 {item.FruitQuantity === 0 ? "Sold Out" : "Add to Cart"}
               </button>
@@ -116,8 +136,6 @@ function FruitCatelog() {
           </li>
         ))}
       </ul>
-      <br />
-
       <br />
       <Footer />
     </div>

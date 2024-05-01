@@ -33,7 +33,7 @@ const UpdateStock = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const stockData = { FruitName, FruitQuantity, price, image };
+    const stockData = { fruitName, fruitQuantity, price, image };
     try {
       const response = await axios.put(`http://localhost:3000/api/Stock/Update/${id}`, stockData);
       if (response.data.success) {

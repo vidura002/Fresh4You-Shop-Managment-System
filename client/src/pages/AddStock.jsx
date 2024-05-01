@@ -71,6 +71,10 @@ const AddStock = () => {
       text: 'Form cleared successfully!',
     });
   };
+
+  const clearImage = () => {
+    setImageUrl('');
+  };
   
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -141,7 +145,7 @@ const AddStock = () => {
           />
         </div>
         <div className="mb-4">
-          <UploadImage onImageUrlChange={handleImageUrlChange} />
+          <UploadImage onImageUrlChange={handleImageUrlChange} clearImage={clearImage} />
         </div>
         <button
           type="submit"
@@ -172,3 +176,4 @@ const AddStock = () => {
 };
 
 export default AddStock;
+
