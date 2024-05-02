@@ -19,6 +19,7 @@ import AddStock from './pages/AddStock';
 import AdminStock from './pages/AdminStock';
 import FruitCatelog from "./pages/FruitCatelog";
 import UpdateStock from "./pages/UpdateStock"
+import Did from "./pages/Did";
 
 export default function App() {
   return (
@@ -32,7 +33,6 @@ export default function App() {
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/create-listing" element={<CreateListing />}></Route>
         </Route>
-
         <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
         <Route path="/DeliveryPlaces" element={<DeliveryPlaces />}></Route>
         <Route path="/AdminOffer" element={<AdminOffer />}></Route>
@@ -44,6 +44,7 @@ export default function App() {
         <Route path="/AddStock" element={<AddStock/>}></Route>
         <Route path="/FruitCatelog" element={<FruitCatelog/>}></Route>
         <Route path="/UpdateStock" element={<UpdateStock/>}></Route>
+        <Route path="/Did" element={<Did/>}></Route>
       </Routes>
     
     </BrowserRouter>

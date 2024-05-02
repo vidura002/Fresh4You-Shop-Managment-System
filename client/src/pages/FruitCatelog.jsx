@@ -9,6 +9,7 @@ function FruitCatelog() {
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const [sortByPrice, setSortByPrice] = useState(false); // State for checkbox
 
   // Fetch data from API
   const fetchData = async () => {
@@ -16,21 +17,25 @@ function FruitCatelog() {
       const response = await axios.get(
         "http://localhost:3000/api/Stock/getAll"
       );
-      console.log("API :", response.data);
       setData(response.data.data);
     } catch (error) {
       console.error("Error :", error);
     }
   };
 
-  // Filter data based on search term
+  // Filter data based on search term and sort by price if necessary
   useEffect(() => {
-    setFilteredData(
-      data.filter((item) =>
-        item.FruitName.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+    let filtered = data.filter((item) =>
+      item.FruitName.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  }, [data, searchTerm]);
+
+    // Sort by price if checkbox is checked
+    if (sortByPrice) {
+      filtered.sort((a, b) => a.price - b.price);
+    }
+
+    setFilteredData(filtered);
+  }, [data, searchTerm, sortByPrice]);
 
   // Initial data fetching
   useEffect(() => {
@@ -42,23 +47,9 @@ function FruitCatelog() {
     setSearchTerm(value);
   };
 
-  // Function to handle adding item to cart with specified quantity in kg
-  const handleAddToCart = async (itemId, quantity) => {
-    try {
-      // Make a POST request to update the stock quantity
-      await axios.post(`http://localhost:3000/api/stock/updateQuantity`, {
-        itemId: itemId,
-        quantity: quantity, // Pass the specified quantity
-      });
-
-      // Fetch data again to reflect the updated stock
-      fetchData();
-
-      // Optionally, you can display a success message or perform other actions
-      console.log("Item added to cart successfully!");
-    } catch (error) {
-      console.error("Error adding item to cart:", error);
-    }
+  // Handle checkbox change
+  const handleCheckboxChange = () => {
+    setSortByPrice(!sortByPrice);
   };
 
   return (
@@ -87,24 +78,34 @@ function FruitCatelog() {
           <h1>Offers</h1>
         </Link>
       </div>
-      <br></br>
+      <br />
       <hr />
-      <div className="bg-gray-200 p-4 grid grid-cols-3 justify-center">
-        <div></div>
-        <div>
-          <h2 className="text-lg font-semibold mb-4">Filters</h2>
-          <label htmlFor="search">Search:</label>
-          <input
-            type="text"
-            id="search"
-            value={searchTerm}
-            onChange={(e) => handleFilter(e.target.value)}
-            className="border border-gray-300 rounded-md px-2 py-1 mb-4 block w-96"
-          />
-        </div>
-        <div></div>
-      </div>
-      <br></br>
+      <div className="bg-gray-200 p-4 grid grid-cols-3 place-content-center">
+  <div></div>
+  <div className="flex items-center justify-center"> {/* Center the search input */}
+    <input
+      type="text"
+      placeholder="Search..."
+      className="border border-gray-300 rounded-md px-4 py-2 w-96 focus:outline-none focus:border-blue-500 "
+      value={searchTerm}
+      onChange={(e) => handleFilter(e.target.value)}
+    />
+  </div>
+  <div className="flex items-center justify-center"> {/* Center the checkbox */}
+    <label htmlFor="sortByPrice" className="flex items-center">
+      <input
+        type="checkbox"
+        id="sortByPrice"
+        checked={sortByPrice}
+        onChange={handleCheckboxChange}
+        className="form-checkbox h-5 w-5 text-orange-500"
+      />
+      <span className="ml-2">Arrange prices in ascending order</span>
+    </label>
+  </div>
+</div>
+
+      <br />
       <ul className="grid gap-5 md:grid-cols-3 lg:grid-cols-5 ml-10 mr-10">
         {filteredData.map((item, index) => (
           <li
@@ -122,7 +123,7 @@ function FruitCatelog() {
               </p>
               <br />
               <button
-                className={`w-full bg-green-800 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:bg-green-600 animate-fade-in ${
+                className={`w-full bg-green-800 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:bg-green-00 animate-fade-in ${
                   item.FruitQuantity === 0
                     ? "bg-red-500 cursor-not-allowed hover:bg-red-500 "
                     : ""

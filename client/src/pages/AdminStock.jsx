@@ -23,6 +23,8 @@ export default function AdminStock() {
   const [outOfStockItemCount, setOutOfStockItemCount] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
   const [notificationList, setNotificationList] = useState([]);
+  const [showOutOfStock, setShowOutOfStock] = useState(false);
+const [showItemsLessThan100, setShowItemsLessThan100] = useState(false);
 
 
   const handleSearchChange = (event) => {
@@ -54,29 +56,7 @@ export default function AdminStock() {
       });
   };
 
-  const handleNotificationClick = () => {
-    swal.fire({
-      title: "Stock Notifications",
-      html: generateNotificationList(),
-    });
-  };
-
-  const generateNotificationList = () => {
-    if (notificationList.length === 0) {
-      return "<p>No notifications</p>";
-    }
-
-    let html = "<ul>";
-    notificationList.forEach((item) => {
-      const notificationStyle = item.FruitQuantity === 0 ? "color: red;" : "";
-    html += `<li style="${notificationStyle}">${item.FruitID}: ${item.FruitQuantity}kg</li>`;
-    
-    });
-    html += "</ul>";
-
-    return html;
-  };
-
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,21 +67,21 @@ export default function AdminStock() {
         console.log("API:", response.data); 
         setData(response.data.data); 
 
-        const below100 = response.data.data.filter(
-          (item) => item.FruitQuantity < 100
-        );
-        setItemsBelow100(below100.length);
+        let filteredData = response.data.data;
+    if (showOutOfStock) {
+      filteredData = filteredData.filter(item => item.FruitQuantity === 0);
+    }
+    if (showItemsLessThan100) {
+      filteredData = filteredData.filter(item => item.FruitQuantity < 100);
+    }
 
-        setRowCount(response.data.data.length);
+    const below100 = filteredData.filter(item => item.FruitQuantity < 100);
+    setItemsBelow100(below100.length);
 
-        const outOfStockItems = response.data.data.filter(
-          (item) => item.FruitQuantity <= 0
-        );
-        setOutOfStockItemCount(outOfStockItems.length);
+    setRowCount(filteredData.length);
 
-        const notifications = below100.concat(outOfStockItems);
-        setNotificationList(notifications);
-
+    const outOfStockItems = filteredData.filter(item => item.FruitQuantity === 0);
+    setOutOfStockItemCount(outOfStockItems.length);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -109,6 +89,7 @@ export default function AdminStock() {
 
     fetchData();
   }, []);
+  
 
   useEffect(() => {
     const results = data.filter(
@@ -126,12 +107,14 @@ export default function AdminStock() {
     const formattedDate = currentDate.toLocaleString(); 
     const shopName = "Fresh4You Fruit shop";
     const title = "Stock Report";
-    const headers = ["Fruit ID", "Fruit Name", "Quantity", "Price"];
+    const headers = ["Fruit ID", "Fruit Name","Category", "Quantity", "Price", ];
     const rows = searchResults.map((item) => [
       item.FruitID,
       item.FruitName,
+      item.category,
       `${item.FruitQuantity} kg`,
       `Rs.${item.price}.00`,
+      
     ]);
   
     const styles = {
@@ -187,7 +170,7 @@ export default function AdminStock() {
             Stock Management{" "}
           </h1>
           <div className="float-right mr-10 mt-10">
-            <IoMdNotificationsOutline className="text-black text-3xl cursor-pointer" onClick={handleNotificationClick}/>
+            <IoMdNotificationsOutline className="text-black text-3xl cursor-pointer" />
             <span></span>
           </div>
           <div className="float-right mr-10 mt-10">
@@ -211,6 +194,24 @@ export default function AdminStock() {
               onChange={handleSearchChange}
             />
           </div>
+          <div className="float-right mr-10 mt-10">
+          <input
+            type="checkbox"
+            id="outOfStockCheckbox"
+            checked={showOutOfStock}
+            onChange={() => setShowOutOfStock(!showOutOfStock)}
+          />
+          <label htmlFor="outOfStockCheckbox">Show Out of Stock</label>
+        </div>
+        <div className="float-right mr-10 mt-10">
+          <input
+            type="checkbox"
+            id="itemsLessThan100Checkbox"
+            checked={showItemsLessThan100}
+            onChange={() => setShowItemsLessThan100(!showItemsLessThan100)}
+          />
+          <label htmlFor="itemsLessThan100Checkbox">Show Items Less Than 100kg</label>
+        </div>
           {searchResults.length === 0 && (
             <p className="text-center text-red-500">No matching data found.</p>
           )}
@@ -255,6 +256,7 @@ export default function AdminStock() {
                     Fruit ID
                   </th>
                   <th className="w-48 h-12  border-b-2">Fruit Name</th>
+                  <th className="w-48 h-12  border-b-2">Category</th>
                   <th className="w-48 h-12  border-b-2">Quantity</th>
                   <th className="w-48 h-12  border-b-2">Price</th>
                   <th className="w-48 h-12 border-b-2">Image</th>
@@ -264,10 +266,15 @@ export default function AdminStock() {
                 </tr>
               </thead>
               <tbody>
-                {searchResults.map((item, index) => (
+                {searchResults.map((item, index) => {
+                  const showItem =
+                  (!showOutOfStock || item.FruitQuantity === 0) &&
+                  (!showItemsLessThan100 || item.FruitQuantity < 100);
+                  return showItem ? (
                   <tr key={index}>
                     <td className="h-12 border-b-2 p-2">{item.FruitID}</td>
                     <td className="border-b-2">{item.FruitName}</td>
+                    <td className="border-b-2">{item.category}</td>
                     <td className="border-b-2">{item.FruitQuantity}kg</td>
                     <td className="border-b-2">Rs.{item.price}.00</td>
                     <td className="border-b-2">
@@ -291,7 +298,8 @@ export default function AdminStock() {
                     </button>
                     </td>
                   </tr>
-                ))}
+                  ) : null;
+})}
               </tbody>
             </table>
           </div>

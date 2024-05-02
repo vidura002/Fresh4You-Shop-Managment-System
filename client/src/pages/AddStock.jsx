@@ -10,6 +10,7 @@ const AddStock = () => {
   const [fruitName, setFruitName] = useState("");
   const [fruitQuantity, setFruitQuantity] = useState("");
   const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
   const [image, setImageUrl] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
 
@@ -19,7 +20,8 @@ const AddStock = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const stockData = {FruitName: fruitName, FruitQuantity: fruitQuantity, price: price, image: image };
+    
+    const stockData = {FruitName: fruitName, FruitQuantity: fruitQuantity, price: price,category:category, image: image };
     try {
       const response = await axios.post('http://localhost:3000/api/stock/createstock', stockData);
       if (response.data.success) {
@@ -27,6 +29,7 @@ const AddStock = () => {
         setFruitName('');
         setFruitQuantity('');
         setPrice('');
+        setCategory('');
         setImageUrl('');
         Swal.fire({
           icon: 'success',
@@ -54,7 +57,7 @@ const AddStock = () => {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Error adding data to MongoDB!',
+          text: 'All fields are required.',
         });
       }
     }
@@ -64,6 +67,7 @@ const AddStock = () => {
     setFruitName('');
     setFruitQuantity('');
     setPrice('');
+    setCategory('');
     setImageUrl('');
     Swal.fire({
       icon: 'success',
@@ -82,6 +86,10 @@ const AddStock = () => {
     if (id === "fruitName") {
       if (/^[A-Za-z\s]+$/.test(value) || value === "") {
         setFruitName(value);
+        setAlertMessage("");
+      }
+      else{
+        setAlertMessage("**Enter only letters and spaces**");
       }
     } else {
       setFormData({
@@ -102,9 +110,10 @@ const AddStock = () => {
       <form onSubmit={handleSubmit}>
         
         <div className="mb-4">
+          <div className="flex gap-3">
           <label htmlFor="fruitName" className="block text-gray-700 font-bold mb-2">
             Fruit Name
-          </label>
+          </label>{alertMessage && (<p className="block text-red-500">{alertMessage}</p>)}</div>
           <input
             type="text"
             id="fruitName"
@@ -145,6 +154,39 @@ const AddStock = () => {
           />
         </div>
         <div className="mb-4">
+  <label htmlFor="variant" className="block text-gray-700 font-bold mb-2">
+    Variant
+  </label>
+  <div className=" gap-9 flex items-center justify-start ">
+  
+    <label className="inline-flex items-center">
+      <input
+        type="radio"
+        id="small"
+        name="variant"
+        value="Imported"
+        checked={category === "Imported"}
+        onChange={(e) => setCategory(e.target.value)}
+        className="form-radio h-5 w-5 text-orange-500"
+      />
+      <span className="ml-2">Imported</span>
+    </label>
+    <label className="inline-flex items-center">
+      <input
+        type="radio"
+        id="medium"
+        name="variant"
+        value="Local"
+        checked={category === "Local"}
+        onChange={(e) => setCategory(e.target.value)}
+        className="form-radio h-5 w-5 text-orange-500"
+      />
+      <span className="ml-2">Local</span>
+    </label>
+  </div>
+</div>
+
+        <div className="mb-4">
           <UploadImage onImageUrlChange={handleImageUrlChange} clearImage={clearImage} />
         </div>
         <button
@@ -171,6 +213,7 @@ const AddStock = () => {
             Clear
           </button>
       </form>
+    
     </div>
   );
 };

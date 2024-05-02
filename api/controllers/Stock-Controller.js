@@ -1,16 +1,39 @@
 import FruitStock from "../models/Stock-Model.js";
 
-let fruitIDCounter = 10000;
+import fs from 'fs';
 
-const generateFruitID = () => {
-  const fruitID = "F" + fruitIDCounter;
-  fruitIDCounter++; 
-  return fruitID;
-};
+const fileName = 'lastGeneratedNumber.txt'; // Define the file name
+
+let lastGeneratedNumber = 9999;
+
+try {
+  if (fs.existsSync(fileName)) {
+    const data = fs.readFileSync(fileName, 'utf8');
+    lastGeneratedNumber = parseInt(data);
+  } else {
+    saveLastGeneratedNumberToFile(); // Create the file with the initial value
+  }
+} catch (err) {
+  console.error("Error reading last generated number from file:", err);
+}
+
+function generateFruitID() {
+  lastGeneratedNumber++;
+  saveLastGeneratedNumberToFile();
+  return 'F' + lastGeneratedNumber.toString(); // Remove the unnecessary +1
+}
+
+function saveLastGeneratedNumberToFile() {
+  try {
+    fs.writeFileSync(fileName, lastGeneratedNumber.toString());
+  } catch (err) {
+    console.error("Error saving last generated number to file:", err);
+  }
+}
 
 const CreateStock = async (req, res) => {
   try {
-    const {FruitName, FruitQuantity, price, image } = req.body;
+    const {FruitName, FruitQuantity, price,category, image } = req.body;
     const FruitID = generateFruitID();
     const existingStock = await FruitStock.findOne({ FruitID });
 
@@ -22,6 +45,7 @@ const CreateStock = async (req, res) => {
       FruitName,
       FruitQuantity,
       price,
+      category,
       image,
     });
     await newStock.save();
@@ -64,13 +88,14 @@ const GetOneStock = async (req, res) => {
 
 const UpdateStock = async (req, res) => {
   const { id } = req.params; 
-  const { FruitName, FruitQuantity, price, image } = req.body; 
+  const { FruitName, FruitQuantity, price,category, image } = req.body; 
 
   try {
     const updatedItem = await FruitStock.findByIdAndUpdate(id, {
       FruitName,
       FruitQuantity,
       price,
+      category,
       image,
     }, { new: true }); 
 
