@@ -7,7 +7,7 @@ function AdminDashboard() {
   return (
     <div>
         <div><AdminNavBar/></div>
-        <div className="grid grid gap-4 sm:grid-cols-12">
+        <div className="grid  gap-4 sm:grid-cols-12">
           <div className="col-span-2"><AdminSideBar/></div>
 
           <div className="col-span-10 h-max text-black">
