@@ -2,7 +2,7 @@ import FruitStock from "../models/Stock-Model.js";
 
 import fs from 'fs';
 
-const fileName = 'lastGeneratedNumber.txt'; // Define the file name
+const fileName = 'lastGeneratedNumber.txt'; 
 
 let lastGeneratedNumber = 9999;
 
@@ -11,7 +11,7 @@ try {
     const data = fs.readFileSync(fileName, 'utf8');
     lastGeneratedNumber = parseInt(data);
   } else {
-    saveLastGeneratedNumberToFile(); // Create the file with the initial value
+    saveLastGeneratedNumberToFile(); 
   }
 } catch (err) {
   console.error("Error reading last generated number from file:", err);
@@ -20,7 +20,7 @@ try {
 function generateFruitID() {
   lastGeneratedNumber++;
   saveLastGeneratedNumberToFile();
-  return 'F' + lastGeneratedNumber.toString(); // Remove the unnecessary +1
+  return 'F' + lastGeneratedNumber.toString(); 
 }
 
 function saveLastGeneratedNumberToFile() {
@@ -74,6 +74,11 @@ const GetAllStock = async (req, res) => {
 
 const GetOneStock = async (req, res) => {
   const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ success: false, error: "No ID provided" });
+  }
+
   try {
     const stockItem = await FruitStock.findById(id);
     if (!stockItem) {
@@ -85,6 +90,7 @@ const GetOneStock = async (req, res) => {
     res.status(500).json({ success: false, error: "Internal Server Error" });
   }
 };
+
 
 const UpdateStock = async (req, res) => {
   const { id } = req.params; 

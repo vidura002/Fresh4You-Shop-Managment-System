@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
 
 const AddStock = () => {
-  const [fruitId, setFruitId] = useState("");
   const [fruitName, setFruitName] = useState("");
   const [fruitQuantity, setFruitQuantity] = useState("");
   const [price, setPrice] = useState("");
@@ -100,7 +99,10 @@ const AddStock = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-green-200 shadow-md rounded-md">
+    <div className="min-h-screen grid bg-yellow-100">
+      <div ></div>
+      <div >
+    <div className="max-w-md mx-auto p-6 bg-green-200 shadow-md rounded-md">
       <div className="flex gap-2">
         <Link to="/AdminStock">
           <IoArrowBackCircleOutline className="text-4xl" />
@@ -214,6 +216,8 @@ const AddStock = () => {
           </button>
       </form>
     
+    </div>
+    </div>
     </div>
   );
 };
