@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 import AdminNavBar from "../components/AdminNavBar";
 import AdminSideBar from "../components/AdminSideBar";
 import { CgAddR } from "react-icons/cg";
@@ -24,10 +24,12 @@ export default function AdminStock() {
   const [showOutOfStock, setShowOutOfStock] = useState(false);
   const [showItemsLessThan100, setShowItemsLessThan100] = useState(false);
 
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
+  //Handle delete fruit button
   const handleConfirmClick = (itemId) => {
     swal
       .fire({
@@ -41,7 +43,9 @@ export default function AdminStock() {
       .then(async (result) => {
         if (result.isConfirmed) {
           try {
-            await axios.delete(`http://localhost:3000/api/Stock/Delete/${itemId}`);
+            await axios.delete(
+              `http://localhost:3000/api/Stock/Delete/${itemId}`
+            );
             swal.fire("Deleted!", `Item has been deleted`, "success");
           } catch (error) {
             console.error("Error deleting item:", error);
@@ -53,27 +57,38 @@ export default function AdminStock() {
       });
   };
 
+  //get all data
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/Stock/getAll");
+        const response = await axios.get(
+          "http://localhost:3000/api/Stock/getAll"
+        );
         console.log("API:", response.data);
         setData(response.data.data);
 
         let filteredData = response.data.data;
         if (showOutOfStock) {
-          filteredData = filteredData.filter(item => item.FruitQuantity === 0);
+          filteredData = filteredData.filter(
+            (item) => item.FruitQuantity === 0
+          );
         }
         if (showItemsLessThan100) {
-          filteredData = filteredData.filter(item => item.FruitQuantity < 100);
+          filteredData = filteredData.filter(
+            (item) => item.FruitQuantity < 100
+          );
         }
 
-        const below100 = filteredData.filter(item => item.FruitQuantity < 100);
+        const below100 = filteredData.filter(
+          (item) => item.FruitQuantity < 100
+        );
         setItemsBelow100(below100.length);
 
         setRowCount(filteredData.length);
 
-        const outOfStockItems = filteredData.filter(item => item.FruitQuantity === 0);
+        const outOfStockItems = filteredData.filter(
+          (item) => item.FruitQuantity === 0
+        );
         setOutOfStockItemCount(outOfStockItems.length);
       } catch (error) {
         console.error("Error:", error);
@@ -83,15 +98,19 @@ export default function AdminStock() {
     fetchData();
   }, [showOutOfStock, showItemsLessThan100]);
 
+  //useEffect to serach item
   useEffect(() => {
     const results = data.filter(
       (item) =>
         item.FruitName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.FruitID.toString().includes(searchTerm)||item.category.toLowerCase().includes(searchTerm.toLowerCase())
+        item.FruitID.toString().includes(searchTerm) ||
+        item.category.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
   }, [searchTerm, data]);
 
+
+  //Generate report
   const generateReport = () => {
     const doc = new jsPDF();
 
@@ -99,7 +118,7 @@ export default function AdminStock() {
     const formattedDate = currentDate.toLocaleString();
     const shopName = "Fresh4You Fruit shop";
     const title = "Stock Report";
-    const headers = ["Fruit ID", "Fruit Name","Category", "Quantity", "Price"];
+    const headers = ["Fruit ID", "Fruit Name", "Category", "Quantity", "Price"];
     const rows = searchResults.map((item) => [
       item.FruitID,
       item.FruitName,
@@ -121,12 +140,12 @@ export default function AdminStock() {
       },
       alternateRowStyles: {
         fillColor: "#F3F4F6",
-      }
+      },
     };
 
     const logo = new Image();
-    logo.src = '../src/images/report.png';
-    doc.addImage(logo, 'PNG', 10, 10, 20, 20);
+    logo.src = "../src/images/report.png";
+    doc.addImage(logo, "PNG", 10, 10, 20, 20);
 
     doc.setFontSize(20);
     doc.text(shopName, 30, 23);
@@ -190,27 +209,36 @@ export default function AdminStock() {
                 <TiShoppingCart className="text-white text-4xl" />
                 <span className="text-xl font-medium">Total Fruit Item</span>
                 <p></p>
-                <p className="text-6xl  font-bold text-white inline-block align-middle">{rowCount}</p>
+                <p className="text-6xl  font-bold text-white inline-block align-middle">
+                  {rowCount}
+                </p>
               </div>
             </div>
             <div className=" grid grid-col-2 bg-yellow-500 p-5 rounded-2xl">
               <div className="grid grid-cols-2">
                 <BsGraphDownArrow className="text-white text-4xl" />
-                <span className="text-xl font-medium">Number of Items less than 100kg</span>
+                <span className="text-xl font-medium">
+                  Number of Items less than 100kg
+                </span>
                 <p> </p>
-                <p className="text-6xl  font-bold text-white inline-block align-middle">{itemsBelow100}</p>
+                <p className="text-6xl  font-bold text-white inline-block align-middle">
+                  {itemsBelow100}
+                </p>
               </div>
             </div>
             <div className="grid grid-col-3 bg-red-600 p-5 rounded-2xl">
               <div className="grid grid-cols-2">
                 <BsCartX className="text-white text-4xl" />
-                <span className="text-xl text-black font-medium">Out of Stock</span>
+                <span className="text-xl text-black font-medium">
+                  Out of Stock
+                </span>
                 <p> </p>
-                <p className="text-6xl font-bold text-slate-300 inline-block align-middle">{outOfStockItemCount}</p>
+                <p className="text-6xl font-bold text-slate-300 inline-block align-middle">
+                  {outOfStockItemCount}
+                </p>
               </div>
             </div>
           </div>
-
           <div className="flex ml-10 gap-10 mb-5 font-medium ">
             <div className="flex gap-2 bg-red-100 p-1  pl-2 rounded-lg shadow-sm ring ring-pink-500 ring-offset-4">
               <input
@@ -230,10 +258,11 @@ export default function AdminStock() {
                 onChange={() => setShowItemsLessThan100(!showItemsLessThan100)}
                 className="transform scale-150 accent-yellow-500"
               />
-              <label htmlFor="itemsLessThan100Checkbox">Show Items Less Than 100kg</label>
+              <label htmlFor="itemsLessThan100Checkbox">
+                Show Items Less Than 100kg
+              </label>
             </div>
           </div>
-
           <div className="grid justify-items-center ml-10 mr-10 ">
             <table
               rowsPerPageOptions={[5, 10, 25, 50]}
@@ -259,8 +288,8 @@ export default function AdminStock() {
               <tbody>
                 {searchResults.map((item, index) => {
                   const showItem =
-                  (!showOutOfStock || item.FruitQuantity === 0) &&
-                  (!showItemsLessThan100 || item.FruitQuantity < 100);
+                    (!showOutOfStock || item.FruitQuantity === 0) &&
+                    (!showItemsLessThan100 || item.FruitQuantity < 100);
                   return showItem ? (
                     <tr key={index}>
                       <td className="h-12 border-b-2 p-2">{item.FruitID}</td>
@@ -277,7 +306,6 @@ export default function AdminStock() {
                       </td>
                       <td className="border-b-2 w-16"></td>
                       <td className="border-b-2 w-16">
-                        {/* Pass itemId as URL parameter to the update page */}
                         <Link to={`/UpdateStock/${item._id}`}>
                           <FaPenToSquare className="text-green-600 text-2xl" />
                         </Link>
