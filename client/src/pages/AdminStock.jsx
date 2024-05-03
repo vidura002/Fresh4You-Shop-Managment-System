@@ -87,7 +87,7 @@ export default function AdminStock() {
     const results = data.filter(
       (item) =>
         item.FruitName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.FruitID.toString().includes(searchTerm)
+        item.FruitID.toString().includes(searchTerm)||item.category.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
   }, [searchTerm, data]);
