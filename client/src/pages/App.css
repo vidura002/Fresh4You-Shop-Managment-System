@@ -1,31 +1,36 @@
-*{
+* {
     box-sizing: border-box;
 }
-body{
+
+body {
     background-color: #f5f6ff;
 }
-.container{
-    padding:10px;
+
+.container {
+    padding: 10px;
     max-width: fit-content;
     margin: auto;
     margin: 50px auto;
 }
-.btn{
+
+.btn {
     border: none;
     padding: 7px 15px;
     font-size: 18px;
     border-radius: 5px;
     cursor: pointer;
-
 }
-.btn-add{
+
+.btn-add {
     background-color: #194064;
     color: white;
+    margin-left: right; 
 }
-.addContainer{
+
+.addContainer {
     position: absolute;
-    background-color: rgba(0,0,0,0.1);
-    left : 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    left: 0;
     right: 0;
     bottom: 0;
     top: 0;
@@ -33,90 +38,118 @@ body{
     justify-content: center;
     align-items: center;
 }
-.addContainer form{
+
+.addContainer form {
     width: 400px;
     background-color: white;
     display: flex;
     flex-direction: column;
-    padding:50px 30px;
-    box-shadow: 5px 10px rgba(0,0,0,0.2);
+    padding: 40px 30px;
+    box-shadow: 5px 10px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-} 
-.addContainer form lable{
+}
+
+.addContainer form label {
     font-size: 18px;
 }
-.addContainer form input{
+
+.addContainer form input {
     font-size: 18px;
-    padding: 8px; 
+    padding: 10px;
     margin-top: 5px;
     margin-bottom: 5px;
-    border-radius: 5px; 
-    border: 1px solid #ccc; 
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
-.addContainer form button{
+
+.addContainer form button {
     background-color: navy;
     color: white;
     font-weight: 500px;
-    margin-top: 5px;
+    margin-top: 13px;
 }
-.addContainer form .close-btn{
+
+.addContainer form .close-btn {
     margin-left: auto;
     font-size: 20px;
     width: 20px;
     height: 20px;
     background-color: red;
-    display :flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
     cursor: pointer;
-
 }
-.tablecontainer{
+
+.tablecontainer {
     margin-top: 20px;
     border-radius: 10px;
 }
-.addContainer table{
+
+.addContainer table {
     border: 1px solid #c9c5c2;
 }
 
-.tablecontainer table thead tr{
+.tablecontainer table thead tr {
     background-color: #f0eaea;
 }
+
 .tablecontainer table thead tr th,
-.tablecontainer table tbody tr td{
+.tablecontainer table tbody tr td {
     min-width: 200px;
     padding: 5px;
     text-align: center;
 }
 
-.tablecontainer table tbody tr td{
+.tablecontainer table tbody tr td {
     border-bottom: 1px solid #c9c5c2;
 }
+
 .btn-edit,
-.btn-delete{
+.btn-delete {
     font-size: 16px;
     padding: 5px 10px;
     margin: 0px 10px;
 }
-.btn-edit{
+
+.btn-edit {
     background-color: yellow;
 }
-.btn-delete{
+
+.btn-delete {
     background-color: red;
     color: white;
 }
+
 .button-and-search {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px; 
-   
-  }
-  
-  .search-bar {
+    margin-bottom: 20px;
+}
+
+.search-bar {
     margin-left: auto; 
-    padding: 8px; 
-    border-radius: 10px; 
-    border: 1px solid #ccc; 
-  }
+    margin-right: auto;
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+.btn-generate {
+    background-color: rgb(90, 81, 56); 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 10px; 
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-generate:hover {
+    background-color: rgb(90, 81, 56);
+}

@@ -21,8 +21,8 @@ app.use(bodyParser.json());
 
 //schema
 const schemaData = mongoose.Schema({
-    deliveryId: Number,
-    orderId: String,
+    
+    
     name: String,
     method: String,
     status: String
