@@ -140,9 +140,9 @@ export default function AdminOffer() {
       </div>
       <div className="grid gap-4  lg:grid-cols-12 md:grid-cols-12 divide-x ">
         <div className="grid-col-1  lg:col-span-2 md:col-span-3 ">
-          <AdminSideBar  className=""/>
+          <AdminSideBar />
         </div>
-        <div className="grid-col-11 lg:col-span-10 md:col-span-9 h-max  text-black scroll-smooth overflow-auto h-full h-dvh ">
+        <div className="grid-col-11 lg:col-span-10 md:col-span-9 h-max  text-black scroll-smooth overflow-auto max-h-svh ">
           <h1 className="text-2xl ml-10 mt-10 inline-block">
             Offer Management/home{" "}
           </h1>
@@ -226,7 +226,7 @@ export default function AdminOffer() {
                       />
                     </td>
                     <td className="border-y px-4 py-2 ">
-                      <Link to="/UpdateOffer" className="flex justify-center">
+                      <Link to={`UpdateOffer/${offer._id}`} className="flex justify-center">
                         <IoIosCreate className="text-green-600 text-2xl" />
                       </Link>
                     </td>
