@@ -46,14 +46,19 @@ const GetAllOffers = async (req, res) => {
 //Get one offer Controller
 const GetOneOffer = async (req, res) => {
   const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ success: false, error: "No ID provided" });
+  }
+
   try {
-    const stockItem = await OfferModel.findById(id);
-    if (!stockItem) {
+    const Offer = await OfferModel.findById(id);
+    if (!Offer) {
       return res
         .status(404)
         .json({ success: false, error: "Offer item not found" });
     }
-    res.status(200).json({ success: true, data: stockItem });
+    res.status(200).json({ success: true, data: Offer });
   } catch (error) {
     console.error("Error", error);
     res.status(500).json({ success: false, error: "Internal Server Error" });

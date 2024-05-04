@@ -38,12 +38,12 @@ export default function App() {
         <Route path="/AdminOffer" element={<AdminOffer />}></Route>
         <Route path="/CreateOffer" element={<CreateOffer/>}></Route>
         <Route path="/OfferNotification" element={<OfferNotification/>}></Route>
-        <Route path="/UpdateOffer" element={<UpdateOffer/>}></Route>
+        <Route path="/UpdateOffer/:_id" element={<UpdateOffer/>}></Route>
         <Route path="/OfferCatalog" element={<OfferCatalog/>}></Route>
         <Route path="/AdminStock" element={<AdminStock/>}></Route>
         <Route path="/AddStock" element={<AddStock/>}></Route>
         <Route path="/FruitCatelog" element={<FruitCatelog/>}></Route>
-        <Route path="/UpdateStock/:id" element={<UpdateStock/>}></Route>
+        <Route path="/UpdateStock" element={<UpdateStock/>}></Route>
       </Routes>
     
     </BrowserRouter>

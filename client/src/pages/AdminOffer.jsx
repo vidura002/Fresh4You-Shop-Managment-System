@@ -226,7 +226,7 @@ export default function AdminOffer() {
                       />
                     </td>
                     <td className="border-y px-4 py-2 ">
-                      <Link to={`UpdateOffer/${offer._id}`} className="flex justify-center">
+                      <Link to={`/UpdateOffer/${offer._id}`} className="flex justify-center">
                         <IoIosCreate className="text-green-600 text-2xl" />
                       </Link>
                     </td>
