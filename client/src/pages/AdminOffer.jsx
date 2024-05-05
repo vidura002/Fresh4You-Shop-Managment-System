@@ -85,7 +85,7 @@ export default function AdminOffer() {
 
     const currentDate = new Date();
     const formattedDate = currentDate.toLocaleString();
-
+    const shopName = "Fresh4You Fruit shop";
     const title = "Offer Report";
     const headers = [
       "ID",
@@ -120,16 +120,17 @@ export default function AdminOffer() {
       },
     };
 
-    doc.setFontSize(20);
-    doc.text("Fresh4You Fruit shop", 14, 15);
+    const logo = new Image();
+    logo.src = "../src/images/Orange.png";
+    doc.addImage(logo, "PNG", 10, 10, 20, 20);
 
+    doc.setFontSize(20);
+    doc.text(shopName, 30, 23);
     doc.setFontSize(16);
     doc.text(title, 14, 40);
     doc.setFontSize(12);
     doc.text(`Generated on: ${formattedDate}`, 14, 50);
-
     doc.autoTable({ head: [headers], body: rows, startY: 60, styles });
-
     doc.save(`Offer_report_${formattedDate}.pdf`);
   };
 

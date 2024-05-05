@@ -76,11 +76,12 @@ export default function UpdateOffer() {
   };
 
   return (
-    <div className="max-h-screen">
-      <div className="flex content-center justify-center mt-8">
-        <img src={image} alt={name} style={{ maxWidth: "150px" }} className="rounded-full shadow-xl absolute ring-offset-10 ring-8 ring-green-200" />
+    <div className="min-h-screen bg-yellow-100">
+      <div className="">
+      <div className="flex content-center justify-center ">
+        <img src={image} alt={name} style={{ maxWidth: "150px" }} className="rounded-full shadow-xl absolute ring-offset-10 ring-8 ring-green-200 mt-6" />
       </div>
-      <div className="ml-32 mr-32 p-8 bg-green-200 shadow-md rounded-md mt-16">
+      <div className="ml-32 mr-32 p-6 bg-green-200 shadow-md rounded-md mt-20">
         <div className="flex gap-2">
           <Link to="/AdminOffer">
             <IoArrowBackCircleOutline className="text-4xl" />
@@ -90,32 +91,32 @@ export default function UpdateOffer() {
         <form onSubmit={handleSubmit} className="mt-10">
           <div className="grid grid-cols-2 gap-10">
             <div>
-              <div className="mb-4">
+              <div className="mb-3 ">
                 <label className="block text-gray-700 font-bold mb-2">Offer ID:</label>
                 <input type="text" name="offerID" readOnly value={updatedOffer.offerID} onChange={handleInputChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 cursor-not-allowed" />
               </div>
-              <div className="mb-4">
+              <div className="mb-3 ">
                 <div className="flex gap-5">
                   <label className="block text-gray-700 font-bold mb-2">Offer Name:</label>
                   {alertMessage && <p className="text-red-500 mt-1">{alertMessage}</p>}
                 </div>
                 <input type="text" name="name" value={updatedOffer.name} onChange={handleInputChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" />
               </div>
-              <div className="mb-4">
+              <div className="mb-3 ">
                 <label className="block text-gray-700 font-bold mb-2">Description of Offer:</label>
                 <textarea name="description" value={updatedOffer.description} onChange={handleInputChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" />
               </div>
             </div>
             <div>
-              <div className="mb-4">
+              <div className="mb-3 ">
                 <label className="block text-gray-700 font-bold mb-2">Price:</label>
                 <input type="number" name="price" value={updatedOffer.price} onChange={handleInputChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" />
               </div>
-              <div className="mb-4">
+              <div className="mb-3 ">
                 <label className="block text-gray-700 font-bold mb-2">Quantity:</label>
                 <input type="number" name="quantity" value={updatedOffer.quantity} onChange={handleInputChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" />
               </div>
-              <div className="mb-4">
+              <div className="mb-3 ">
                 <label className="block text-gray-700 font-bold mb-2">Variant of Offer:</label>
                 <select name="variant" value={updatedOffer.variant} onChange={handleInputChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500">
                   <option value="Small">Small</option>
@@ -126,15 +127,16 @@ export default function UpdateOffer() {
             </div>
           </div>
 
-          <div className="mb-4">
+          <div className="mb-3 ">
             <OfferImageAdd onImageUrlChange={handleImageUrlChange} />
           </div>
           <div className="flex gap-5 justify-end">
-            <button type="submit" className="w-64 bg-orange-500 text-white p-3 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-600">Save Changes</button>
+            <button type="submit" className="w-64 bg-orange-500 text-white p-3 font-semibold shadow-xl rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-600">Save Changes</button>
           </div>
           <div></div>
         </form>
       </div>
+    </div>
     </div>
   );
 }
