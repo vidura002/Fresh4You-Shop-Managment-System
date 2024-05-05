@@ -2,9 +2,20 @@ import React, { useState, useEffect } from 'react';
 import Header from "../components/Header";
 import './App.css';
 import axios from "axios";
+import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
 import DeliveryFormTable from '../components/deliveryFormtable.jsx';
 
 axios.defaults.baseURL = "http://localhost:3000/";
+
+const mapContainerStyle = {
+  width: '100%',
+  height: '400px',
+};
+
+const center = {
+  lat: 0,
+  lng: 0,
+};
 
 function DeliveryDetails() {
     const [addSection, SetAddSection] = useState(false);
@@ -23,6 +34,22 @@ function DeliveryDetails() {
     });
     const [dataList, setDataList] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
+    const [currentLocation, setCurrentLocation] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    useEffect(() => {
+        // Fetch current location when component mounts
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                setCurrentLocation({ lat: latitude, lng: longitude });
+            },
+            (error) => {
+                console.error('Error fetching location:', error);
+                setErrorMessage('Error fetching location');
+            }
+        );
+    }, []);
 
     const handleOnChange = (e) => {
         const { value, name } = e.target;
