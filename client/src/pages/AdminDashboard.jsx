@@ -29,7 +29,7 @@ function AdminDashboard() {
         <hr />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 p-10 gap-10 m-5 ">
-        <Link to="/">
+        <Link to="/usersList">
           <div className="p-10 bg-green-200 w-64 h-48 rounded-2xl hover:bg-green-300 transition duration-300 ease-in-out transform hover:scale-105 font-bold text-center text-xl shadow-2xl">
             <div className="flex justify-center items-center">
               <FaUser className="text-6xl" />

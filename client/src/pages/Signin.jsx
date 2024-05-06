@@ -52,8 +52,11 @@ export default function Signin() {
             navigate('/AdminDashboard');
         } else if (data.role=="supplier"){
             navigate('/SupplierDashboard');
+
+
         } else {
             navigate('/')
+
         }
         
 

@@ -28,10 +28,16 @@ import ShoppingCart from "./pages/ShoppingCart";
 import CartProducts from "./components/CartProducts";
 import OrderPayment from "./pages/OrderPayment";
 import FruitCatelog from "./pages/FruitCatelog";
+
+import UpdateStock from "./pages/UpdateStock"
+import { SupplierDashboard } from './pages/SupplierDashboard';
+import UserList from './pages/UserList';
+
 import UpdateStock from "./pages/UpdateStock";
 import UserOrders from "./pages/UserOrders";
 import OrderReceipt from "./pages/OrderReceipt";
 import UserList from "./pages/UserList";
+
 
 export default function App() {
   return (
@@ -54,6 +60,19 @@ export default function App() {
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/create-listing" element={<CreateListing />}></Route>
         </Route>
+
+        <Route path="/SupplierDashboard" element={<SupplierDashboard/>}></Route>
+        <Route path="/AdminDashboard" element={<AdminDashboard/>}></Route>
+        <Route path="/DeliveryPlaces" element={<DeliveryPlaces/>}></Route>
+        <Route path="/AdminStock" element={<AdminStock/>}></Route>
+        <Route path="/AddStock" element={<AddStock/>}></Route>
+        <Route path="/FruitCatelog" element={<FruitCatelog/>}></Route>
+        <Route path="/UpdateStock" element={<UpdateStock/>}></Route>
+        <Route path="/usersList" element={<UserList/>}></Route>
+    </Routes>
+    
+    </BrowserRouter>
+
         <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
         <Route path="/DeliveryPlaces" element={<DeliveryPlaces />}></Route>
         <Route path="/AdminOffer" element={<AdminOffer />}></Route>
@@ -68,6 +87,7 @@ export default function App() {
         <Route path="/AddStock" element={<AddStock />}></Route>
         <Route path="/FruitCatelog" element={<FruitCatelog />}></Route>
         <Route path="/UpdateStock" element={<UpdateStock />}></Route>
+
 
         {/* Orders */}
         <Route path="/orders" element={<Order />}></Route>
