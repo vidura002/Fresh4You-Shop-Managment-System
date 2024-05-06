@@ -11,6 +11,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import DeliveryPlaces from './pages/DeliveryPlaces';
 import DeliveryDetails from './pages/DeliveryDetails';
 import DeliveryDashboard from './pages/DeliveryDashboard';
+import DAdm from './pages/DAdm';
 
 export default function App() {
   return (
@@ -28,6 +29,8 @@ export default function App() {
         <Route path="/DeliveryPlaces" element={<DeliveryPlaces/>}></Route>
         <Route path="/DeliveryDetails" element={<DeliveryDetails/>}></Route>
         <Route path="/DeliveryDashboard" element={<DeliveryDashboard/>}></Route>
+        <Route path="/DAdm" element={<DAdm/>}></Route>
+
 
 
     </Routes>
