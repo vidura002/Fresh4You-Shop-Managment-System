@@ -1,5 +1,6 @@
+
 import React from "react";
-import AdminSideBar from "../components/adminSideBar";
+import AdminSideBar from "../components/AdminSideBar";
 import AdminNavBar from "../components/AdminNavBar";
 import { Link } from "react-router-dom";
 import { IoHomeSharp } from "react-icons/io5";
@@ -11,6 +12,7 @@ import { MdFeedback } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
 import { LiaLuggageCartSolid } from "react-icons/lia";
 import { RiLogoutCircleLine } from "react-icons/ri";
+
 
 function AdminDashboard() {
   return (
@@ -35,7 +37,7 @@ function AdminDashboard() {
             <h1 className="text-2xl">User Management</h1>
           </div>
         </Link>
-        <Link to="/">
+        <Link to="/AdminOffer">
           <div className="p-10 bg-yellow-200 w-64 h-48 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out transform hover:scale-105 font-bold text-center text-xl shadow-2xl">
             <div className="flex justify-center items-center">
               <GiFruitBowl className="text-6xl" />
@@ -43,7 +45,7 @@ function AdminDashboard() {
             <h1 className="text-2xl">Fruit Offer Management</h1>
           </div>
         </Link>
-        <Link to="/">
+        <Link to="/Orders">
           <div className="p-10 bg-blue-200 w-64 h-48 rounded-2xl hover:bg-blue-300 transition duration-300 ease-in-out transform hover:scale-105 font-bold text-center text-xl shadow-2xl">
             <div className="flex justify-center items-center">
               <GoListOrdered className="text-6xl" />
@@ -83,7 +85,7 @@ function AdminDashboard() {
             <h1 className="text-2xl">Feedback & Rewiew</h1>
           </div>
         </Link>
-        <Link to="/Signin" >
+        <Link to="/Signin">
           <div className="p-10 bg-red-400 w-64 h-48 rounded-2xl hover:bg-red-500 transition duration-300 ease-in-out transform hover:scale-105 font-bold text-center text-xl shadow-2xl">
             <div className="flex justify-center items-center">
               <RiLogoutCircleLine className="text-6xl" />
@@ -91,7 +93,6 @@ function AdminDashboard() {
             <h1 className="text-2xl">Logout</h1>
           </div>
         </Link>
-        
       </div>
     </div>
   );

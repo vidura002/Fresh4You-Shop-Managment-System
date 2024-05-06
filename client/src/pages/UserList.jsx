@@ -37,14 +37,23 @@ function UserList() {
   
 
   return (
+
     <div className="ml-24">
     <input
+
+    <div className="p-10 mb-10">
+    <input className="'bg-transparent focus:outline-none w-24 sm:w-64 w-5xl h-lg'"
+
         type="text"
         placeholder="Search users..."
         value={searchQuery}
         onChange={handleSearchChange}
       />
+
       <table className="text-left text-sm font-light border-collapse border border-slate-500 ...">
+
+      <table className="text-left text-sm font-light border-collapse border border-slate-500 ... mt-10">
+
         <thead className="border-b font-medium dark:border-neutral-500" >
           <tr>
             <th className="border border-slate-600 ...">User Name</th>
@@ -59,7 +68,9 @@ function UserList() {
               <td className="border border-slate-700 ...">{user.username}</td>
               <td className="border border-slate-700 ...">{user.email}</td>
               <td className="border border-slate-700 ...">{user.role}</td>
+
               <td className="border border-slate-700 ...">{user.role}</td>
+
             </tr>
           ))}
         </tbody>
