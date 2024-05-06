@@ -31,6 +31,7 @@ import FruitCatelog from "./pages/FruitCatelog";
 import UpdateStock from "./pages/UpdateStock";
 import UserOrders from "./pages/UserOrders";
 import OrderReceipt from "./pages/OrderReceipt";
+import UserList from "./pages/UserList";
 
 export default function App() {
   return (
@@ -44,6 +45,7 @@ export default function App() {
         <Route path="/supplier_orders" element={<SupplierOrders />}></Route>
         <Route path="/create" element={<CreateOrder />}></Route>
         <Route path="/update/:id" element={<UpdateOrder />}></Route>
+        <Route path="/userslist" element={<UserList />}></Route>
         <Route
           path="/supplier_order_details"
           element={<SupplierOrderDetails />}
