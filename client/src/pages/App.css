@@ -24,7 +24,6 @@ body {
 .btn-add {
     background-color: #194064;
     color: white;
-    margin-left: right; 
 }
 
 .addContainer {
@@ -130,26 +129,7 @@ body {
 }
 
 .search-bar {
-    margin-left: auto; 
-    margin-right: auto;
     padding: 8px;
     border-radius: 10px;
     border: 1px solid #ccc;
-}
-.btn-generate {
-    background-color: rgb(90, 81, 56); 
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-left: 10px; 
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn-generate:hover {
-    background-color: rgb(90, 81, 56);
 }

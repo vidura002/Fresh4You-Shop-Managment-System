@@ -142,35 +142,6 @@ function DeliveryDetails() {
         setSearchQuery(e.target.value);
     }
 
-    const handleGenerateDetails = () => {
-        // Generate text content
-        const textContent = dataList.map(item => {
-            return `DeliveryID: ${item._id}, Name: ${item.name}, Method: ${item.method}, Status: ${item.status}`;
-        }).join('\n');
-
-        // Create a Blob object from the text content
-        const blob = new Blob([textContent], { type: 'text/plain' });
-
-        // Create a temporary URL for the Blob object
-        const url = window.URL.createObjectURL(blob);
-
-        // Create a link element
-        const link = document.createElement('a');
-        link.href = url;
-
-        // Set the filename for the downloaded file
-        link.setAttribute('download', 'delivery_details.txt');
-
-        // Append the link to the document body
-        document.body.appendChild(link);
-
-        // Trigger the click event on the link to initiate the download
-        link.click();
-
-        // Clean up by revoking the URL object
-        window.URL.revokeObjectURL(url);
-    };
-
     const filteredDataList = dataList.filter(item =>
         item.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -190,7 +161,6 @@ function DeliveryDetails() {
                             onChange={handleSearchChange}
                             className="search-bar"
                         />
-                        <button className='btn btn-generate' onClick={handleGenerateDetails}>Generate Report</button>
                     </div>
 
                     {addSection && (
