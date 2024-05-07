@@ -11,9 +11,7 @@ import { RiAiGenerate } from "react-icons/ri";
 import { BsCartX } from "react-icons/bs";
 import { TiShoppingCart } from "react-icons/ti";
 import { BsGraphDownArrow } from "react-icons/bs";
-import swal from "sweetalert2";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
+import swt from "sweetalert2";
 
 export default function AdminStock() {
   const [data, setData] = useState([]);
@@ -28,7 +26,7 @@ export default function AdminStock() {
   };
 
   const handleConfirmClick = (itemId) => {
-    swal
+    swt
       .fire({
         title: "Are you sure?",
         text: "Delete this item from Stock",
@@ -40,16 +38,14 @@ export default function AdminStock() {
       .then(async (result) => {
         if (result.isConfirmed) {
           try {
-            await axios.delete(
-              `http://localhost:3000/api/Stock/Delete/${itemId}`
-            );
-            swal.fire("Deleted!", `Item has been deleted`, "success");
+            await axios.delete(`http://localhost:3000/api/Stock/Delete/${itemId}`);
+            swt.fire("Deleted!", `Item has been deleted`, "success");
           } catch (error) {
             console.error("Error deleting item:", error);
-            swal.fire("Error", "Failed to delete item", "error");
+            swt.fire("Error", "Failed to delete item", "error");
           }
-        } else if (result.dismiss === swal.DismissReason.cancel) {
-          swal.fire("Cancelled", "This item is still in stock ", "error");
+        } else if (result.dismiss === swt.DismissReason.cancel) {
+          swt.fire("Cancelled", "This item is still in stock ", "error");
         }
       });
   };
@@ -60,8 +56,8 @@ export default function AdminStock() {
         const response = await axios.get(
           "http://localhost:3000/api/Stock/getAll"
         );
-        console.log("API:", response.data);
-        setData(response.data.data);
+        console.log("API:", response.data); 
+        setData(response.data.data); 
 
         const below100 = response.data.data.filter(
           (item) => item.FruitQuantity < 100
@@ -91,56 +87,6 @@ export default function AdminStock() {
     setSearchResults(results);
   }, [searchTerm, data]);
 
-  const generateReport = () => {
-    const doc = new jsPDF();
-
-    const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleString();
-
-    const title = "Stck Report";
-    const headers = ["Fruit ID", "Fruit Name", "Quantity", "Price"];
-    const rows = searchResults.map((item) => [
-      item.FruitID,
-      item.FruitName,
-      `${item.FruitQuantity} kg`,
-      `Rs.${item.price}.00`,
-    ]);
-
-    const styles = {
-      headStyles: {
-        fillColor: "#4CAF50",
-        textColor: "#FFFFFF",
-        fontSize: 13,
-        fontStyle: "bold",
-      },
-      bodyStyles: {
-        textColor: "#111827",
-        fontSize: 12,
-      },
-      alternateRowStyles: {
-        fillColor: "#F3F4F6",
-      },
-    };
-
-    doc.setFontSize(20);
-    doc.text("Fresh4You Fruit shop", 14, 15);
-
-    doc.setFontSize(16);
-    doc.text(title, 14, 40);
-    doc.setFontSize(12);
-    doc.text(`Generated on: ${formattedDate}`, 14, 50);
-
-    doc.autoTable({ head: [headers], body: rows, startY: 60, styles });
-
-    doc.save("StockDetails.pdf");
-
-    swal.fire({
-      icon: "success",
-      title: "Report Generated",
-      text: "The report has been successfully generated!",
-    });
-  };
-
   return (
     <div className="">
       <div>
@@ -164,10 +110,9 @@ export default function AdminStock() {
             </a>
           </div>
           <div className="float-right mr-10 mt-10">
-            <RiAiGenerate
-              className="text-green-600 text-3xl cursor-pointer"
-              onClick={generateReport}
-            />
+            <a href="/AddStock">
+              <RiAiGenerate className="text-green-600 text-3xl" />
+            </a>
           </div>
           <br />
           <div className="flex justify-center">
@@ -190,33 +135,23 @@ export default function AdminStock() {
                 <TiShoppingCart className="text-white text-4xl" />
                 <span className="text-xl font-medium">Total Fruit Item</span>
                 <p></p>
-                <p className="text-6xl  font-bold text-white inline-block align-middle">
-                  {rowCount}
-                </p>
+                <p className="text-6xl  font-bold text-white inline-block align-middle">{rowCount}</p>
               </div>
             </div>
             <div className=" grid grid-col-2 bg-yellow-500 p-5 rounded-2xl">
               <div className="grid grid-cols-2">
                 <BsGraphDownArrow className="text-white text-4xl" />
-                <span className="text-xl font-medium">
-                  Number of Items less than 100kg
-                </span>
+                <span className="text-xl font-medium">Number of Items less than 100kg</span>
                 <p> </p>
-                <p className="text-6xl  font-bold text-white inline-block align-middle">
-                  {itemsBelow100}
-                </p>
+                <p className="text-6xl  font-bold text-white inline-block align-middle">{itemsBelow100}</p>
               </div>
             </div>
             <div className="grid grid-col-3 bg-red-600 p-5 rounded-2xl">
               <div className="grid grid-cols-2">
                 <BsCartX className="text-white text-4xl" />
-                <span className="text-xl text-slate-300 font-medium">
-                  Out of Stock
-                </span>
+                <span className="text-xl text-slate-300 font-medium">Out of Stock</span>
                 <p> </p>
-                <p className="text-6xl font-bold text-slate-300 inline-block align-middle">
-                  {outOfStockItemCount}
-                </p>
+                <p className="text-6xl font-bold text-slate-300 inline-block align-middle">{outOfStockItemCount}</p>
               </div>
             </div>
           </div>
@@ -255,16 +190,18 @@ export default function AdminStock() {
                         className="w-16 h-16 object-cover flex items-center justify-center rounded-2xl p-1"
                       />
                     </td>
-                    <td className="border-b-2 w-16"></td>
+                    <td className="border-b-2 w-16">
+                      
+                    </td>
                     <td className="border-b-2 w-16">
                       <a href="/UpdateStock">
                         <FaPenToSquare className="text-green-600 text-2xl" />
                       </a>
                     </td>
                     <td className="border-b-2 w-16">
-                      <button onClick={() => handleConfirmClick(item._id)}>
+                    <button onClick={() => handleConfirmClick(item._id)}>
                         <MdDeleteForever className="text-red-600 text-3xl" />
-                      </button>
+                    </button>
                     </td>
                   </tr>
                 ))}

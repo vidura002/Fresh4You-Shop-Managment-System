@@ -15,7 +15,6 @@ const CreateOffer = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const [alertMessageNumber, setAlertMessageNumber] = useState("");
   const [alertMessageQuantity, setAlertMessageQuantity] = useState("");
-  const [alertMessageID, setalertMessageID] = useState("");
 
   const handleImageUrlChange = (url) => {
     setImageUrl(url);
@@ -83,7 +82,7 @@ const CreateOffer = () => {
         error.response.status === 400 &&
         error.response.data.error === "Offer ID already exists"
       ) {
-        setalertMessageID("Offer ID already exists.");
+        setAlertMessage("Offer ID already exists.");
       } else {
         console.error("Error adding data to MongoDB:", error);
       }
@@ -125,27 +124,6 @@ const CreateOffer = () => {
         <div className="grid grid-cols-2 gap-10">
           <div>
             <div className="mb-5">
-            <div className="mb-4">
-              <label
-                htmlFor="offerID"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Offer ID
-              </label>
-              <input
-                type="text"
-                id="offerID"
-                name="offerID"
-                value={offerID}
-                onChange={(e) => {
-                  setOfferID(e.target.value);
-                  setAlertMessage("");
-                }}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-              />
-              {alertMessageID && (<p className="text-red-500 mt-1">{alertMessageID}</p>)}
-            </div>
-            <div className="mb-4">
               <label
                 htmlFor="name"
                 className="block text-gray-700 font-bold mb-2"

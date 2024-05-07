@@ -57,21 +57,23 @@ const GetOneStock = async (req, res) => {
 };
 
 const UpdateStock = async (req, res) => {
-  const { id } = req.params; 
-  const { FruitName, FruitQuantity, price, image } = req.body; 
+  const { id } = req.params; // Extract _id from request parameters
+  const { FruitName, FruitQuantity, price, image } = req.body; // Extract updated data from request body
 
   try {
+    // Find the stock item by _id and update its details
     const updatedItem = await FruitStock.findByIdAndUpdate(id, {
       FruitName,
       FruitQuantity,
       price,
       image,
-    }, { new: true }); 
+    }, { new: true }); // { new: true } option returns the updated document
 
     if (!updatedItem) {
       return res.status(404).json({ message: 'Stock item not found' });
     }
-    
+
+    // If update is successful, send back the updated item
     res.status(200).json(updatedItem);
   } catch (error) {
     console.error('Error updating stock item:', error);
