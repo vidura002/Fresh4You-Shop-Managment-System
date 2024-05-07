@@ -231,7 +231,6 @@ const CreateOffer = () => {
             </div>
           </div>
         </div>
-
         <div className="mb-4">
           <OfferImageAdd onImageUrlChange={handleImageUrlChange} />
         </div>
@@ -250,8 +249,7 @@ const CreateOffer = () => {
             Cancel
           </button>
         </div>
-        </div>
-      </form>
+        </form>
     </div>
     </div>
     </div>

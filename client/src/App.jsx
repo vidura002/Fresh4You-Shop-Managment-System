@@ -43,7 +43,7 @@ export default function App() {
         <Route path="/AdminStock" element={<AdminStock/>}></Route>
         <Route path="/AddStock" element={<AddStock/>}></Route>
         <Route path="/FruitCatelog" element={<FruitCatelog/>}></Route>
-        <Route path="/UpdateStock" element={<UpdateStock/>}></Route>
+        <Route path="/UpdateStock/:_id" element={<UpdateStock/>}></Route>
       </Routes>
     
     </BrowserRouter>
