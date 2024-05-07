@@ -1,6 +1,5 @@
 import FruitStock from "../models/Stock-Model.js";
 
-//Create new stock
 const CreateStock = async (req, res) => {
   try {
     const { FruitID, FruitName, FruitQuantity, price, image } = req.body;
@@ -58,8 +57,8 @@ const GetOneStock = async (req, res) => {
 };
 
 const UpdateStock = async (req, res) => {
-  const { id } = req.params; // Extract _id from request parameters
-  const { FruitName, FruitQuantity, price, image } = req.body; // Extract updated data from request body
+  const { id } = req.params; 
+  const { FruitName, FruitQuantity, price,category, image } = req.body; 
 
   try {
     // Find the stock item by _id and update its details

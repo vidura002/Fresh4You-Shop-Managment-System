@@ -18,7 +18,13 @@ const AddStock = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const stockData = { FruitID: fruitId, FruitName: fruitName, FruitQuantity: fruitQuantity, price: price, image: image };
+    const stockData = {
+      FruitName: fruitName,
+      FruitQuantity: fruitQuantity,
+      price: price,
+      category: category,
+      image: image,
+    };
     try {
       const response = await axios.post('http://localhost:3000/api/stock/createstock', stockData);
       if (response.data.success) {
