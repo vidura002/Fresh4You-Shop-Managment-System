@@ -20,7 +20,6 @@ const AddStock = () => {
   //Handel create stock fruit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const stockData = { FruitID: fruitId, FruitName: fruitName, FruitQuantity: fruitQuantity, price: price, image: image };
     const stockData = {
       FruitName: fruitName,
       FruitQuantity: fruitQuantity,

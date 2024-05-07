@@ -40,9 +40,6 @@ export default function SignIn() {
     };
 
     return (
-        <div className="p-3 max-w-lg mx-auto">
-            <h1 className="text-4xl text-center font-semibold my-8">Sign In</h1>
-
         <div>
             <Header />
         <div className="p-3 max-w-lg mx-auto">

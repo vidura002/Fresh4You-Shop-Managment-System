@@ -93,8 +93,6 @@ const GetOneStock = async (req, res) => {
 
 
 const UpdateStock = async (req, res) => {
-  const { id } = req.params; // Extract _id from request parameters
-  const { FruitName, FruitQuantity, price, image } = req.body; // Extract updated data from request body
   const { id } = req.params; 
   const { FruitName, FruitQuantity, price,category, image } = req.body; 
 
