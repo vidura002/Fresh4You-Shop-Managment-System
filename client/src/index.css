@@ -13,7 +13,7 @@ body {
 
 .supplier_details {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: ;
   gap: 100px;
 }
 .supplier-details {
