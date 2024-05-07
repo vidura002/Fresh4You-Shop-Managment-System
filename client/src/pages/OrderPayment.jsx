@@ -83,7 +83,7 @@ const OrderPayment = () => {
       const data = await response.json();
       navigate("/OrderReceipt/", { state: data });
     } catch (error) {
-      console.error("Error processing payment:", error.message);
+      toast.error("Error processing payment. Please try again.");
     }
   }, [formData, totalPrice, productCartItem]);
 

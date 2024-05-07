@@ -38,9 +38,10 @@ const OrderReceipt = ({ order }) => {
           id="receipt"
           className="bg-white border rounded-lg shadow-lg px-6 py-8"
         >
-          <h1 className="font-bold text-3xl text-center text-blue-600 mb-4">
-            Fresh 4 You
+          <h1 className="font-bold text-5xl text-center text-green-500 mb-8">
+            Fresh<span className="text-green-700"> 4</span> You
           </h1>
+
           <hr className="mb-6" />
           <div className="flex justify-between mb-6">
             <h1 className="text-lg font-bold">Order Receipt</h1>
@@ -54,39 +55,60 @@ const OrderReceipt = ({ order }) => {
             <div className="text-gray-700 mb-2">{data?.user}</div>
             <div className="text-gray-700 mb-2">{data?.address}</div>
           </div>
-          <table className="w-full mb-8">
+          <table className="w-full border border-gray-300 mb-8">
             <thead>
               <tr>
-                <th className="text-left font-bold text-gray-700">
+                <th className="text-left font-bold text-gray-700 border-r border-b border-gray-300 px-4 py-2">
+                  Image
+                </th>
+                <th className="text-left font-bold text-gray-700 border-r border-b border-gray-300 px-4 py-2">
                   Description
                 </th>
-                <th className="text-left font-bold text-gray-700">Quantity</th>
-                <th className="text-right font-bold text-gray-700">Amount</th>
+                <th className="text-left font-bold text-gray-700 border-r border-b border-gray-300 px-4 py-2">
+                  Quantity
+                </th>
+                <th className="text-right font-bold text-gray-700 border-b border-gray-300 px-4 py-2">
+                  Amount
+                </th>
               </tr>
             </thead>
             <tbody>
               {data?.items?.map((item, index) => (
                 <tr key={index}>
-                  <td className="text-left text-gray-700">{item.name}</td>
-                  <td className="text-left text-gray-700">{item.qty}</td>
-                  <td className="text-right text-gray-700">Rs.{item.price}</td>
+                  <td className="border-r border-b border-gray-300 px-4 py-2">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="h-10 w-10 object-cover"
+                    />
+                  </td>
+                  <td className="text-left text-gray-700 border-r border-b border-gray-300 px-4 py-2">
+                    {item.name}
+                  </td>
+                  <td className="text-left text-gray-700 border-r border-b border-gray-300 px-4 py-2">
+                    {item.qty}
+                  </td>
+                  <td className="text-right text-gray-700 border-b border-gray-300 px-4 py-2">
+                    Rs.{item.price}
+                  </td>
                 </tr>
               ))}
             </tbody>
             <tfoot>
               <tr>
-                <td className="text-left font-bold text-gray-700">Total</td>
-                <td></td>
-                <td className="text-right font-bold text-gray-700">
+                <td className="text-left font-bold text-gray-700 border-r border-gray-300 px-4 py-2">
+                  Total
+                </td>
+                <td className="border-r border-gray-300"></td>
+                <td className="border-r border-gray-300"></td>
+                <td className="text-right font-bold text-gray-700 border-gray-300 px-4 py-2">
                   Rs.{data?.total}
                 </td>
               </tr>
             </tfoot>
           </table>
+
           <div className="text-gray-700 mb-2">Thank you for your business!</div>
-          <div className="text-gray-700 text-sm">
-            Please remit payment within 30 days.
-          </div>
         </div>
         <div className="order-details text-center">
           <button
