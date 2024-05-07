@@ -1,19 +1,51 @@
 import FruitStock from "../models/Stock-Model.js";
 
+import fs from 'fs';
+
+const fileName = 'lastGeneratedNumber.txt'; 
+
+let lastGeneratedNumber = 9999;
+
+try {
+  if (fs.existsSync(fileName)) {
+    const data = fs.readFileSync(fileName, 'utf8');
+    lastGeneratedNumber = parseInt(data);
+  } else {
+    saveLastGeneratedNumberToFile(); 
+  }
+} catch (err) {
+  console.error("Error reading last generated number from file:", err);
+}
+
+function generateFruitID() {
+  lastGeneratedNumber++;
+  saveLastGeneratedNumberToFile();
+  return 'F' + lastGeneratedNumber.toString(); 
+}
+
+function saveLastGeneratedNumberToFile() {
+  try {
+    fs.writeFileSync(fileName, lastGeneratedNumber.toString());
+  } catch (err) {
+    console.error("Error saving last generated number to file:", err);
+  }
+}
+
 const CreateStock = async (req, res) => {
   try {
-    const { FruitID, FruitName, FruitQuantity, price, image } = req.body;
-
+    const {FruitName, FruitQuantity, price,category, image } = req.body;
+    const FruitID = generateFruitID();
     const existingStock = await FruitStock.findOne({ FruitID });
+
     if (existingStock) {
       return res.status(400).json({ error: "FruitID already exists" });
     }
-
     const newStock = new FruitStock({
       FruitID,
       FruitName,
       FruitQuantity,
       price,
+      category,
       image,
     });
     await newStock.save();
@@ -38,12 +70,15 @@ const GetAllStock = async (req, res) => {
     console.error("Error", error);
     res.status(500).json({ success: false, error: "Internal Server Error" });
   }
-
-  
 };
 
 const GetOneStock = async (req, res) => {
   const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ success: false, error: "No ID provided" });
+  }
+
   try {
     const stockItem = await FruitStock.findById(id);
     if (!stockItem) {
@@ -56,9 +91,12 @@ const GetOneStock = async (req, res) => {
   }
 };
 
+
 const UpdateStock = async (req, res) => {
   const { id } = req.params; // Extract _id from request parameters
   const { FruitName, FruitQuantity, price, image } = req.body; // Extract updated data from request body
+  const { id } = req.params; 
+  const { FruitName, FruitQuantity, price,category, image } = req.body; 
 
   try {
     // Find the stock item by _id and update its details
@@ -66,6 +104,7 @@ const UpdateStock = async (req, res) => {
       FruitName,
       FruitQuantity,
       price,
+      category,
       image,
     }, { new: true }); // { new: true } option returns the updated document
 
@@ -93,6 +132,29 @@ const DeleteStock = async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
   }
 };
-export { CreateStock, GetAllStock, GetOneStock, DeleteStock, UpdateStock };
+
+
+const UpdateQuantity = async (req, res) => {
+  const { id, quantity } = req.body;
+
+  try {
+    const stockItem = await FruitStock.findById(id);
+
+    if (!stockItem) {
+      return res.status(404).json({ message: "Stock item not found" });
+    }
+
+    stockItem.FruitQuantity -= quantity;
+
+    await stockItem.save();
+
+    res.status(200).json({ message: "Stock quantity updated successfully" });
+  } catch (error) {
+    console.error("Error updating stock quantity:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export { CreateStock, GetAllStock, GetOneStock, DeleteStock, UpdateStock, UpdateQuantity };
 
 

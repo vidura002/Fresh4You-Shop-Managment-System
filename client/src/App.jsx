@@ -1,4 +1,4 @@
-;
+
 import CreateOffer from "./pages/CreateOffer";
 import AdminOffer from "./pages/AdminOffer";
 import OfferNotification from "./pages/OfferNotification";
@@ -32,18 +32,17 @@ export default function App() {
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/create-listing" element={<CreateListing />}></Route>
         </Route>
-
         <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
         <Route path="/DeliveryPlaces" element={<DeliveryPlaces />}></Route>
         <Route path="/AdminOffer" element={<AdminOffer />}></Route>
         <Route path="/CreateOffer" element={<CreateOffer/>}></Route>
         <Route path="/OfferNotification" element={<OfferNotification/>}></Route>
-        <Route path="/UpdateOffer/:_id" element={<UpdateOffer/>}></Route>
+        <Route path="/UpdateOffer" element={<UpdateOffer/>}></Route>
         <Route path="/OfferCatalog" element={<OfferCatalog/>}></Route>
         <Route path="/AdminStock" element={<AdminStock/>}></Route>
         <Route path="/AddStock" element={<AddStock/>}></Route>
         <Route path="/FruitCatelog" element={<FruitCatelog/>}></Route>
-        <Route path="/UpdateStock" element={<UpdateStock/>}></Route>
+        <Route path="/UpdateStock/:_id" element={<UpdateStock/>}></Route>
       </Routes>
     
     </BrowserRouter>

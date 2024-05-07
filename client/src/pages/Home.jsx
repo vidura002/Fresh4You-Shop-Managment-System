@@ -36,7 +36,7 @@ const Home = () => {
               <br/><br/><span className="text-5xl">🍎🍌🍇</span>
             </h1>
             <br />
-            <button className="border-2 border-orange-600 hover:bg-orange-600 text-orange-600 font-bold py-3 px-12 rounded transition-colors hover:text-white  hover:delay-100">
+            <button className="border-2 border-orange-600 hover:bg-orange-600 text-orange-600	 text-orange-600 font-bold py-3 px-12 rounded transition-colors hover:text-white hover:bg-orange-500 hover:delay-100">
               SHOP NOW
             </button>
           </div>

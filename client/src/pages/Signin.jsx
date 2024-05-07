@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 export default function SignIn() {
     const [formData, setFormData] = useState({
         email: "",
@@ -39,6 +42,12 @@ export default function SignIn() {
     return (
         <div className="p-3 max-w-lg mx-auto">
             <h1 className="text-4xl text-center font-semibold my-8">Sign In</h1>
+
+        <div>
+            <Header />
+        <div className="p-3 max-w-lg mx-auto">
+            
+            <h1 className="text-4xl text-center font-semibold my-16">Sign In</h1>
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <input type="email" placeholder="Email" className="border p-3 rounded-lg" id="email" value={formData.email} onChange={handleChange} required />
                 <input type="password" placeholder="Password" className="border p-3 rounded-lg" id="password" value={formData.password} onChange={handleChange} required />
@@ -54,5 +63,6 @@ export default function SignIn() {
             </div>
             {error && <p className="text-red-500 mt-5">{error}</p>}
         </div>
+                </div>
     );
 }

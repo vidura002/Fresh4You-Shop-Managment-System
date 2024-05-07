@@ -1,12 +1,12 @@
 import OfferModel from "../models/OfferModel.js";
 
+
+
 //create offer controller
 const createOffer = async (req, res) => {
   try {
-    const { name, price, variant, quantity, description, image } = req.body;
-
-    // Generate automatic offer ID
-    const offerID = await generateOfferID();
+    const { offerID, name, price, variant, quantity, description, image } =
+      req.body;
 
     const existingOffer = await OfferModel.findOne({ offerID });
     if (existingOffer) {
@@ -34,28 +34,6 @@ const createOffer = async (req, res) => {
   }
 };
 
-const generateOfferID = async () => {
-  try {
-    const latestOffer = await OfferModel.findOne({}, {}, { sort: { 'offerID': -1 } });
-    let latestID = latestOffer ? latestOffer.offerID : 'offer0000'; // Set a default value if no offer is found
-
-    const numericPart = parseInt(latestID.replace('offer', ''), 10);
-    const newNumericPart = isNaN(numericPart) ? 1 : numericPart + 1;
-
-    // Pad the numeric part with zeros
-    const paddedNumericPart = String(newNumericPart).padStart(4, '0');
-
-    const newOfferID = 'offer' + paddedNumericPart;
-
-    return newOfferID;
-  } catch (error) {
-    console.error("Error generating offer ID:", error);
-    throw new Error("Error generating offer ID");
-  }
-};
-
-
-
 //Get All offer Controller
 const GetAllOffers = async (req, res) => {
   try {
@@ -70,19 +48,14 @@ const GetAllOffers = async (req, res) => {
 //Get one offer Controller
 const GetOneOffer = async (req, res) => {
   const { id } = req.params;
-
-  if (!id) {
-    return res.status(400).json({ success: false, error: "No ID provided" });
-  }
-
   try {
-    const Offer = await OfferModel.findById(id);
-    if (!Offer) {
+    const stockItem = await OfferModel.findById(id);
+    if (!stockItem) {
       return res
         .status(404)
         .json({ success: false, error: "Offer item not found" });
     }
-    res.status(200).json({ success: true, data: Offer });
+    res.status(200).json({ success: true, data: stockItem });
   } catch (error) {
     console.error("Error", error);
     res.status(500).json({ success: false, error: "Internal Server Error" });
