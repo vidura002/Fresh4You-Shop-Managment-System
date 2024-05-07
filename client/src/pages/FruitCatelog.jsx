@@ -11,6 +11,7 @@ function FruitCatelog() {
   const [sortOption, setSortOption] = useState();
   const [priceRange, setPriceRange] = useState();
   const [showAvailableOnly, setShowAvailableOnly] = useState();
+  const [showOutOfStock, setShowOutOfStock] = useState();
 
   //get all offers
   const fetchData = async () => {
@@ -266,7 +267,7 @@ function FruitCatelog() {
                   className="form-checkbox h-5 w-5 accent-green-500"
                 />
                 <span className="ml-2 text-lg font-font1 font-medium text-black">
-                  Show available only ({availableCount})
+                  {/* Show available only ({availableCount}) */}
                 </span>
               </label>
             </div>
@@ -281,7 +282,7 @@ function FruitCatelog() {
                   className="form-checkbox h-5 w-5 accent-green-500"
                 />
                 <span className="ml-2 text-lg font-font1 font-medium text-black">
-                  Show out of stock only ({outOfStockCount})
+                  {/* Show out of stock only ({outOfStockCount}) */}
                 </span>
               </label>
             </div>
@@ -289,7 +290,7 @@ function FruitCatelog() {
         </div>
         <div className="col-span-4">
           <ul className="grid gap-5 md:grid-cols-3 lg:grid-cols-4 ml-10 mr-10">
-            {filteredData.map((item, index) => (
+            {/* {filteredData.map((item, index) => (
               <li
                 key={index}
                 className="border border-gray-200 rounded-md overflow-hidden animate-fade-in shadow-xl"
@@ -322,7 +323,7 @@ function FruitCatelog() {
                   </button>
                 </div>
               </li>
-            ))}
+            ))} */}
           </ul>
         </div>
       </div>
