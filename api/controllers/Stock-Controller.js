@@ -95,6 +95,7 @@ const GetOneStock = async (req, res) => {
 const UpdateStock = async (req, res) => {
   const { id } = req.params; 
   const { FruitName, FruitQuantity, price,category, image } = req.body; 
+  const { FruitName, FruitQuantity, price, image } = req.body; 
 
   try {
     const updatedItem = await FruitStock.findByIdAndUpdate(id, {
@@ -108,6 +109,7 @@ const UpdateStock = async (req, res) => {
     if (!updatedItem) {
       return res.status(404).json({ message: 'Stock item not found' });
     }
+    
     res.status(200).json(updatedItem);
   } catch (error) {
     console.error('Error updating stock item:', error);
