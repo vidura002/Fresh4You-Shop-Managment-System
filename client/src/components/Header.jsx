@@ -18,7 +18,10 @@ export default function Header() {
             <span className="text-green-800">Fresh</span>
             <span className="text-green-900">4You</span>
           </h1>
-        </Link> 
+        </Link>
+
+        
+        
         <ul className="flex gap-6">
         <NavLinkWithActiveCheck to="/" text="Home" isActive={
             location.pathname === '/'
@@ -34,40 +37,6 @@ export default function Header() {
           }
         />
           <Link to={currentUser ? '/profile' : '/signin'}>
-
-export default function Header() {
-  const { currentUser } = useSelector((state) => state.user);
-  return (
-    <header className="bg-green-400 shadow-md">
-      <div className="flex justify-between items-center max-w-6xl mx-auto p-3 ">
-        <Link to="/">
-          <h1 className="font-bold text-7xl sm:text-xl flex flex-wrap mr-20 items-center space-x-1">
-            <img src={Logo} alt="logo" className="w-14 h-14 rounded-full " />
-            <span className="text-green-700">Fresh</span>
-            <span className="text-green-800">4You</span>
-          </h1>
-        </Link>
-
-        <form className="bg-slate-100 p-3 rounded-lg flex items-center">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="bg-transparent focus:outline-none w-24 sm:w-64"
-          />
-          <FaSearch className="text-slate-700" />
-  </form>
-        <ul className="flex gap-6">
-          <Link to={"/"}>
-            <li className="hidden sm:inline text-slate-700 hover:underline text-xl">
-              Home
-            </li>
-          </Link>
-          <Link to={"/supplier_details"}>
-            <li className="hidden sm:inline text-slate-700 hover:underline text-xl">
-              Supplier-Details
-            </li>
-</Link>
-          <Link to={"/profile"}>
             {currentUser ? (
               <img
                 className="rounded-full h-7 w-7 object-cover"
@@ -80,13 +49,6 @@ export default function Header() {
           </Link>
           <Link to="/cart">
             <li className="hidden sm:inline text-slate-700 font-medium hover:underline text-3xl">
-              <li className=" text-slate-700 hover:underline text-xl">
-                Log Out
-              </li>
-            )}
-          </Link>
-          <Link to={"/signin"}>
-            {/*<li className="hidden sm:inline text-slate-700 font-medium hover:underline text-3xl">
               <LiaShoppingCartSolid />
             </li>
           </Link>
@@ -97,16 +59,17 @@ export default function Header() {
             <li className="hidden sm:inline text-slate-700 font-medium hover:underline text-2xl">
               <SlHandbag />
             </li>
-          <Link to={"/user-orders"}>
-            <li className="hidden sm:inline text-slate-700 font-medium hover:underline text-2xl">
-              <SlHandbag />
-          </li>*/}
           </Link>
         </ul>
       </div>
       <div className='h-1 bg-white'>
 
       </div>
+
+     
+    </header>
+  );
+}
 
 function NavLinkWithActiveCheck({ to, text, isActive }) {
   return (

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { BsFillPersonLinesFill } from "react-icons/bs";
 import { IoHomeSharp } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import { GiFruitBowl } from "react-icons/gi";

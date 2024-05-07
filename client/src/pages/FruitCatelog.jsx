@@ -1,14 +1,11 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
-import Footer from "../components/Footer";
-import { setDataProduct, addCartItem } from "../redux/productSlice";
-import { useDispatch } from "react-redux";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
-function FruitCatalog() {
+function FruitCatelog() {
   const location = useLocation();
-  const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState([]);
@@ -19,20 +16,15 @@ function FruitCatalog() {
   const [availableCount, setAvailableCount] = useState(0);
   const [outOfStockCount, setOutOfStockCount] = useState(0);
   const [sortOption, setSortOption] = useState("priceLowToHigh");
-  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     try {
       const response = await axios.get(
         "http://localhost:3000/api/Stock/getAll"
       );
-      console.log("API :", response.data);
-      dispatch(setDataProduct(response.data.data));
       setData(response.data.data);
-      setLoading(false);
     } catch (error) {
       console.error("Error :", error);
-      setLoading(false);
     }
   };
 
@@ -116,9 +108,6 @@ function FruitCatalog() {
 
   const handleSortChange = (option) => {
     setSortOption(sortOption === option ? "" : option);
-
-  const handleAddToCart = (data) => {
-    dispatch(addCartItem(data));
   };
 
   return (
@@ -126,9 +115,9 @@ function FruitCatalog() {
       <Header />
       <div className="flex items-center justify-center text-2xl">
         <Link
-          to={"/FruitCatalog"}
+          to={"/FruitCatelog"}
           className={
-            location.pathname === "/FruitCatalog"
+            location.pathname === "/FruitCatelog"
               ? "text-black font-bold mt-5 hover:text-slate-500"
               : "text-gray-500 mt-5 hover:text-slate-500"
           }
@@ -291,30 +280,6 @@ function FruitCatalog() {
         <div className="col-span-4">
           <ul className="grid gap-5 md:grid-cols-3 lg:grid-cols-4 ml-10 mr-10">
             {filteredData.map((item, index) => (
-      <div className="bg-gray-200 p-4 grid grid-cols-3">
-        <div></div>
-        <div>
-          <h2 className="text-lg font-semibold mb-4 ">Filters</h2>
-          <label htmlFor="search">Search:</label>
-          <input
-            type="text"
-            id="search"
-            onChange={(e) => handleFilter(e.target.value)}
-            className="border border-gray-300 rounded-md px-2 py-1 mb-4 block w-96"
-          />
-        </div>
-        <div></div>
-      </div>
-      <br />
-
-      <Suspense
-        fallback={<div className="text-center text-6xl">Loading...</div>}
-      >
-        <ul className="grid gap-5 md:grid-cols-3 lg:grid-cols-5 ml-10 mr-10">
-          {loading ? (
-            <div className="text-center my-4">Loading...</div>
-          ) : (
-            filteredData.map((item, index) => (
               <li
                 key={index}
                 className="border border-gray-200 rounded-md overflow-hidden animate-fade-in shadow-xl"
@@ -324,10 +289,6 @@ function FruitCatalog() {
                 </div>
                 <div className="p-4">                
                   <h2 className="text-lg font-semibold">{item.FruitName} - <span className="text-lg font-semibold ">{item.category}</span></h2>
-                  <img src={item.image} alt={item.FruitName} className="" />
-                </div>
-                <div className="p-4">
-                  <h2 className="text-lg font-semibold">{item.FruitName}</h2>
                   <p className="text-red-600 text-2xl">
                     Rs.{item.price}.00{" "}
                     <span className="text-black text-lg">[Per 100g]</span>
@@ -335,15 +296,13 @@ function FruitCatalog() {
                   <br />
                   <button
                     className={`w-full bg-green-800 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:bg-green-00 animate-fade-in ${
-
-                    onClick={() => handleAddToCart(item)}
-                    className={`w-full bg-green-800 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:bg-indigo-600 animate-fade-in ${
                       item.FruitQuantity === 0
                         ? "bg-red-500 cursor-not-allowed hover:bg-red-500 "
                         : ""
                     }`}
                     disabled={item.FruitQuantity === 0}
                     onClick={() => handleAddToCart(item.itemId, 0.1)} 
+                  >
                     {item.FruitQuantity === 0 ? "Sold Out" : "Add to Cart"}
                   </button>
                 </div>
@@ -352,16 +311,10 @@ function FruitCatalog() {
           </ul>
         </div>
       </div>
-
-            ))
-          )}
-        </ul>
-      </Suspense>
-
       <br />
       <Footer />
     </div>
   );
 }
 
-export default FruitCatalog;
+export default FruitCatelog;

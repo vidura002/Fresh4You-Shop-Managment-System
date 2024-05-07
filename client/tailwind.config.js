@@ -38,10 +38,9 @@ export default {
       },
       fontFamily:{
         'kotta': ['Kotta One', 'serif'],
-        'https://github.com/vidura002/ITP-Project/pull/10/conflict?name=client%252Ftailwind.config.js&ancestor_oid=aa3a36502a80b5721fb8397b86c075f33ae418f5&base_oid=901be8c0f1c92831ec7da2b338e728b99c5e848f&head_oid=14a4ed4d3f9efb232dacaf44728cdc01126a19a5madimi': ['Madimi One', 'sans-serif'], 
+        'madimi': ['Madimi One', 'sans-serif'], 
         'font1':['Rajdhani','sans-serif']
         
-        'font2':['Rajdhani','sans-serif']
       }
     },
   },

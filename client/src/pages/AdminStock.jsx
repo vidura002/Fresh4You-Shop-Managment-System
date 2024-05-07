@@ -119,10 +119,6 @@ export default function AdminStock() {
     const shopName = "Fresh4You Fruit shop";
     const title = "Stock Report";
     const headers = ["Fruit ID", "Fruit Name", "Category", "Quantity", "Price"];
-
-
-    const title = "Stck Report";
-    const headers = ["Fruit ID", "Fruit Name", "Quantity", "Price"];
     const rows = searchResults.map((item) => [
       item.FruitID,
       item.FruitName,
@@ -160,10 +156,6 @@ export default function AdminStock() {
     doc.autoTable({ head: [headers], body: rows, startY: 60, styles });
 
     doc.save(`Stock_Report_${formattedDate}.pdf`);
-
-    doc.autoTable({ head: [headers], body: rows, startY: 60, styles });
-
-    doc.save("StockDetails.pdf");
 
     swal.fire({
       icon: "success",
@@ -238,7 +230,6 @@ export default function AdminStock() {
               <div className="grid grid-cols-2">
                 <BsCartX className="text-white text-4xl" />
                 <span className="text-xl text-black font-medium">
-                <span className="text-xl text-slate-300 font-medium">
                   Out of Stock
                 </span>
                 <p> </p>
@@ -327,33 +318,6 @@ export default function AdminStock() {
                     </tr>
                   ) : null;
                 })}
-
-                {searchResults.map((item, index) => (
-                  <tr key={index}>
-                    <td className="h-12 border-b-2 p-2">{item.FruitID}</td>
-                    <td className="border-b-2">{item.FruitName}</td>
-                    <td className="border-b-2">{item.FruitQuantity}kg</td>
-                    <td className="border-b-2">Rs.{item.price}.00</td>
-                    <td className="border-b-2">
-                      <img
-                        src={item.image}
-                        alt={item.FruitName}
-                        className="w-16 h-16 object-cover flex items-center justify-center rounded-2xl p-1"
-                      />
-                    </td>
-                    <td className="border-b-2 w-16"></td>
-                    <td className="border-b-2 w-16">
-                      <a href="/UpdateStock">
-                        <FaPenToSquare className="text-green-600 text-2xl" />
-                      </a>
-                    </td>
-                    <td className="border-b-2 w-16">
-                      <button onClick={() => handleConfirmClick(item._id)}>
-                        <MdDeleteForever className="text-red-600 text-3xl" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
               </tbody>
             </table>
           </div>

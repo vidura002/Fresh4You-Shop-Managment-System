@@ -27,11 +27,6 @@ const AddStock = () => {
       FruitQuantity: fruitQuantity,
       price: price,
       category: category,
-    const stockData = {
-      FruitID: fruitId,
-      FruitName: fruitName,
-      FruitQuantity: fruitQuantity,
-      price: price,
       image: image,
     };
     try {
@@ -45,10 +40,6 @@ const AddStock = () => {
         setFruitQuantity("");
         setPrice("");
         setCategory("");
-        setFruitId("");
-        setFruitName("");
-        setFruitQuantity("");
-        setPrice("");
         setImageUrl("");
         Swal.fire({
           icon: "success",
@@ -83,7 +74,6 @@ const AddStock = () => {
           icon: "error",
           title: "Error",
           text: "All fields are required.",
-          text: "Error adding data to MongoDB!",
         });
       }
     }
@@ -95,10 +85,6 @@ const AddStock = () => {
     setFruitQuantity("");
     setPrice("");
     setCategory("");
-    setFruitId("");
-    setFruitName("");
-    setFruitQuantity("");
-    setPrice("");
     setImageUrl("");
     Swal.fire({
       icon: "success",
@@ -266,115 +252,6 @@ const AddStock = () => {
           </form>
         </div>
       </div>
-    <div className="max-w-md mx-auto mt-10 p-6 bg-green-200 shadow-md rounded-md">
-      <div className="flex gap-2">
-        <Link to="/AdminStock">
-          <IoArrowBackCircleOutline className="text-4xl" />
-        </Link>
-        <h2 className="text-2xl font-semibold mb-4"> Add Stock Information</h2>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label
-            htmlFor="fruitId"
-            className="block text-gray-700 font-bold mb-2"
-          >
-            Fruit ID
-          </label>
-          <input
-            type="text"
-            id="fruitId"
-            name="fruitId"
-            value={fruitId}
-            onChange={(e) => {
-              setFruitId(e.target.value);
-              setAlertMessage("");
-            }}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-          />
-          {alertMessage && <p className="text-red-500 mt-1">{alertMessage}</p>}
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="fruitName"
-            className="block text-gray-700 font-bold mb-2"
-          >
-            Fruit Name
-          </label>
-          <input
-            type="text"
-            id="fruitName"
-            name="fruitName"
-            value={fruitName}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="fruitQuantity"
-            className="block text-gray-700 font-bold mb-2"
-          >
-            Fruit Quantity (kg)
-          </label>
-          <input
-            type="number"
-            id="fruitQuantity"
-            name="fruitQuantity"
-            value={fruitQuantity}
-            onChange={(e) => setFruitQuantity(e.target.value)}
-            min="0"
-            max="100000"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="price" className="block text-gray-700 font-bold mb-2">
-            Price (Per 100g)
-          </label>
-          <input
-            type="number"
-            id="price"
-            name="price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            min="50"
-            max="10000"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-          />
-        </div>
-        <div className="mb-4">
-          <UploadImage onImageUrlChange={handleImageUrlChange} />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-600"
-          onClick={() => {
-            Swal.fire({
-              icon: "info",
-              title: "Submitting...",
-              text: "Please wait...",
-              showConfirmButton: false,
-            });
-          }}
-        >
-          Submit
-        </button>
-        <button
-          type="button"
-          className="mt-2 w-full bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none focus:bg-gray-400"
-          onClick={() => {
-            Swal.fire({
-              icon: "info",
-              title: "Clearing...",
-              text: "Please wait...",
-              showConfirmButton: false,
-            });
-          }}
-        >
-          Clear
-        </button>
-      </form>
     </div>
   );
 };
