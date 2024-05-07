@@ -1,28 +1,21 @@
 import mongoose from "mongoose";
-
-const offerSchema = new mongoose.Schema({
-  offerID: {
+const StockSchema = new mongoose.Schema({
+  FruitID: {
     type: String,
     required: true,
     unique: true,
   },
-  name: {
+  FruitName: {
     type: String,
     required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  variant: {
-    type: String,
   },
   quantity: {
     type: Number,
     required: true,
   },
-  description: {
-    type: String,
+  price: {
+    type: Number,
+    required: true,
   },
   image: {
     type: String,
@@ -30,5 +23,5 @@ const offerSchema = new mongoose.Schema({
   },
 });
 
-const OfferModel = mongoose.model("Offers", offerSchema);
-export default OfferModel;
+const Stock = mongoose.model("Stock", StockSchema);
+export default Stock;
