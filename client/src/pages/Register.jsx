@@ -2,7 +2,6 @@ import { data } from "autoprefixer";
 import React, { useState } from "react";
 import { Link , useNavigate} from "react-router-dom";
 import OAuth from "../components/OAuth";
-import Header from "../components/Header";
 
 export default function Register() {
 
@@ -50,10 +49,8 @@ export default function Register() {
     };
 
   return (
-    <div>
-            <Header />
     <div className="p-3 max-w-lg mx-auto">
-        <h1 className="text-4xl text-center font-semibold my-12">Sign Up</h1>
+        <h1 className="text-4xl text-center font-semibold my-8">Sign Up</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <input type="text" placeholder="username" className="border p-3 rounded-lg" id="username" onChange={handleChange}  required/>
             <input type="email" placeholder="email" className="border p-3 rounded-lg" id="email" onChange={handleChange}/>
@@ -70,7 +67,6 @@ export default function Register() {
             </Link>
         </div>
         {error && <p className="text-red-500 mt-5">{error}</p>}
-    </div>
     </div>
   )
 }
