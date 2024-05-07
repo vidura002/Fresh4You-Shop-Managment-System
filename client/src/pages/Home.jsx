@@ -28,18 +28,6 @@ const Home = () => {
           className={`min-h-svh bg-[url('images/bg.png')] bg-center bg-cover`}
         >
           <div className="grid grid-cols-2 pt-48 pl-40 pr-8">
-          <div className="">
-            <span className="text-4xl md:text-6xl font-semibold text-orange-800">Welcome to Fresh4You!</span><br/><br/>
-            <h1 className="text-xl md:text-3xl  md:text-justify antialiased">Explore our fresh, delicious fruits sourced from local farms. Let's make healthy
-              snacking easy and delightful! Happy browsing!
-              <br/><br/><span className="text-5xl">🍎🍌🍇</span>
-            </h1>
-            <br />
-            <button className="border-2 border-orange-600 hover:bg-orange-600 text-orange-600 font-bold py-3 px-12 rounded transition-colors hover:text-white  hover:delay-100">
-              SHOP NOW
-            </button>
-          </div>
-          <div></div>
             <div className="">
               <span className="text-4xl md:text-6xl font-semibold text-orange-800">
                 Welcome to Fresh4You!

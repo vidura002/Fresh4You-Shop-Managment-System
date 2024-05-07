@@ -59,13 +59,6 @@ export default function App() {
           <Route path="/create-listing" element={<CreateListing />}></Route>
         </Route>
 
-        <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
-        <Route path="/DeliveryPlaces" element={<DeliveryPlaces />}></Route>
-        <Route path="/AdminOffer" element={<AdminOffer />}></Route>
-        <Route path="/CreateOffer" element={<CreateOffer/>}></Route>
-        <Route path="/OfferNotification" element={<OfferNotification/>}></Route>
-        <Route path="/UpdateOffer/:_id" element={<UpdateOffer/>}></Route>
-        <Route path="/OfferCatalog" element={<OfferCatalog/>}></Route>
         <Route path="/SupplierDashboard" element={<SupplierDashboard/>}></Route>
         <Route path="/AdminDashboard" element={<AdminDashboard/>}></Route>
         <Route path="/DeliveryPlaces" element={<DeliveryPlaces/>}></Route>
@@ -74,6 +67,24 @@ export default function App() {
         <Route path="/FruitCatelog" element={<FruitCatelog/>}></Route>
         <Route path="/UpdateStock" element={<UpdateStock/>}></Route>
         <Route path="/usersList" element={<UserList/>}></Route>
+    </Routes>
+    
+    </BrowserRouter>
+
+        <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
+        <Route path="/DeliveryPlaces" element={<DeliveryPlaces />}></Route>
+        <Route path="/AdminOffer" element={<AdminOffer />}></Route>
+        <Route path="/CreateOffer" element={<CreateOffer />}></Route>
+        <Route
+          path="/OfferNotification"
+          element={<OfferNotification />}
+        ></Route>
+        <Route path="/UpdateOffer" element={<UpdateOffer />}></Route>
+        <Route path="/OfferCatalog" element={<OfferCatalog />}></Route>
+        <Route path="/AdminStock" element={<AdminStock />}></Route>
+        <Route path="/AddStock" element={<AddStock />}></Route>
+        <Route path="/FruitCatelog" element={<FruitCatelog />}></Route>
+        <Route path="/UpdateStock" element={<UpdateStock />}></Route>
 
 
         {/* Orders */}

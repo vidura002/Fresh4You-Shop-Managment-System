@@ -84,7 +84,7 @@ export default function AdminOffer() {
 
     const currentDate = new Date();
     const formattedDate = currentDate.toLocaleString();
-    const shopName = "Fresh4You Fruit shop";
+
     const title = "Offer Report";
     const headers = [
       "ID",
@@ -119,17 +119,16 @@ export default function AdminOffer() {
       },
     };
 
-    const logo = new Image();
-    logo.src = "../src/images/Orange.png";
-    doc.addImage(logo, "PNG", 10, 10, 20, 20);
-
     doc.setFontSize(20);
-    doc.text(shopName, 30, 23);
+    doc.text("Fresh4You Fruit shop", 14, 15);
+
     doc.setFontSize(16);
     doc.text(title, 14, 40);
     doc.setFontSize(12);
     doc.text(`Generated on: ${formattedDate}`, 14, 50);
+
     doc.autoTable({ head: [headers], body: rows, startY: 60, styles });
+
     doc.save(`Offer_report_${formattedDate}.pdf`);
   };
 
@@ -140,7 +139,7 @@ export default function AdminOffer() {
       </div>
       <div className="grid gap-4  lg:grid-cols-12 md:grid-cols-12 divide-x ">
         <div className="grid-col-1  lg:col-span-2 md:col-span-3 ">
-          <AdminSideBar />
+          <AdminSideBar  className=""/>
         </div>
         <div className="grid-col-11 lg:col-span-10 md:col-span-9 h-max  text-black scroll-smooth overflow-auto max-h-svh ">
           <h1 className="text-2xl ml-10 mt-10 inline-block">
@@ -226,7 +225,7 @@ export default function AdminOffer() {
                       />
                     </td>
                     <td className="border-y px-4 py-2 ">
-                      <Link to={`/UpdateOffer/${offer._id}`} className="flex justify-center">
+                      <Link to="/UpdateOffer" className="flex justify-center">
                         <IoIosCreate className="text-green-600 text-2xl" />
                       </Link>
                     </td>

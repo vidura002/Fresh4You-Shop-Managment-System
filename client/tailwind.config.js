@@ -39,7 +39,6 @@ export default {
       fontFamily:{
         'kotta': ['Kotta One', 'serif'],
         'madimi': ['Madimi One', 'sans-serif'], 
-        'font2':['Rajdhani','sans-serif']
       }
     },
   },
