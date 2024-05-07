@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const CreateOffer = () => {
-  const [offerID, setOfferID] = useState("");
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [variant, setVariant] = useState("");
@@ -48,8 +47,7 @@ const CreateOffer = () => {
       setAlertMessageQuantity("Quantity should be a positive integer.");
       return;
     }
-    const OfferData = {
-      offerID,
+    const offerData = {
       name,
       price,
       variant,
@@ -60,11 +58,10 @@ const CreateOffer = () => {
     try {
       const response = await axios.post(
         "http://localhost:3000/api/Offer/create",
-        OfferData
+        offerData
       );
       if (response.data.success) {
         console.log("Data successfully added to MongoDB!");
-        setOfferID("");
         setName("");
         setPrice("");
         setVariant("");
@@ -102,7 +99,6 @@ const CreateOffer = () => {
       cancelButtonText: "No",
     }).then((result) => {
       if (result.isConfirmed) {
-        setOfferID("");
         setName("");
         setPrice("");
         setVariant("");
@@ -115,38 +111,19 @@ const CreateOffer = () => {
   };
 
   return (
-    <div className="mt-10 ml-20 mr-20 p-10 bg-green-200 shadow-md rounded-md">
-        
+    <div className="min-h-screen bg-yellow-100">
+    <div className="p-16 ">
+    <div className="p-12 mr-32 ml-32 bg-green-200 shadow-md rounded-md">
       <div className="flex gap-2">
         <Link to="/AdminOffer">
           <IoArrowBackCircleOutline className="text-4xl" />
         </Link>
-        <h2 className="text-2xl font-semibold mb-4">Offer Information</h2>
+        <h2 className="text-2xl font-semibold mb-4">Add Offer</h2>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-10">
           <div>
             <div className="mb-5">
-            <div className="mb-4">
-              <label
-                htmlFor="offerID"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Offer ID
-              </label>
-              <input
-                type="text"
-                id="offerID"
-                name="offerID"
-                value={offerID}
-                onChange={(e) => {
-                  setOfferID(e.target.value);
-                  setAlertMessage("");
-                }}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-              />
-            </div>
-            <div className="mb-4">
               <label
                 htmlFor="name"
                 className="block text-gray-700 font-bold mb-2"
@@ -169,7 +146,9 @@ const CreateOffer = () => {
                 }}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               />
-            {alertMessage && (<p className="text-red-500 mt-1">{alertMessage}</p>)}
+              {alertMessage && (
+                <p className="text-red-500 mt-1">{alertMessage}</p>
+              )}
             </div>
             <div className="mb-4">
               <label
@@ -183,7 +162,7 @@ const CreateOffer = () => {
                 name="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                className="w-full px-3 py-2 border h-32 border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               />
             </div>
           </div>
@@ -205,9 +184,11 @@ const CreateOffer = () => {
                 step="0.01"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               />
-              {alertMessageNumber && (<p className="text-red-500 mt-1">{alertMessageNumber}</p>)}
+              {alertMessageNumber && (
+                <p className="text-red-500 mt-1">{alertMessageNumber}</p>
+              )}
             </div>
-            
+
             <div className="mb-4">
               <label
                 htmlFor="quantity"
@@ -224,7 +205,9 @@ const CreateOffer = () => {
                 min="0"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
               />
-               {alertMessageQuantity && (<p className="text-red-500 mt-1">{alertMessageQuantity}</p>)}
+              {alertMessageQuantity && (
+                <p className="text-red-500 mt-1">{alertMessageQuantity}</p>
+              )}
             </div>
             <div className="mb-4">
               <label
@@ -268,6 +251,8 @@ const CreateOffer = () => {
           </button>
         </div>
       </form>
+    </div>
+    </div>
     </div>
   );
 };

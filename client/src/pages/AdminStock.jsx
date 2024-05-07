@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import AdminNavBar from "../components/AdminNavBar";
 import AdminSideBar from "../components/AdminSideBar";
 import { CgAddR } from "react-icons/cg";
 import { FaPenToSquare } from "react-icons/fa6";
 import { MdDeleteForever } from "react-icons/md";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { IoMdEye } from "react-icons/io";
 import { RiAiGenerate } from "react-icons/ri";
 import { BsCartX } from "react-icons/bs";
 import { TiShoppingCart } from "react-icons/ti";
@@ -19,15 +20,11 @@ export default function AdminStock() {
   const [rowCount, setRowCount] = useState(0);
   const [outOfStockItemCount, setOutOfStockItemCount] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
-  const [showOutOfStock, setShowOutOfStock] = useState(false);
-  const [showItemsLessThan100, setShowItemsLessThan100] = useState(false);
-
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  //Handle delete fruit button
   const handleConfirmClick = (itemId) => {
     swt
       .fire({
@@ -53,7 +50,6 @@ export default function AdminStock() {
       });
   };
 
-  //get all data
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -63,27 +59,15 @@ export default function AdminStock() {
         console.log("API:", response.data); 
         setData(response.data.data); 
 
-        let filteredData = response.data.data;
-        if (showOutOfStock) {
-          filteredData = filteredData.filter(
-            (item) => item.FruitQuantity === 0
-          );
-        }
-        if (showItemsLessThan100) {
-          filteredData = filteredData.filter(
-            (item) => item.FruitQuantity < 100
-          );
-        }
-
-        const below100 = filteredData.filter(
+        const below100 = response.data.data.filter(
           (item) => item.FruitQuantity < 100
         );
         setItemsBelow100(below100.length);
 
-        setRowCount(filteredData.length);
+        setRowCount(response.data.data.length);
 
-        const outOfStockItems = filteredData.filter(
-          (item) => item.FruitQuantity === 0
+        const outOfStockItems = response.data.data.filter(
+          (item) => item.FruitQuantity <= 0
         );
         setOutOfStockItemCount(outOfStockItems.length);
       } catch (error) {
@@ -92,72 +76,16 @@ export default function AdminStock() {
     };
 
     fetchData();
-  }, [showOutOfStock, showItemsLessThan100]);
+  }, []);
 
-  //useEffect to serach item
   useEffect(() => {
     const results = data.filter(
       (item) =>
         item.FruitName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.FruitID.toString().includes(searchTerm) ||
-        item.category.toLowerCase().includes(searchTerm.toLowerCase())
+        item.FruitID.toString().includes(searchTerm)
     );
     setSearchResults(results);
   }, [searchTerm, data]);
-
-  //Generate report
-  const generateReport = () => {
-    const doc = new jsPDF();
-
-    const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleString();
-    const shopName = "Fresh4You Fruit shop";
-    const title = "Stock Report";
-    const headers = ["Fruit ID", "Fruit Name", "Category", "Quantity", "Price"];
-    const rows = searchResults.map((item) => [
-      item.FruitID,
-      item.FruitName,
-      item.category,
-      `${item.FruitQuantity} kg`,
-      `Rs.${item.price}.00`,
-    ]);
-
-    const styles = {
-      headStyles: {
-        fillColor: "#4CAF50",
-        textColor: "#FFFFFF",
-        fontSize: 13,
-        fontStyle: "bold",
-      },
-      bodyStyles: {
-        textColor: "#111827",
-        fontSize: 12,
-      },
-      alternateRowStyles: {
-        fillColor: "#F3F4F6",
-      },
-    };
-
-    const logo = new Image();
-    logo.src = "../src/images/report.png";
-    doc.addImage(logo, "PNG", 10, 10, 20, 20);
-
-    doc.setFontSize(20);
-    doc.text(shopName, 30, 23);
-    doc.setFontSize(16);
-    doc.text(title, 14, 40);
-    doc.setFontSize(12);
-    doc.text(`Generated on: ${formattedDate}`, 14, 50);
-    doc.autoTable({ head: [headers], body: rows, startY: 60, styles });
-
-    doc.save(`Stock_Report_${formattedDate}.pdf`);
-
-    swal.fire({
-      icon: "success",
-      title: "Report Generated",
-      text: "The report has been successfully generated!",
-    });
-  };
 
   return (
     <div className="">
@@ -172,12 +100,19 @@ export default function AdminStock() {
           <h1 className="text-2xl ml-10 mt-10 inline-block font-bold">
             Stock Management{" "}
           </h1>
-          <div className="float-right mr-16 mt-10 ">
+          <div className="float-right mr-10 mt-10">
+            <IoMdNotificationsOutline className="text-black text-3xl" />
+            <span></span>
+          </div>
+          <div className="float-right mr-10 mt-10">
             <a href="/AddStock">
-              <CgAddR className="text-green-600 text-4xl cursor-copy" />
+              <CgAddR className="text-green-600 text-3xl cursor-copy" />
             </a>
           </div>
           <div className="float-right mr-10 mt-10">
+            <a href="/AddStock">
+              <RiAiGenerate className="text-green-600 text-3xl" />
+            </a>
           </div>
           <br />
           <div className="flex justify-center">
@@ -214,36 +149,10 @@ export default function AdminStock() {
             <div className="grid grid-col-3 bg-red-600 p-5 rounded-2xl">
               <div className="grid grid-cols-2">
                 <BsCartX className="text-white text-4xl" />
-                <span className="text-xl text-black font-medium">
-                  Out of Stock
-                </span>
+                <span className="text-xl text-slate-300 font-medium">Out of Stock</span>
                 <p> </p>
                 <p className="text-6xl font-bold text-slate-300 inline-block align-middle">{outOfStockItemCount}</p>
               </div>
-            </div>
-          </div>
-          <div className="flex ml-10 gap-10 mb-5 font-medium ">
-            <div className="flex gap-2 bg-red-100 p-1  pl-2 rounded-lg shadow-sm ring ring-pink-500 ring-offset-4">
-              <input
-                type="checkbox"
-                id="outOfStockCheckbox"
-                checked={showOutOfStock}
-                onChange={() => setShowOutOfStock(!showOutOfStock)}
-                className="transform scale-150 accent-pink-500"
-              />
-              <label htmlFor="outOfStockCheckbox">Show Out of Stock</label>
-            </div>
-            <div className="flex gap-2 bg-yellow-100 p-1 pl-2 rounded-lg shadow-sm ring ring-yellow-500 ring-offset-4 ">
-              <input
-                type="checkbox"
-                id="itemsLessThan100Checkbox"
-                checked={showItemsLessThan100}
-                onChange={() => setShowItemsLessThan100(!showItemsLessThan100)}
-                className="transform scale-150 accent-yellow-500"
-              />
-              <label htmlFor="itemsLessThan100Checkbox">
-                Show Items Less Than 100kg
-              </label>
             </div>
           </div>
           <div className="grid justify-items-center ml-10 mr-10 ">
@@ -259,7 +168,6 @@ export default function AdminStock() {
                     Fruit ID
                   </th>
                   <th className="w-48 h-12  border-b-2">Fruit Name</th>
-                  <th className="w-48 h-12  border-b-2">Category</th>
                   <th className="w-48 h-12  border-b-2">Quantity</th>
                   <th className="w-48 h-12  border-b-2">Price</th>
                   <th className="w-48 h-12 border-b-2">Image</th>
@@ -269,38 +177,34 @@ export default function AdminStock() {
                 </tr>
               </thead>
               <tbody>
-                {searchResults.map((item, index) => {
-                  const showItem =
-                    (!showOutOfStock || item.FruitQuantity === 0) &&
-                    (!showItemsLessThan100 || item.FruitQuantity < 100);
-                  return showItem ? (
-                    <tr key={index}>
-                      <td className="h-12 border-b-2 p-2">{item.FruitID}</td>
-                      <td className="border-b-2">{item.FruitName}</td>
-                      <td className="border-b-2">{item.category}</td>
-                      <td className="border-b-2">{item.FruitQuantity}kg</td>
-                      <td className="border-b-2">Rs.{item.price}.00</td>
-                      <td className="border-b-2">
-                        <img
-                          src={item.image}
-                          alt={item.FruitName}
-                          className="w-16 h-16 object-cover flex items-center justify-center rounded-2xl p-1"
-                        />
-                      </td>
-                      <td className="border-b-2 w-16"></td>
-                      <td className="border-b-2 w-16">
-                        <Link to={`/UpdateStock/${item._id}`}>
-                          <FaPenToSquare className="text-green-600 text-2xl" />
-                        </Link>
-                      </td>
-                      <td className="border-b-2 w-16">
-                        <button onClick={() => handleConfirmClick(item._id)}>
-                          <MdDeleteForever className="text-red-600 text-3xl" />
-                        </button>
-                      </td>
-                    </tr>
-                  ) : null;
-                })}
+                {searchResults.map((item, index) => (
+                  <tr key={index}>
+                    <td className="h-12 border-b-2 p-2">{item.FruitID}</td>
+                    <td className="border-b-2">{item.FruitName}</td>
+                    <td className="border-b-2">{item.FruitQuantity}kg</td>
+                    <td className="border-b-2">Rs.{item.price}.00</td>
+                    <td className="border-b-2">
+                      <img
+                        src={item.image}
+                        alt={item.FruitName}
+                        className="w-16 h-16 object-cover flex items-center justify-center rounded-2xl p-1"
+                      />
+                    </td>
+                    <td className="border-b-2 w-16">
+                      
+                    </td>
+                    <td className="border-b-2 w-16">
+                      <a href="/UpdateStock">
+                        <FaPenToSquare className="text-green-600 text-2xl" />
+                      </a>
+                    </td>
+                    <td className="border-b-2 w-16">
+                    <button onClick={() => handleConfirmClick(item._id)}>
+                        <MdDeleteForever className="text-red-600 text-3xl" />
+                    </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

@@ -39,7 +39,7 @@ const OfferImageAdd = ({ onImageUrlChange }) => {
         <input
           type="file"
           onChange={handleImageChange}
-          className="mt-4 bg-white border border-gray-300  rounded-xl bg-red-300 py-2 px-4 w-full inline-block focus:outline-none focus:border-indigo-500"
+          className="mt-4 bg-white border border-gray-300  rounded-xl  py-2 px-4 w-full inline-block focus:outline-none focus:border-indigo-500"
         />
       </div>
       <div className="flex ">
@@ -48,7 +48,7 @@ const OfferImageAdd = ({ onImageUrlChange }) => {
           className={"p-2 bg-yellow-200 rounded-xl cursor-pointer w-64 mt-10 focus:outline-none focus:bg-orange-400 "}
           disabled={uploading}
         >
-         {uploading ? 'Uploading...' : 'Upload'}
+         {uploading ? 'Uploading...' : 'Upload Image'}
         </button>
       </div>
     </div>
