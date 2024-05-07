@@ -112,147 +112,148 @@ const CreateOffer = () => {
 
   return (
     <div className="min-h-screen bg-yellow-100">
-      <div className="p-16 ">
-        <div className="p-12 mr-32 ml-32 bg-green-200 shadow-md rounded-md">
-          <div className="flex gap-2">
-            <Link to="/AdminOffer">
-              <IoArrowBackCircleOutline className="text-4xl" />
-            </Link>
-            <h2 className="text-2xl font-semibold mb-4">Add Offer</h2>
+    <div className="p-16 ">
+    <div className="p-12 mr-32 ml-32 bg-green-200 shadow-md rounded-md">
+      <div className="flex gap-2">
+        <Link to="/AdminOffer">
+          <IoArrowBackCircleOutline className="text-4xl" />
+        </Link>
+        <h2 className="text-2xl font-semibold mb-4">Add Offer</h2>
+      </div>
+      <form onSubmit={handleSubmit}>
+        <div className="grid grid-cols-2 gap-10">
+          <div>
+            <div className="mb-5">
+              <label
+                htmlFor="name"
+                className="block text-gray-700 font-bold mb-2"
+              >
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={name}
+                onChange={(e) => {
+                  const inputName = e.target.value;
+                  if (/^[A-Za-z\s]+$/.test(inputName) || inputName === "") {
+                    setName(inputName);
+                    setAlertMessage("");
+                  } else {
+                    setAlertMessage("Name should contain only letters.");
+                  }
+                }}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+              />
+              {alertMessage && (
+                <p className="text-red-500 mt-1">{alertMessage}</p>
+              )}
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="description"
+                className="block text-gray-700 font-bold mb-2"
+              >
+                Description
+              </label>
+              <textarea
+                id="description"
+                name="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className="w-full px-3 py-2 border h-32 border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+              />
+            </div>
           </div>
-          <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-2 gap-10">
-              <div>
-                <div className="mb-5">
-                  <label
-                    htmlFor="name"
-                    className="block text-gray-700 font-bold mb-2"
-                  >
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={name}
-                    onChange={(e) => {
-                      const inputName = e.target.value;
-                      if (/^[A-Za-z\s]+$/.test(inputName) || inputName === "") {
-                        setName(inputName);
-                        setAlertMessage("");
-                      } else {
-                        setAlertMessage("Name should contain only letters.");
-                      }
-                    }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                  />
-                  {alertMessage && (
-                    <p className="text-red-500 mt-1">{alertMessage}</p>
-                  )}
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="description"
-                    className="block text-gray-700 font-bold mb-2"
-                  >
-                    Description
-                  </label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="w-full px-3 py-2 border h-32 border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                  />
-                </div>
-              </div>
-              <div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="price"
-                    className="block text-gray-700 font-bold mb-2"
-                  >
-                    Price
-                  </label>
-                  <input
-                    type="number"
-                    id="price"
-                    name="price"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    min="0"
-                    step="0.01"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                  />
-                  {alertMessageNumber && (
-                    <p className="text-red-500 mt-1">{alertMessageNumber}</p>
-                  )}
-                </div>
-
-                <div className="mb-4">
-                  <label
-                    htmlFor="quantity"
-                    className="block text-gray-700 font-bold mb-2"
-                  >
-                    Quantity
-                  </label>
-                  <input
-                    type="number"
-                    id="quantity"
-                    name="quantity"
-                    value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
-                    min="0"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                  />
-                  {alertMessageQuantity && (
-                    <p className="text-red-500 mt-1">{alertMessageQuantity}</p>
-                  )}
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="variant"
-                    className="block text-gray-700 font-bold mb-2"
-                  >
-                    Variant
-                  </label>
-                  <select
-                    id="variant"
-                    name="variant"
-                    value={variant}
-                    onChange={(e) => setVariant(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                  >
-                    <option value=""></option>
-                    <option value="Small">Small</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Large">Large</option>
-                  </select>
-                </div>
-              </div>
+          <div>
+            <div className="mb-4">
+              <label
+                htmlFor="price"
+                className="block text-gray-700 font-bold mb-2"
+              >
+                Price
+              </label>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                min="0"
+                step="0.01"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+              />
+              {alertMessageNumber && (
+                <p className="text-red-500 mt-1">{alertMessageNumber}</p>
+              )}
             </div>
 
             <div className="mb-4">
-              <OfferImageAdd onImageUrlChange={handleImageUrlChange} />
-            </div>
-            <div className="flex gap-5 justify-end">
-              <button
-                type="submit"
-                className="w-72 bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-600"
+              <label
+                htmlFor="quantity"
+                className="block text-gray-700 font-bold mb-2"
               >
-                Submit
-              </button>
-              <button
-                type="button"
-                className=" w-72 bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none focus:bg-gray-400"
-                onClick={handleCancelClick}
-              >
-                Cancel
-              </button>
+                Quantity
+              </label>
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+                min="0"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+              />
+              {alertMessageQuantity && (
+                <p className="text-red-500 mt-1">{alertMessageQuantity}</p>
+              )}
             </div>
-          </form>
+            <div className="mb-4">
+              <label
+                htmlFor="variant"
+                className="block text-gray-700 font-bold mb-2"
+              >
+                Variant
+              </label>
+              <select
+                id="variant"
+                name="variant"
+                value={variant}
+                onChange={(e) => setVariant(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+              >
+                <option value=""></option>
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
+              </select>
+            </div>
+          </div>
         </div>
-      </div>
+
+        <div className="mb-4">
+          <OfferImageAdd onImageUrlChange={handleImageUrlChange} />
+        </div>
+        <div className="flex gap-5 justify-end">
+          <button
+            type="submit"
+            className="w-72 bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-600"
+          >
+            Submit
+          </button>
+          <button
+            type="button"
+            className=" w-72 bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none focus:bg-gray-400"
+            onClick={handleCancelClick}
+          >
+            Cancel
+          </button>
+        </div>
+        </div>
+      </form>
+    </div>
+    </div>
     </div>
   );
 };
