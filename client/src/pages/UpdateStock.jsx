@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Link, useParams } from "react-router-dom";
 
@@ -19,21 +19,24 @@ export default function UpdateStock() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/Stock/${id}`);
+        const response = await axios.get(
+          `http://localhost:3000/api/Stock/${id}`
+        );
         const { FruitName, FruitQuantity, price, image } = response.data;
         setFruitName(FruitName);
         setFruitQuantity(FruitQuantity);
         setPrice(price);
         setImageUrl(image);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
         const response = await axios.get(
           `http://localhost:3000/api/Stock/${_id}`
         );
         setStockItem(response.data.data);
-      } catch (error) {
-        console.error("Error fetching stock item:", error);
       }
+      // catch (error) {
+      //   console.error("Error fetching stock item:", error);
+      // }
     };
 
     fetchData();
@@ -47,14 +50,17 @@ export default function UpdateStock() {
     e.preventDefault();
     const stockData = { FruitName, FruitQuantity, price, image };
     try {
-      const response = await axios.put(`http://localhost:3000/api/Stock/Update/${id}`, stockData);
+      const response = await axios.put(
+        `http://localhost:3000/api/Stock/Update/${id}`,
+        stockData
+      );
       if (response.data.success) {
-        console.log('Data successfully updated in MongoDB!');
+        console.log("Data successfully updated in MongoDB!");
       } else {
-        console.error('Error updating data in MongoDB:', response.data.message);
+        console.error("Error updating data in MongoDB:", response.data.message);
       }
     } catch (error) {
-      console.error('Error updating data in MongoDB:', error);
+      console.error("Error updating data in MongoDB:", error);
     }
   };
 
@@ -64,11 +70,16 @@ export default function UpdateStock() {
         <Link to="/AdminStock">
           <IoArrowBackCircleOutline className="text-4xl" />
         </Link>
-        <h2 className="text-2xl font-semibold mb-4">Update Stock Information</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          Update Stock Information
+        </h2>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label htmlFor="fruitName" className="block text-gray-700 font-bold mb-2">
+          <label
+            htmlFor="fruitName"
+            className="block text-gray-700 font-bold mb-2"
+          >
             Fruit Name
           </label>
           <input
@@ -81,7 +92,10 @@ export default function UpdateStock() {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="fruitQuantity" className="block text-gray-700 font-bold mb-2">
+          <label
+            htmlFor="fruitQuantity"
+            className="block text-gray-700 font-bold mb-2"
+          >
             Fruit Quantity (kg)
           </label>
           <input
@@ -111,7 +125,7 @@ export default function UpdateStock() {
           />
         </div>
         <div className="mb-4">
-        <UploadImage onImageUrlChange={handleImageUrlChange} />
+          <UploadImage onImageUrlChange={handleImageUrlChange} />
         </div>
         <button
           type="submit"
@@ -122,6 +136,4 @@ export default function UpdateStock() {
       </form>
     </div>
   );
-};
-
-export default UpdateStock;
+}

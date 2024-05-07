@@ -7,6 +7,10 @@ import Footer from "../components/Footer";
 function FruitCatelog() {
   const location = useLocation();
   const [data, setData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState();
+  const [sortOption, setSortOption] = useState();
+  const [priceRange, setPriceRange] = useState();
+  const [showAvailableOnly, setShowAvailableOnly] = useState();
 
   //get all offers
   const fetchData = async () => {
@@ -80,19 +84,22 @@ function FruitCatelog() {
       </div>
       <br />
       <hr />
-      
+
       <div className="bg-gray-200 p-4 grid grid-cols-3">
         <div></div>
-        <div><h2 className="text-lg font-semibold mb-4 ">Filters</h2>
-        <label htmlFor="search ">Search:</label>
-        <input
-          type="text"
-          id="search"
-          onChange={(e) => handleFilter(e.target.value)}
-          className="border border-gray-300 rounded-md px-2 py-1 mb-4 block w-96 "
-        /></div>
+        <div>
+          <h2 className="text-lg font-semibold mb-4 ">Filters</h2>
+          <label htmlFor="search ">Search:</label>
+          <input
+            type="text"
+            id="search"
+            onChange={(e) => handleFilter(e.target.value)}
+            className="border border-gray-300 rounded-md px-2 py-1 mb-4 block w-96 "
+          />
+        </div>
         <div></div>
-      </div><br />
+      </div>
+      <br />
       <ul className="grid gap-5 md:grid-cols-3 lg:grid-cols-5 ml-10 mr-10 ">
         {data.map((item, index) => (
           <li
@@ -156,7 +163,10 @@ function FruitCatelog() {
                     onChange={() => handleSortChange("priceLowToHigh")}
                     className="form-checkbox h-5 w-5 accent-green-500 mr-2"
                   />
-                  <label htmlFor="priceLowToHigh" className="text-lg font-font1 font-medium text-black">
+                  <label
+                    htmlFor="priceLowToHigh"
+                    className="text-lg font-font1 font-medium text-black"
+                  >
                     Price low to high
                   </label>
                 </div>
@@ -169,7 +179,10 @@ function FruitCatelog() {
                     onChange={() => handleSortChange("priceHighToLow")}
                     className="form-checkbox h-5 w-5 accent-green-500 mr-2"
                   />
-                  <label htmlFor="priceHighToLow" className="text-lg font-font1 font-medium text-black">
+                  <label
+                    htmlFor="priceHighToLow"
+                    className="text-lg font-font1 font-medium text-black"
+                  >
                     Price high to low
                   </label>
                 </div>
@@ -182,7 +195,10 @@ function FruitCatelog() {
                     onChange={() => handleSortChange("alphabeticallyAZ")}
                     className="form-checkbox h-5 w-5 accent-green-500 mr-2"
                   />
-                  <label htmlFor="alphabeticallyAZ" className="text-lg font-font1 font-medium text-black">
+                  <label
+                    htmlFor="alphabeticallyAZ"
+                    className="text-lg font-font1 font-medium text-black"
+                  >
                     Alphabetically A-Z
                   </label>
                 </div>
@@ -195,7 +211,10 @@ function FruitCatelog() {
                     onChange={() => handleSortChange("alphabeticallyZA")}
                     className="form-checkbox h-5 w-5 accent-green-500 mr-2"
                   />
-                  <label htmlFor="alphabeticallyZA" className="text-lg font-font1 font-medium text-black">
+                  <label
+                    htmlFor="alphabeticallyZA"
+                    className="text-lg font-font1 font-medium text-black"
+                  >
                     Alphabetically Z-A
                   </label>
                 </div>
@@ -210,24 +229,28 @@ function FruitCatelog() {
                 type="range"
                 min="0"
                 max="3000"
-                value={priceRange[0]}
+                // value={priceRange[0]}
                 onChange={handlePriceRangeChange}
                 data-index={0}
                 className="w-32 accent-green-400"
               />
-              <span className="ml-2 text-lg font-font1 font-medium text-black">Rs. {priceRange[0]}.00</span>
+              <span className="ml-2 text-lg font-font1 font-medium text-black">
+                {/* Rs. {priceRange[0]}.00 */}
+              </span>
             </div>
             <div className="flex mb-5">
               <input
                 type="range"
                 min="0"
                 max="3000"
-                value={priceRange[1]}
+                // value={priceRange[1]}
                 onChange={handlePriceRangeChange}
                 data-index={1}
                 className="w-32 accent-green-400"
               />
-              <span className="ml-2 text-lg font-font1 font-medium text-black">Rs. {priceRange[1]}.00</span>
+              <span className="ml-2 text-lg font-font1 font-medium text-black">
+                {/* Rs. {priceRange[1]}.00 */}
+              </span>
             </div>
             <div className="mb-5">
               <span className="text-lg font-semibold">Availability</span>
@@ -274,8 +297,13 @@ function FruitCatelog() {
                 <div className="flex items-center justify-center">
                   <img src={item.image} alt={item.FruitName} />
                 </div>
-                <div className="p-4">                
-                  <h2 className="text-lg font-semibold">{item.FruitName} - <span className="text-lg font-semibold ">{item.category}</span></h2>
+                <div className="p-4">
+                  <h2 className="text-lg font-semibold">
+                    {item.FruitName} -{" "}
+                    <span className="text-lg font-semibold ">
+                      {item.category}
+                    </span>
+                  </h2>
                   <p className="text-red-600 text-2xl">
                     Rs.{item.price}.00{" "}
                     <span className="text-black text-lg">[Per 100g]</span>
@@ -288,7 +316,7 @@ function FruitCatelog() {
                         : ""
                     }`}
                     disabled={item.FruitQuantity === 0}
-                    onClick={() => handleAddToCart(item.itemId, 0.1)} 
+                    onClick={() => handleAddToCart(item.itemId, 0.1)}
                   >
                     {item.FruitQuantity === 0 ? "Sold Out" : "Add to Cart"}
                   </button>
