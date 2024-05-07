@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import UploadImage from "../components/UploadImage";
-import axios from "axios";
+import axios from 'axios';
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
 
 const AddStock = () => {
   const [fruitName, setFruitName] = useState("");
@@ -21,7 +20,7 @@ const AddStock = () => {
   //Handel create stock fruit
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const stockData = { FruitID: fruitId, FruitName: fruitName, FruitQuantity: fruitQuantity, price: price, image: image };
     const stockData = {
       FruitName: fruitName,
       FruitQuantity: fruitQuantity,
@@ -30,10 +29,7 @@ const AddStock = () => {
       image: image,
     };
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/stock/createstock",
-        stockData
-      );
+      const response = await axios.post('http://localhost:3000/api/stock/createstock', stockData);
       if (response.data.success) {
         console.log("Data successfully added to MongoDB!");
         setFruitName("");
@@ -47,27 +43,11 @@ const AddStock = () => {
           text: "Data successfully added to MongoDB!",
         });
       } else {
-        console.error("Error adding data to MongoDB:", response.data.message);
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: response.data.message,
-        });
+        console.error('Error adding data to MongoDB:', response.data.message);
       }
     } catch (error) {
-      if (
-        error.response &&
-        error.response.status === 400 &&
-        error.response.data.error === "FruitID already exists"
-      ) {
-        setAlertMessage(
-          "Fruit ID already exists. Please enter a different Fruit ID."
-        );
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "Fruit ID already exists. Please enter a different Fruit ID.",
-        });
+      if (error.response && error.response.status === 400 && error.response.data.error === 'FruitID already exists') {
+        setAlertMessage('Fruit ID already exists. Please enter a different Fruit ID.');
       } else {
         console.error("Error adding data to MongoDB:", error);
         Swal.fire({
@@ -115,6 +95,7 @@ const AddStock = () => {
       });
     }
   };
+  
 
   return (
     <div className="min-h-screen grid bg-yellow-100">

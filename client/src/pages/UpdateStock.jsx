@@ -6,6 +6,12 @@ import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
+const UpdateStock = () => {
+  const { id } = useParams(); 
+  const [fruitName, setFruitName] = useState("");
+  const [fruitQuantity, setFruitQuantity] = useState("");
+  const [price, setPrice] = useState("");
+  const [image, setImageUrl] = useState("");
 export default function UpdateStock() {
   const { _id } = useParams();
   const [stockItem, setStockItem] = useState(null);
@@ -23,6 +29,15 @@ export default function UpdateStock() {
   useEffect(() => {
     const fetchStockItem = async () => {
       try {
+        const response = await axios.get(`http://localhost:3000/api/Stock/${id}`);
+        const { FruitName, FruitQuantity, price, image } = response.data;
+        setFruitName(FruitName);
+        setFruitQuantity(FruitQuantity);
+        setPrice(price);
+        setImageUrl(image);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+
         const response = await axios.get(
           `http://localhost:3000/api/Stock/${_id}`
         );

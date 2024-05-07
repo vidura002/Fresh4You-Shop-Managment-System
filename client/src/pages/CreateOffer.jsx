@@ -126,6 +126,7 @@ const CreateOffer = () => {
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-10">
           <div>
+            <div className="mb-5">
             <div className="mb-4">
               <label
                 htmlFor="offerID"

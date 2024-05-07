@@ -10,9 +10,7 @@ import { RiAiGenerate } from "react-icons/ri";
 import { BsCartX } from "react-icons/bs";
 import { TiShoppingCart } from "react-icons/ti";
 import { BsGraphDownArrow } from "react-icons/bs";
-import swal from "sweetalert2";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
+import swt from "sweetalert2";
 
 export default function AdminStock() {
   const [data, setData] = useState([]);
@@ -31,7 +29,7 @@ export default function AdminStock() {
 
   //Handle delete fruit button
   const handleConfirmClick = (itemId) => {
-    swal
+    swt
       .fire({
         title: "Are you sure?",
         text: "Delete this item from Stock",
@@ -43,16 +41,14 @@ export default function AdminStock() {
       .then(async (result) => {
         if (result.isConfirmed) {
           try {
-            await axios.delete(
-              `http://localhost:3000/api/Stock/Delete/${itemId}`
-            );
-            swal.fire("Deleted!", `Item has been deleted`, "success");
+            await axios.delete(`http://localhost:3000/api/Stock/Delete/${itemId}`);
+            swt.fire("Deleted!", `Item has been deleted`, "success");
           } catch (error) {
             console.error("Error deleting item:", error);
-            swal.fire("Error", "Failed to delete item", "error");
+            swt.fire("Error", "Failed to delete item", "error");
           }
-        } else if (result.dismiss === swal.DismissReason.cancel) {
-          swal.fire("Cancelled", "This item is still in stock ", "error");
+        } else if (result.dismiss === swt.DismissReason.cancel) {
+          swt.fire("Cancelled", "This item is still in stock ", "error");
         }
       });
   };
@@ -64,8 +60,8 @@ export default function AdminStock() {
         const response = await axios.get(
           "http://localhost:3000/api/Stock/getAll"
         );
-        console.log("API:", response.data);
-        setData(response.data.data);
+        console.log("API:", response.data); 
+        setData(response.data.data); 
 
         let filteredData = response.data.data;
         if (showOutOfStock) {
@@ -108,7 +104,6 @@ export default function AdminStock() {
     );
     setSearchResults(results);
   }, [searchTerm, data]);
-
 
   //Generate report
   const generateReport = () => {
@@ -183,10 +178,6 @@ export default function AdminStock() {
             </a>
           </div>
           <div className="float-right mr-10 mt-10">
-            <RiAiGenerate
-              className="text-green-600 text-4xl cursor-pointer"
-              onClick={generateReport}
-            />
           </div>
           <br />
           <div className="flex justify-center">
@@ -209,21 +200,15 @@ export default function AdminStock() {
                 <TiShoppingCart className="text-white text-4xl" />
                 <span className="text-xl font-medium">Total Fruit Item</span>
                 <p></p>
-                <p className="text-6xl  font-bold text-white inline-block align-middle">
-                  {rowCount}
-                </p>
+                <p className="text-6xl  font-bold text-white inline-block align-middle">{rowCount}</p>
               </div>
             </div>
             <div className=" grid grid-col-2 bg-yellow-500 p-5 rounded-2xl">
               <div className="grid grid-cols-2">
                 <BsGraphDownArrow className="text-white text-4xl" />
-                <span className="text-xl font-medium">
-                  Number of Items less than 100kg
-                </span>
+                <span className="text-xl font-medium">Number of Items less than 100kg</span>
                 <p> </p>
-                <p className="text-6xl  font-bold text-white inline-block align-middle">
-                  {itemsBelow100}
-                </p>
+                <p className="text-6xl  font-bold text-white inline-block align-middle">{itemsBelow100}</p>
               </div>
             </div>
             <div className="grid grid-col-3 bg-red-600 p-5 rounded-2xl">
@@ -233,9 +218,7 @@ export default function AdminStock() {
                   Out of Stock
                 </span>
                 <p> </p>
-                <p className="text-6xl font-bold text-slate-300 inline-block align-middle">
-                  {outOfStockItemCount}
-                </p>
+                <p className="text-6xl font-bold text-slate-300 inline-block align-middle">{outOfStockItemCount}</p>
               </div>
             </div>
           </div>

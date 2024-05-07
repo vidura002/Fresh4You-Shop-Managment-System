@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -39,6 +40,9 @@ export default function SignIn() {
     };
 
     return (
+        <div className="p-3 max-w-lg mx-auto">
+            <h1 className="text-4xl text-center font-semibold my-8">Sign In</h1>
+
         <div>
             <Header />
         <div className="p-3 max-w-lg mx-auto">
@@ -59,7 +63,6 @@ export default function SignIn() {
             </div>
             {error && <p className="text-red-500 mt-5">{error}</p>}
         </div>
-        
-        </div>
+                </div>
     );
 }

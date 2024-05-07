@@ -1,3 +1,4 @@
+
 import { FaSearch } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -5,11 +6,14 @@ import Logo from '../images/logo.jpg';
 import { LiaShoppingCartSolid } from 'react-icons/lia';
 import { SlHandbag } from 'react-icons/sl';
 
+
+
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   const location = useLocation();
 
   return (
+
     <header className="bg-green-500">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3 shadow-green-400">
         <Link to="/">
@@ -63,12 +67,12 @@ export default function Header() {
         </ul>
       </div>
       <div className='h-1 bg-white'>
-
       </div>
-
-     
     </header>
   );
+
+            
+    
 }
 
 function NavLinkWithActiveCheck({ to, text, isActive }) {
