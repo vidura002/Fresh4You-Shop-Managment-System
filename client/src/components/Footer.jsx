@@ -21,9 +21,9 @@ const Footer = () => {
     <div className="w-full md:w-auto mb-4 md:mb-0">
       <h2 className="text-2xl font-semibold  underline decoration-green-600	 text-white">Quick Links</h2>
       <ul>
-        <li className="mb-2 md:mb-4"><Link to={"/"} className="hover:text-green-500 ">Home</Link></li>
-        <li className="mb-2 md:mb-4"><Link to={"/"} className="hover:text-green-500">Benifit</Link></li>
-        <li className="mb-2 md:mb-4"><Link to={"/About"} className="hover:text-green-500">About Us</Link></li>
+        <li className="mb-2 md:mb-4"><Link to={"/FruitCategory"} className="hover:text-green-500 ">Home</Link></li>
+        <li className="mb-2 md:mb-4"><Link to={"#about"} className="hover:text-green-500">Benifit</Link></li>
+        <li className="mb-2 md:mb-4"><Link to={"/"} className="hover:text-green-500">About Us</Link></li>
         <li className="mb-2 md:mb-4"><Link to={"/DeliveryPlaces"} className="hover:text-green-500">Where We Deliver</Link></li>
       </ul>
     </div>

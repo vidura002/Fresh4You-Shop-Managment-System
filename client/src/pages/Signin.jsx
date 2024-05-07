@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-
 export default function SignIn() {
     const [formData, setFormData] = useState({
         email: "",
@@ -60,6 +57,5 @@ export default function SignIn() {
             </div>
             {error && <p className="text-red-500 mt-5">{error}</p>}
         </div>
-                </div>
     );
 }
