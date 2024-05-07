@@ -29,14 +29,12 @@ import CartProducts from "./components/CartProducts";
 import OrderPayment from "./pages/OrderPayment";
 import FruitCatelog from "./pages/FruitCatelog";
 
-import UpdateStock from "./pages/UpdateStock"
 import { SupplierDashboard } from './pages/SupplierDashboard';
 import UserList from './pages/UserList';
 
 import UpdateStock from "./pages/UpdateStock";
 import UserOrders from "./pages/UserOrders";
 import OrderReceipt from "./pages/OrderReceipt";
-import UserList from "./pages/UserList";
 
 
 export default function App() {

@@ -39,7 +39,7 @@ function UserList() {
   return (
 
     <div className="ml-24">
-    <input
+    
 
     <div className="p-10 mb-10">
     <input className="'bg-transparent focus:outline-none w-24 sm:w-64 w-5xl h-lg'"
@@ -50,7 +50,6 @@ function UserList() {
         onChange={handleSearchChange}
       />
 
-      <table className="text-left text-sm font-light border-collapse border border-slate-500 ...">
 
       <table className="text-left text-sm font-light border-collapse border border-slate-500 ... mt-10">
 
@@ -76,6 +75,8 @@ function UserList() {
         </tbody>
       </table>
     </div>
+    </div>
+    
   );
 }
 
