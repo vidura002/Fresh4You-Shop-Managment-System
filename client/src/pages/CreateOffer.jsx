@@ -250,7 +250,6 @@ const CreateOffer = () => {
             Cancel
           </button>
         </div>
-        </div>
       </form>
     </div>
     </div>

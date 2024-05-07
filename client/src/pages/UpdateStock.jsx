@@ -19,14 +19,6 @@ export default function UpdateStock() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/Stock/${id}`);
-        const { FruitName, FruitQuantity, price, image } = response.data;
-        setFruitName(FruitName);
-        setFruitQuantity(FruitQuantity);
-        setPrice(price);
-        setImageUrl(image);
-      } catch (error) {
-        console.error('Error fetching data:', error);
         const response = await axios.get(
           `http://localhost:3000/api/Stock/${_id}`
         );
@@ -124,4 +116,4 @@ export default function UpdateStock() {
   );
 };
 
-export default UpdateStock;
+
