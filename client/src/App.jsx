@@ -67,10 +67,7 @@ export default function App() {
         <Route path="/FruitCatelog" element={<FruitCatelog/>}></Route>
         <Route path="/UpdateStock" element={<UpdateStock/>}></Route>
         <Route path="/usersList" element={<UserList/>}></Route>
-    </Routes>
     
-    </BrowserRouter>
-
         <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
         <Route path="/DeliveryPlaces" element={<DeliveryPlaces />}></Route>
         <Route path="/AdminOffer" element={<AdminOffer />}></Route>
