@@ -7,77 +7,24 @@ import Footer from "../components/Footer";
 function FruitCatelog() {
   const location = useLocation();
   const [data, setData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredData, setFilteredData] = useState([]);
-  const [sortByPrice, setSortByPrice] = useState(false);
-  const [priceRange, setPriceRange] = useState([0, 3000]);
-  const [showAvailableOnly, setShowAvailableOnly] = useState(false);
-  const [showOutOfStock, setShowOutOfStock] = useState(false);
-  const [availableCount, setAvailableCount] = useState(0);
-  const [outOfStockCount, setOutOfStockCount] = useState(0);
-  const [sortOption, setSortOption] = useState("priceLowToHigh");
+  const [searchTerm, setSearchTerm] = useState();
+  const [sortOption, setSortOption] = useState();
+  const [priceRange, setPriceRange] = useState();
+  const [showAvailableOnly, setShowAvailableOnly] = useState();
+  const [showOutOfStock, setShowOutOfStock] = useState();
 
+  //get all offers
   const fetchData = async () => {
     try {
       const response = await axios.get(
         "http://localhost:3000/api/Stock/getAll"
       );
+      console.log("API :", response.data);
       setData(response.data.data);
     } catch (error) {
       console.error("Error :", error);
     }
   };
-
-  useEffect(() => {
-    let filtered = data.filter((item) =>
-      item.FruitName.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    if (sortOption === "priceLowToHigh") {
-      filtered.sort((a, b) => a.price - b.price);
-    } else if (sortOption === "priceHighToLow") {
-      filtered.sort((a, b) => b.price - a.price);
-    } else if (sortOption === "alphabeticallyAZ") {
-      filtered.sort((a, b) => a.FruitName.localeCompare(b.FruitName));
-    } else if (sortOption === "alphabeticallyZA") {
-      filtered.sort((a, b) => b.FruitName.localeCompare(a.FruitName));
-    }
-
-    filtered = filtered.filter(
-      (item) => item.price >= priceRange[0] && item.price <= priceRange[1]
-    );
-
-    filtered = filtered.filter((item) => {
-      if (showAvailableOnly && showOutOfStock) {
-        return item.FruitQuantity > 0 || item.FruitQuantity === 0;
-      } else if (showAvailableOnly) {
-        return item.FruitQuantity > 0;
-      } else if (showOutOfStock) {
-        return item.FruitQuantity === 0;
-      } else {
-        return true;
-      }
-    });
-
-    //count the out of stock and available fruits
-    const availableCount = filtered.filter(
-      (item) => item.FruitQuantity > 0
-    ).length;
-    const outOfStockCount = filtered.filter(
-      (item) => item.FruitQuantity === 0
-    ).length;
-    setAvailableCount(availableCount);
-    setOutOfStockCount(outOfStockCount);
-
-    setFilteredData(filtered);
-  }, [
-    data,
-    searchTerm,
-    sortOption,
-    priceRange,
-    showAvailableOnly,
-    showOutOfStock,
-  ]);
 
   useEffect(() => {
     fetchData();
@@ -138,6 +85,54 @@ function FruitCatelog() {
       </div>
       <br />
       <hr />
+
+      <div className="bg-gray-200 p-4 grid grid-cols-3">
+        <div></div>
+        <div>
+          <h2 className="text-lg font-semibold mb-4 ">Filters</h2>
+          <label htmlFor="search ">Search:</label>
+          <input
+            type="text"
+            id="search"
+            onChange={(e) => handleFilter(e.target.value)}
+            className="border border-gray-300 rounded-md px-2 py-1 mb-4 block w-96 "
+          />
+        </div>
+        <div></div>
+      </div>
+      <br />
+      <ul className="grid gap-5 md:grid-cols-3 lg:grid-cols-5 ml-10 mr-10 ">
+        {data.map((item, index) => (
+          <li
+            key={index}
+            className="border border-gray-200 rounded-md overflow-hidden animate-fade-in shadow-xl"
+          >
+            <div className="flex items-center justify-center ">
+              <img src={item.image} alt={item.FruitName} className="" />
+            </div>
+            <div className="p-4">
+              <h2 className="text-lg font-semibold">{item.FruitName}</h2>
+              <p className="text-red-600 text-2xl">
+                Rs.{item.price}.00{" "}
+                <span className="text-black text-lg">[Per 100g]</span>
+              </p>
+              <br />
+              <button
+                className={`w-full bg-green-800 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:bg-indigo-600 animate-fade-in ${
+                  item.FruitQuantity === 0
+                    ? "bg-red-500 cursor-not-allowed hover:bg-red-500 "
+                    : ""
+                }`}
+                disabled={item.FruitQuantity === 0}
+              >
+                {item.FruitQuantity === 0 ? "Sold Out" : "Add to Cart"}
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <br />
+
       <div className="bg-gray-200 p-4 grid grid-cols-3 place-content-center">
         <div></div>
         <div className="flex items-center justify-center">
@@ -235,13 +230,13 @@ function FruitCatelog() {
                 type="range"
                 min="0"
                 max="3000"
-                value={priceRange[0]}
+                // value={priceRange[0]}
                 onChange={handlePriceRangeChange}
                 data-index={0}
                 className="w-32 accent-green-400"
               />
               <span className="ml-2 text-lg font-font1 font-medium text-black">
-                Rs. {priceRange[0]}.00
+                {/* Rs. {priceRange[0]}.00 */}
               </span>
             </div>
             <div className="flex mb-5">
@@ -249,13 +244,13 @@ function FruitCatelog() {
                 type="range"
                 min="0"
                 max="3000"
-                value={priceRange[1]}
+                // value={priceRange[1]}
                 onChange={handlePriceRangeChange}
                 data-index={1}
                 className="w-32 accent-green-400"
               />
               <span className="ml-2 text-lg font-font1 font-medium text-black">
-                Rs. {priceRange[1]}.00
+                {/* Rs. {priceRange[1]}.00 */}
               </span>
             </div>
             <div className="mb-5">
@@ -272,7 +267,7 @@ function FruitCatelog() {
                   className="form-checkbox h-5 w-5 accent-green-500"
                 />
                 <span className="ml-2 text-lg font-font1 font-medium text-black">
-                  Show available only ({availableCount})
+                  {/* Show available only ({availableCount}) */}
                 </span>
               </label>
             </div>
@@ -287,7 +282,7 @@ function FruitCatelog() {
                   className="form-checkbox h-5 w-5 accent-green-500"
                 />
                 <span className="ml-2 text-lg font-font1 font-medium text-black">
-                  Show out of stock only ({outOfStockCount})
+                  {/* Show out of stock only ({outOfStockCount}) */}
                 </span>
               </label>
             </div>
@@ -295,7 +290,7 @@ function FruitCatelog() {
         </div>
         <div className="col-span-4">
           <ul className="grid gap-5 md:grid-cols-3 lg:grid-cols-4 ml-10 mr-10">
-            {filteredData.map((item, index) => (
+            {/* {filteredData.map((item, index) => (
               <li
                 key={index}
                 className="border border-gray-200 rounded-md overflow-hidden animate-fade-in shadow-xl"
@@ -328,7 +323,7 @@ function FruitCatelog() {
                   </button>
                 </div>
               </li>
-            ))}
+            ))} */}
           </ul>
         </div>
       </div>
