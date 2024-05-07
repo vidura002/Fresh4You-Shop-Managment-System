@@ -3,12 +3,18 @@ import axios from 'axios';
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Link, useParams } from "react-router-dom";
 
-const UpdateStock = () => {
-  const { id } = useParams(); 
-  const [fruitName, setFruitName] = useState("");
-  const [fruitQuantity, setFruitQuantity] = useState("");
-  const [price, setPrice] = useState("");
-  const [image, setImageUrl] = useState("");
+export default function UpdateStock() {
+  const { _id } = useParams();
+  const [stockItem, setStockItem] = useState(null);
+  const [updatedDetails, setUpdatedDetails] = useState({
+    FruitName: "",
+    FruitQuantity: "",
+    price: "",
+    category: "",
+    image: "",
+  });
+  const [isEditing, setIsEditing] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,6 +27,12 @@ const UpdateStock = () => {
         setImageUrl(image);
       } catch (error) {
         console.error('Error fetching data:', error);
+        const response = await axios.get(
+          `http://localhost:3000/api/Stock/${_id}`
+        );
+        setStockItem(response.data.data);
+      } catch (error) {
+        console.error("Error fetching stock item:", error);
       }
     };
 
