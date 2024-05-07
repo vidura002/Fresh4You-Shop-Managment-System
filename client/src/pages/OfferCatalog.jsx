@@ -3,6 +3,8 @@ import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { IoMdNotificationsOutline } from "react-icons/io";
+
 
 function OfferCatalog() {
   const location = useLocation();
@@ -132,7 +134,9 @@ function OfferCatalog() {
         >
           <h1>Offers</h1>
         </Link>
+        
       </div>
+      
       <br />
       <hr />
       {/* Search Bar */}
@@ -147,6 +151,11 @@ function OfferCatalog() {
             onChange={(e) => handleFilter(e.target.value)}
           />
         </div>
+        <div className="float-right mr-10 mt-10">
+            <a href="/OfferNotification">
+              <IoMdNotificationsOutline className="text-black text-3xl" />
+            </a>
+          </div>
       </div>
       <div className="grid grid-cols-5 m-5 ">
         <div>
@@ -236,7 +245,7 @@ function OfferCatalog() {
                 <span className="text-lg font-semibold">Price:</span>
               </div>
               {priceRange.map((range, index) => (
-                <div key={index} className="flex mb-5">
+                <div key={index} className="flex">
                   <input
                     type="range"
                     min="0"
@@ -246,14 +255,14 @@ function OfferCatalog() {
                     data-index={index}
                     className="w-32 accent-green-400"
                   />
-                  <span className="ml-2 text-lg font-font1 font-medium text-black">
+                  <span className="ml-2 text-lg font-font2 font-medium text-black">
                     Rs. {range}.00
                   </span>
                 </div>
               ))}
 
               {/* Checkboxes - Availability */}
-              <div className="mb-5">
+              <div className="mb-5 mt-5">
                 <span className="text-lg font-semibold">Availability</span>
               </div>
               {[

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Header from "../components/Header";
 
 export default function SignIn() {
     const [formData, setFormData] = useState({
@@ -22,15 +23,11 @@ export default function SignIn() {
         e.preventDefault();
         setLoading(true);
 
-        // Simulating authentication logic
         if (formData.email === "admin@example.com" && formData.password === "admin123") {
-            // Successful admin sign-in
             navigate("/AdminDashboard");
         } else if (formData.email === "user@example.com" && formData.password === "user123") {
-            // Successful user sign-in
             navigate("/FruitCatelog");
         } else {
-            // Failed sign-in
             setError("Invalid email or password");
             setLoading(false);
         }

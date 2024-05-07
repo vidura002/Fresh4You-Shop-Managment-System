@@ -121,7 +121,7 @@ export default function AdminOffer() {
     };
 
     const logo = new Image();
-    logo.src = "../src/images/Orange.png";
+    logo.src = "../src/images/report.png";
     doc.addImage(logo, "PNG", 10, 10, 20, 20);
 
     doc.setFontSize(20);

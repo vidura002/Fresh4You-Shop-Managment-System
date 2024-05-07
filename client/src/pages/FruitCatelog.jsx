@@ -136,6 +136,7 @@ function FruitCatelog() {
           <h1>Offers</h1>
         </Link>
       </div>
+      
       <br />
       <hr />
       <div className="bg-gray-200 p-4 grid grid-cols-3 place-content-center">
@@ -169,7 +170,7 @@ function FruitCatelog() {
                     onChange={() => handleSortChange("priceLowToHigh")}
                     className="form-checkbox h-5 w-5 accent-green-500 mr-2"
                   />
-                  <label htmlFor="priceLowToHigh" className="text-lg font-font1 font-medium text-black">
+                  <label htmlFor="priceLowToHigh" className="text-lg font-font2 font-medium text-black">
                     Price low to high
                   </label>
                 </div>
@@ -182,7 +183,7 @@ function FruitCatelog() {
                     onChange={() => handleSortChange("priceHighToLow")}
                     className="form-checkbox h-5 w-5 accent-green-500 mr-2"
                   />
-                  <label htmlFor="priceHighToLow" className="text-lg font-font1 font-medium text-black">
+                  <label htmlFor="priceHighToLow" className="text-lg font-font2 font-medium text-black">
                     Price high to low
                   </label>
                 </div>
@@ -195,7 +196,7 @@ function FruitCatelog() {
                     onChange={() => handleSortChange("alphabeticallyAZ")}
                     className="form-checkbox h-5 w-5 accent-green-500 mr-2"
                   />
-                  <label htmlFor="alphabeticallyAZ" className="text-lg font-font1 font-medium text-black">
+                  <label htmlFor="alphabeticallyAZ" className="text-lg font-font2 font-medium text-black">
                     Alphabetically A-Z
                   </label>
                 </div>
@@ -208,7 +209,7 @@ function FruitCatelog() {
                     onChange={() => handleSortChange("alphabeticallyZA")}
                     className="form-checkbox h-5 w-5 accent-green-500 mr-2"
                   />
-                  <label htmlFor="alphabeticallyZA" className="text-lg font-font1 font-medium text-black">
+                  <label htmlFor="alphabeticallyZA" className="text-lg font-font2 font-medium text-black">
                     Alphabetically Z-A
                   </label>
                 </div>
@@ -228,7 +229,7 @@ function FruitCatelog() {
                 data-index={0}
                 className="w-32 accent-green-400"
               />
-              <span className="ml-2 text-lg font-font1 font-medium text-black">Rs. {priceRange[0]}.00</span>
+              <span className="ml-2 text-lg font-font2 font-medium text-black">Rs. {priceRange[0]}.00</span>
             </div>
             <div className="flex mb-5">
               <input
@@ -240,7 +241,7 @@ function FruitCatelog() {
                 data-index={1}
                 className="w-32 accent-green-400"
               />
-              <span className="ml-2 text-lg font-font1 font-medium text-black">Rs. {priceRange[1]}.00</span>
+              <span className="ml-2 text-lg font-font2 font-medium text-black">Rs. {priceRange[1]}.00</span>
             </div>
             <div className="mb-5">
               <span className="text-lg font-semibold">Availability</span>
@@ -255,7 +256,7 @@ function FruitCatelog() {
                   onChange={handleCheckboxChange}
                   className="form-checkbox h-5 w-5 accent-green-500"
                 />
-                <span className="ml-2 text-lg font-font1 font-medium text-black">
+                <span className="ml-2 text-lg font-font2 font-medium text-black">
                   Show available only ({availableCount})
                 </span>
               </label>
@@ -270,7 +271,7 @@ function FruitCatelog() {
                   onChange={handleCheckboxChange}
                   className="form-checkbox h-5 w-5 accent-green-500"
                 />
-                <span className="ml-2 text-lg font-font1 font-medium text-black">
+                <span className="ml-2 text-lg font-font2 font-medium text-black">
                   Show out of stock only ({outOfStockCount})
                 </span>
               </label>

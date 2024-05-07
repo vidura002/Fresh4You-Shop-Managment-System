@@ -1,8 +1,13 @@
 import FruitStock from "../models/Stock-Model.js";
 
+
+
+
 const CreateStock = async (req, res) => {
   try {
-    const { FruitID, FruitName, FruitQuantity, price, image } = req.body;
+    const { FruitName, FruitQuantity, price, category, image } = req.body;
+
+    const FruitID = await generateFruitID();
 
     const existingStock = await FruitStock.findOne({ FruitID });
     if (existingStock) {
@@ -14,21 +19,43 @@ const CreateStock = async (req, res) => {
       FruitName,
       FruitQuantity,
       price,
+      category,
       image,
     });
+    
     await newStock.save();
+
     res.status(200).json({
       success: true,
-      Massage: "Fruit Item Created Successfully",
+      message: "Fruit Item Created Successfully",
       newStock,
     });
   } catch (err) {
     console.log(err);
-    res
-      .status(500)
-      .json({ success: false, Massage: "Fruit Item not Created Successfully" });
+    res.status(500).json({ success: false, message: "Fruit Item not Created Successfully" });
   }
 };
+
+
+const generateFruitID = async () => {
+  try {
+    const latestOffer = await FruitStock.findOne({}, {}, { sort: { 'FruitID': -1 } });
+    let latestID = latestOffer ? latestOffer.FruitID : 'F10000'; 
+
+    const numericPart = parseInt(latestID.replace('F', ''), 10);
+    const newNumericPart = isNaN(numericPart) ? 1 : numericPart + 1;
+
+    const paddedNumericPart = String(newNumericPart).padStart(4, '0');
+
+    const newFruitID = 'F' + paddedNumericPart;
+
+    return newFruitID;
+  } catch (error) {
+    console.error("Error generating Fruit ID:", error);
+    throw new Error("Error generating Fruit ID");
+  }
+};
+
 
 const GetAllStock = async (req, res) => {
   try {
@@ -61,19 +88,16 @@ const UpdateStock = async (req, res) => {
   const { FruitName, FruitQuantity, price,category, image } = req.body; 
 
   try {
-    // Find the stock item by _id and update its details
     const updatedItem = await FruitStock.findByIdAndUpdate(id, {
       FruitName,
       FruitQuantity,
       price,
       image,
-    }, { new: true }); // { new: true } option returns the updated document
+    }, { new: true }); 
 
     if (!updatedItem) {
       return res.status(404).json({ message: 'Stock item not found' });
     }
-
-    // If update is successful, send back the updated item
     res.status(200).json(updatedItem);
   } catch (error) {
     console.error('Error updating stock item:', error);
