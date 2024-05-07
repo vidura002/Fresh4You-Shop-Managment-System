@@ -1,5 +1,16 @@
 import { data } from "autoprefixer";
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
+export default function SignIn() {
+    const [formData, setFormData] = useState({
+        email: "",
+        password: ""
+    });
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 import { Link , useNavigate} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -65,6 +76,18 @@ export default function Signin() {
         }
     };
 
+    return (
+        <div>
+            <Header />
+        <div className="p-3 max-w-lg mx-auto">
+            
+            <h1 className="text-4xl text-center font-semibold my-16">Sign In</h1>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <input type="email" placeholder="Email" className="border p-3 rounded-lg" id="email" value={formData.email} onChange={handleChange} required />
+                <input type="password" placeholder="Password" className="border p-3 rounded-lg" id="password" value={formData.password} onChange={handleChange} required />
+                <button type="submit" className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95" disabled={loading}>
+                    {loading ? 'Loading...' : 'Sign In'}
+
   return (
     <div className="p-3 max-w-lg mx-auto">
         <h1 className="text-4xl text-center font-semibold my-8">Sign In</h1>
@@ -82,6 +105,10 @@ export default function Signin() {
                 <span className="text-blue-700">Sign In</span>
             </Link>
         </div>
+        
+        </div>
+    );
+}
         {error && <p className="text-red-500 mt-5">{error}</p>}
     </div>
   )

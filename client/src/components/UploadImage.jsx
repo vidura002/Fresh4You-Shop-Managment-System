@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-const UploadImage = ({ onImageUrlChange }) => {
+const UploadImage = ({ onImageUrlChange, clearImage }) => {
   const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
 
@@ -42,7 +42,10 @@ const UploadImage = ({ onImageUrlChange }) => {
       </div>
       <div className="flex justify-center">
         <button
-          onClick={handleUpload}
+          onClick={() => {
+            handleUpload();
+            clearImage(); // Clear image URL when uploading
+          }}
           className={"bg-orange-600 text-white py-2 px-4 font-medium rounded-md mt-4 focus:outline-none focus:bg-orange-400"}
           disabled={uploading}
         >
