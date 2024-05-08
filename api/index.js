@@ -33,13 +33,13 @@ const schemaData = mongoose.Schema({
 
 const deliveryModel = mongoose.model("delivery2", schemaData)
 
-//read
+//read Deliver
 app.get('/', async(req, res) => {
     const data = await deliveryModel.find({})
     res.json({success : true, data : data})
   })
 
-//create data
+//create data Delivery
 app.post("/create", async(req,res)=>{
     console.log(req.body)
     const data = new deliveryModel(req.body)
@@ -47,7 +47,7 @@ app.post("/create", async(req,res)=>{
     res.send({success : true, message : "data saved successfully", data : data})
 })
 
-//update data
+//update data Delivery
 app.put("/update",async(req,res)=>{
     console.log(req.body)
     const {_id,...rest} = req.body
@@ -57,7 +57,7 @@ app.put("/update",async(req,res)=>{
     
 })
 
-//delete
+//delete Delivery
 app.delete("/delete/:id", async(req,res)=>{
     const id = req.params.id
     console.log(id)
