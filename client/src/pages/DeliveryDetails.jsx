@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from "../components/Header";
 import './App.css';
 import axios from "axios";
+import { Link } from 'react-router-dom';
 import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
 import DeliveryFormTable from '../components/deliveryFormtable.jsx';
 
@@ -153,6 +154,13 @@ function DeliveryDetails() {
                 <div className='container'>
                     <div className="button-and-search">
                         {/* Add a button for generating details */}
+                        <Link
+                to="/DeliveryDashboard"
+                type="viewOrder"
+                className="w-20 bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 rounded"
+            >
+                Back
+            </Link><br></br>
                         <button className='btn btn-add' onClick={() => SetAddSection(true)}>ADD</button>
                         <input
                             type="text"

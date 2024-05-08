@@ -15,18 +15,21 @@ function DeliveryDashboard() {
             <span className='text-5xl font-semibold'>Welcome to DashBoard!</span>
             <h1 className='grid grid-cols-2 text-3xl text-justify antialiased'><br/><br/> "Welcome to our Delivery Dashboard" This is command center for streamlined delivery management. Stay informed, stay efficient, and stay ahead with our intuitive dashboard.<br/></h1><br/>
             
-            <button
+            <div className='flex gap-5'>
+            <Link
+                to="/DeliveryDetails"
                 type="viewOrder"
                 className="w-80 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
                 Delivery
-            </button>
-            <button
+            </Link>
+            <Link
                 type="viewOrder"
                 className="w-80 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
                 View Order
-            </button>
+            </Link>
+            </div>
         </div>
     </div>   
 </div>
