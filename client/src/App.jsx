@@ -18,6 +18,7 @@ import FruitCatelog from "./pages/FruitCatelog";
 import UpdateStock from "./pages/UpdateStock";
 import UserOrders from "./pages/UserOrders";
 import OrderReceipt from "./pages/OrderReceipt";
+import OfferCatalog from "./pages/OfferCatalog";
 
 export default function App() {
   return (
@@ -51,6 +52,7 @@ export default function App() {
         <Route path="/AddStock" element={<AddStock />}></Route>
         <Route path="/FruitCatelog" element={<FruitCatelog />}></Route>
         <Route path="/UpdateStock" element={<UpdateStock />}></Route>
+        <Route path="/OfferCatalog" element={<OfferCatalog />}></Route>
       </Routes>
     </BrowserRouter>
   );

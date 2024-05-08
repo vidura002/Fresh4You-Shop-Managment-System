@@ -9,6 +9,7 @@ import listingRouter from "./routes/listing.route.js";
 import orderRoutes from "./routes/Orders.js";
 import StockRouter from "./routes/Stock-Route.js";
 import bodyParser from "body-parser";
+import offerRoute from "./routes/OfferRoute.js";
 
 dotenv.config();
 
@@ -42,6 +43,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
 app.use("/api/orders", orderRoutes);
 app.use("/api/stock", StockRouter);
+app.use("/api/Offer", offerRoute);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
