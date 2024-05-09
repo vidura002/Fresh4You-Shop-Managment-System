@@ -26,7 +26,7 @@ function AdminDashboard() {
         <hr />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 p-10 gap-10 m-5 ">
-        <Link to="/">
+        <Link to="/AdminDashboard">
           <div className="p-10 bg-green-200 w-64 h-48 rounded-2xl hover:bg-green-300 transition duration-300 ease-in-out transform hover:scale-105 font-bold text-center text-xl shadow-2xl">
             <div className="flex justify-center items-center">
               <FaUser className="text-6xl" />
@@ -42,7 +42,7 @@ function AdminDashboard() {
             <h1 className="text-2xl">Fruit Offer Management</h1>
           </div>
         </Link>
-        <Link to="/">
+        <Link to="/AdminDashboard">
           <div className="p-10 bg-blue-200 w-64 h-48 rounded-2xl hover:bg-blue-300 transition duration-300 ease-in-out transform hover:scale-105 font-bold text-center text-xl shadow-2xl">
             <div className="flex justify-center items-center">
               <GoListOrdered className="text-6xl" />
@@ -58,7 +58,7 @@ function AdminDashboard() {
             <h1 className="text-2xl ">Stock Management</h1>
           </div>
         </Link>
-        <Link to="/">
+        <Link to="/DAdm">
           <div className="p-10 bg-orange-200 w-64 h-48 rounded-2xl hover:bg-orange-300 transition duration-300 ease-in-out transform hover:scale-105 font-bold text-center text-xl shadow-2xl">
             <div className="flex justify-center items-center">
               <TbTruckDelivery className="text-6xl" />
@@ -66,7 +66,7 @@ function AdminDashboard() {
             <h1 className="text-2xl ">Delivery Management</h1>
           </div>
         </Link>
-        <Link to="/">
+        <Link to="/AdminDashboard">
           <div className="p-10 bg-purple-200  w-64 h-48 rounded-2xl hover:bg-purple-300 transition duration-300 ease-in-out transform hover:scale-105 font-bold text-center text-xl shadow-2xl">
             <div className="flex justify-center items-center">
               <LiaLuggageCartSolid className="text-6xl" />
@@ -74,7 +74,7 @@ function AdminDashboard() {
             <h1 className="text-2xl">Supplier Management</h1>
           </div>
         </Link>
-        <Link to="/">
+        <Link to="/AdminDashboard">
           <div className="p-10 bg-red-200 w-64 h-48 rounded-2xl hover:bg-red-300 transition duration-300 ease-in-out transform hover:scale-105 font-bold text-center text-xl shadow-2xl">
             <div className="flex justify-center items-center">
               <MdFeedback className="text-6xl" />

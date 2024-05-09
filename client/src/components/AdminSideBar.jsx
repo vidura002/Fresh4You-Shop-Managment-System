@@ -8,6 +8,7 @@ import { MdFeedback } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
 import { LiaLuggageCartSolid } from "react-icons/lia";
 import adminPage from "../images/Admin-img.jpeg";
+import { Link } from 'react-router-dom';
 
 function AdminSideBar() {
   const [activeLink, setActiveLink] = useState("");
@@ -24,54 +25,54 @@ function AdminSideBar() {
       </div>
       <hr />
       <ul>
-        <a href="/AdminDashboard">  
+        <Link to="/AdminDashboard">  
           <li className={`text-4x text-black font-bold p-3 hover:bg-green-30 ${activeLink === 'AdminDashboard' ? 'bg-green-30' : ''}`}>
             <IoHomeSharp className="inline-block" />
             <span>Dashboard</span>
           </li>
-        </a>
-        <a href="/AdminDashboard"> 
+        </Link>
+        <Link to="/AdminDashboard"> 
           <li className={`text-4x text-black font-bold p-3 hover:bg-green-30 ${activeLink === 'AdminUser' ? 'bg-green-30' : ''}`}>
             <FaUser className="inline-block" />
             <span>User Management</span>
           </li>
-        </a>
-        <a href="/AdminOffer"> 
+        </Link>
+        <Link to="/AdminOffer"> 
           <li className={`text-4x text-black font-bold p-3 hover:bg-green-30 ${activeLink === 'AdminOffer' ? 'bg-green-30' : ''}`}>
             <GiFruitBowl className="inline-block" />
             <span>Fruit Offer Management</span>
           </li>
-        </a>
-        <a href="/AdminOrder"> 
-          <li className={`text-4x text-black font-bold p-3 hover:bg-green-30 ${activeLink === 'AdminOrder' ? 'bg-green-30' : ''}`}>
+        </Link>
+        <Link to="/orders"> 
+          <li className={`text-4x text-black font-bold p-3 hover:bg-green-30 ${activeLink === 'orders' ? 'bg-green-30' : ''}`}>
             <GoListOrdered className="inline-block" />
             <span>Order Management</span>
           </li>
-        </a>
-        <a href="/AdminStock" className="ease-in duration-700"> 
+        </Link>
+        <Link to="/AdminStock" className="ease-in duration-700"> 
           <li className={`text-4x text-black font-bold p-3 hover:bg-green-30 ${activeLink === 'AdminStock' ? 'bg-green-30' : ''}`}>
             <RiStockLine className="inline-block" />
             <span>Stock Management</span>
           </li>
-        </a>
-        <a href="/AdminDelivery"> 
-          <li className={`text-4x text-black font-bold p-3 hover:bg-green-30 ${activeLink === 'AdminDelivery' ? 'bg-green-30' : ''}`}>
+        </Link>
+        <Link to="/DAdm"> 
+          <li className={`text-4x text-black font-bold p-3 hover:bg-green-30 ${activeLink === 'DAdm' ? 'bg-green-30' : ''}`}>
             <TbTruckDelivery className="inline-block" />
             <span>Delivery Details</span>
           </li>
-        </a>
-        <a href="/AdminSupplier"> 
-          <li className={`text-4x text-black font-bold p-3 hover:bg-green-30 ${activeLink === 'AdminSupplier' ? 'bg-green-30' : ''}`}>
+        </Link>
+        <Link to="/AdminDashboard"> 
+          <li className={`text-4x text-black font-bold p-3 hover:bg-green-30 ${activeLink === 'AdminDashboard' ? 'bg-green-30' : ''}`}>
             <LiaLuggageCartSolid className="inline-block" />
             <span>Supplier Management</span>
           </li>
-        </a>
-        <a href="/AdminFeedback"> 
-          <li className={`text-4x text-black font-bold p-3 hover:bg-green-30 ${activeLink === 'AdminFeedback' ? 'bg-green-30' : ''}`}>
+        </Link>
+        <Link to="/AdminDashboard"> 
+          <li className={`text-4x text-black font-bold p-3 hover:bg-green-30 ${activeLink === 'AdminDashboard' ? 'bg-green-30' : ''}`}>
             <MdFeedback className="inline-block" />
             <span>Feedback & Review</span>
           </li>
-        </a>
+        </Link>
       </ul>
     </div>
   );

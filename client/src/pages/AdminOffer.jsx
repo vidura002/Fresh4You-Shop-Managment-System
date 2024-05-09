@@ -148,9 +148,7 @@ export default function AdminOffer() {
             Offer Management/home{" "}
           </h1>
           <div className="float-right mr-10 mt-10">
-            <a href="/OfferNotification">
-              <IoMdNotificationsOutline className="text-black text-3xl" />
-            </a>
+            
           </div>
           <div className="float-right mr-10 mt-10">
             <a href="/CreateOffer">

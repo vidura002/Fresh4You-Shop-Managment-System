@@ -132,6 +132,7 @@ const CreateOffer = () => {
               </label>
               <input
                 type="text"
+                required
                 id="name"
                 name="name"
                 value={name}
@@ -176,6 +177,7 @@ const CreateOffer = () => {
               </label>
               <input
                 type="number"
+                required
                 id="price"
                 name="price"
                 value={price}
@@ -198,6 +200,7 @@ const CreateOffer = () => {
               </label>
               <input
                 type="number"
+                required
                 id="quantity"
                 name="quantity"
                 value={quantity}

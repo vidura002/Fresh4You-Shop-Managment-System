@@ -22,7 +22,9 @@ const createOffer = async (req, res) => {
       description,
       image,
     });
+
     await newOffer.save();
+
     res.status(200).json({
       success: true,
       message: "Offer Item Created Successfully",
@@ -34,15 +36,15 @@ const createOffer = async (req, res) => {
   }
 };
 
+//generate offerID
 const generateOfferID = async () => {
   try {
     const latestOffer = await OfferModel.findOne({}, {}, { sort: { 'offerID': -1 } });
-    let latestID = latestOffer ? latestOffer.offerID : 'offer0000'; // Set a default value if no offer is found
+    let latestID = latestOffer ? latestOffer.offerID : 'offer0000'; 
 
     const numericPart = parseInt(latestID.replace('offer', ''), 10);
     const newNumericPart = isNaN(numericPart) ? 1 : numericPart + 1;
 
-    // Pad the numeric part with zeros
     const paddedNumericPart = String(newNumericPart).padStart(4, '0');
 
     const newOfferID = 'offer' + paddedNumericPart;

@@ -19,9 +19,6 @@ export default function Header() {
             <span className="text-green-900">4You</span>
           </h1>
         </Link>
-
-        
-        
         <ul className="flex gap-6">
         <NavLinkWithActiveCheck to="/" text="Home" isActive={
             location.pathname === '/'
@@ -47,7 +44,7 @@ export default function Header() {
               <li className="text-slate-700 hover:underline text-xl">Sign In</li>
             )}
           </Link>
-          <Link to="/cart">
+          <Link to="/cartproducts">
             <li className="hidden sm:inline text-slate-700 font-medium hover:underline text-3xl">
               <LiaShoppingCartSolid />
             </li>

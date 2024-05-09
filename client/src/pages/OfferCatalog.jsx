@@ -151,11 +151,6 @@ function OfferCatalog() {
             onChange={(e) => handleFilter(e.target.value)}
           />
         </div>
-        <div className="float-right mr-10 mt-10">
-            <a href="/OfferNotification">
-              <IoMdNotificationsOutline className="text-black text-3xl" />
-            </a>
-          </div>
       </div>
       <div className="grid grid-cols-5 m-5 ">
         <div>

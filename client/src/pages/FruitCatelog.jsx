@@ -3,9 +3,12 @@ import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useDispatch } from "react-redux";
+import { setDataProduct, addCartItem } from "../redux/productSlice";
 
 function FruitCatelog() {
   const location = useLocation();
+  const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState([]);
@@ -15,7 +18,7 @@ function FruitCatelog() {
   const [showOutOfStock, setShowOutOfStock] = useState(false);
   const [availableCount, setAvailableCount] = useState(0);
   const [outOfStockCount, setOutOfStockCount] = useState(0);
-  const [sortOption, setSortOption] = useState("priceLowToHigh");
+  const [sortOption, setSortOption] = useState("");
 
   const fetchData = async () => {
     try {
@@ -23,6 +26,7 @@ function FruitCatelog() {
         "http://localhost:3000/api/Stock/getAll"
       );
       setData(response.data.data);
+      dispatch(setDataProduct(response.data.data));
     } catch (error) {
       console.error("Error :", error);
     }
@@ -83,6 +87,10 @@ function FruitCatelog() {
     fetchData();
   }, []);
 
+  const handleAddToCart = (data) => {
+    dispatch(addCartItem(data));
+  };
+
   const handleFilter = (value) => {
     setSearchTerm(value);
   };
@@ -136,7 +144,6 @@ function FruitCatelog() {
           <h1>Offers</h1>
         </Link>
       </div>
-      
       <br />
       <hr />
       <div className="bg-gray-200 p-4 grid grid-cols-3 place-content-center">
@@ -170,7 +177,10 @@ function FruitCatelog() {
                     onChange={() => handleSortChange("priceLowToHigh")}
                     className="form-checkbox h-5 w-5 accent-green-500 mr-2"
                   />
-                  <label htmlFor="priceLowToHigh" className="text-lg font-font2 font-medium text-black">
+                  <label
+                    htmlFor="priceLowToHigh"
+                    className="text-lg font-font2 font-medium text-black"
+                  >
                     Price low to high
                   </label>
                 </div>
@@ -183,7 +193,10 @@ function FruitCatelog() {
                     onChange={() => handleSortChange("priceHighToLow")}
                     className="form-checkbox h-5 w-5 accent-green-500 mr-2"
                   />
-                  <label htmlFor="priceHighToLow" className="text-lg font-font2 font-medium text-black">
+                  <label
+                    htmlFor="priceHighToLow"
+                    className="text-lg font-font2 font-medium text-black"
+                  >
                     Price high to low
                   </label>
                 </div>
@@ -196,7 +209,10 @@ function FruitCatelog() {
                     onChange={() => handleSortChange("alphabeticallyAZ")}
                     className="form-checkbox h-5 w-5 accent-green-500 mr-2"
                   />
-                  <label htmlFor="alphabeticallyAZ" className="text-lg font-font2 font-medium text-black">
+                  <label
+                    htmlFor="alphabeticallyAZ"
+                    className="text-lg font-font2 font-medium text-black"
+                  >
                     Alphabetically A-Z
                   </label>
                 </div>
@@ -209,7 +225,10 @@ function FruitCatelog() {
                     onChange={() => handleSortChange("alphabeticallyZA")}
                     className="form-checkbox h-5 w-5 accent-green-500 mr-2"
                   />
-                  <label htmlFor="alphabeticallyZA" className="text-lg font-font2 font-medium text-black">
+                  <label
+                    htmlFor="alphabeticallyZA"
+                    className="text-lg font-font2 font-medium text-black"
+                  >
                     Alphabetically Z-A
                   </label>
                 </div>
@@ -229,7 +248,9 @@ function FruitCatelog() {
                 data-index={0}
                 className="w-32 accent-green-400"
               />
-              <span className="ml-2 text-lg font-font2 font-medium text-black">Rs. {priceRange[0]}.00</span>
+              <span className="ml-2 text-lg font-font2 font-medium text-black">
+                Rs. {priceRange[0]}.00
+              </span>
             </div>
             <div className="flex mb-5">
               <input
@@ -241,7 +262,9 @@ function FruitCatelog() {
                 data-index={1}
                 className="w-32 accent-green-400"
               />
-              <span className="ml-2 text-lg font-font2 font-medium text-black">Rs. {priceRange[1]}.00</span>
+              <span className="ml-2 text-lg font-font2 font-medium text-black">
+                Rs. {priceRange[1]}.00
+              </span>
             </div>
             <div className="mb-5">
               <span className="text-lg font-semibold">Availability</span>
@@ -288,8 +311,13 @@ function FruitCatelog() {
                 <div className="flex items-center justify-center">
                   <img src={item.image} alt={item.FruitName} />
                 </div>
-                <div className="p-4">                
-                  <h2 className="text-lg font-semibold">{item.FruitName} - <span className="text-lg font-semibold ">{item.category}</span></h2>
+                <div className="p-4">
+                  <h2 className="text-lg font-semibold">
+                    {item.FruitName} -{" "}
+                    <span className="text-lg font-semibold ">
+                      {item.category}
+                    </span>
+                  </h2>
                   <p className="text-red-600 text-2xl">
                     Rs.{item.price}.00{" "}
                     <span className="text-black text-lg">[Per 100g]</span>
@@ -302,7 +330,7 @@ function FruitCatelog() {
                         : ""
                     }`}
                     disabled={item.FruitQuantity === 0}
-                    onClick={() => handleAddToCart(item.itemId, 0.1)} 
+                    onClick={() => handleAddToCart(item)}
                   >
                     {item.FruitQuantity === 0 ? "Sold Out" : "Add to Cart"}
                   </button>

@@ -38,6 +38,7 @@ const OfferImageAdd = ({ onImageUrlChange }) => {
           </label>
         <input
           type="file"
+          required
           onChange={handleImageChange}
           className="mt-4 bg-white border border-gray-300  rounded-xl  py-2 px-4 w-full inline-block focus:outline-none focus:border-indigo-500"
         />
