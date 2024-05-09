@@ -36,7 +36,7 @@ const createOffer = async (req, res) => {
   }
 };
 
-//generate offerID
+//generate offerID function
 const generateOfferID = async () => {
   try {
     const latestOffer = await OfferModel.findOne({}, {}, { sort: { 'offerID': -1 } });
@@ -104,6 +104,7 @@ const DeleteOffer = async (req, res) => {
   }
 };
 
+//update offer
 const UpdateOffer = async (req, res) => {
   const { id } = req.params; 
   const { offerID, name, price, variant, quantity, description, image } =

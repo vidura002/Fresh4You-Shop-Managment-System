@@ -16,9 +16,9 @@ dotenv.config();
 
 const app = express();
 app.use(cors());
-app.use(express.json()); // Parse JSON requests
+app.use(express.json()); 
 app.use(cookieParser());
-app.use(bodyParser.json()); // Parse JSON requests
+app.use(bodyParser.json()); 
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO)

@@ -44,7 +44,7 @@ const ShoppingCart = () => {
 
               {/* total cart item  */}
               <div className="w-full max-w-md ml-auto">
-                <h2 className="bg-lime-200 bg-lime-400 p-2 text-lg font-bold">Summary</h2>
+                <h2 className="bg-lime-200 p-2 text-lg font-bold">Summary</h2>
                 <div className="flex w-full py-2 text-lg border-b">
                   <p>Total Qty :</p>
                   <p className="ml-auto w-32 font-bold">{totalQty}</p>

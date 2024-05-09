@@ -33,6 +33,9 @@ const CreateOffer = () => {
     return /^\d*\.?\d*$/.test(input) && parseFloat(input) > 0;
   };
 
+  //--------------------------------------------------------------
+
+  //click submition
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isValidName(name)) {
